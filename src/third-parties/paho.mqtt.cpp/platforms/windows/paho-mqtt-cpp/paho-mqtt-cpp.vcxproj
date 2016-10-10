@@ -18,10 +18,32 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\mqtt\async_client.h" />
+    <ClInclude Include="..\..\..\src\mqtt\callback.h" />
+    <ClInclude Include="..\..\..\src\mqtt\client.h" />
+    <ClInclude Include="..\..\..\src\mqtt\connect_options.h" />
+    <ClInclude Include="..\..\..\src\mqtt\delivery_token.h" />
+    <ClInclude Include="..\..\..\src\mqtt\exception.h" />
+    <ClInclude Include="..\..\..\src\mqtt\iaction_listener.h" />
+    <ClInclude Include="..\..\..\src\mqtt\iclient_persistence.h" />
+    <ClInclude Include="..\..\..\src\mqtt\ipersistable.h" />
+    <ClInclude Include="..\..\..\src\mqtt\message.h" />
+    <ClInclude Include="..\..\..\src\mqtt\token.h" />
+    <ClInclude Include="..\..\..\src\mqtt\topic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\async_client.cpp" />
+    <ClCompile Include="..\..\..\src\client.cpp" />
+    <ClCompile Include="..\..\..\src\iclient_persistence.cpp" />
+    <ClCompile Include="..\..\..\src\message.cpp" />
+    <ClCompile Include="..\..\..\src\token.cpp" />
+    <ClCompile Include="..\..\..\src\topic.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F53FE4F8-D750-44B5-9D80-700EAF1790F4}</ProjectGuid>
+    <ProjectGuid>{F42D7A64-6A69-4466-AD3F-BB9168EC1EC7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>transport</RootNamespace>
+    <RootNamespace>pahomqttcpp</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,18 +94,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -92,6 +118,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\paho.mqtt.c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,6 +132,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\paho.mqtt.c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -120,6 +148,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\paho.mqtt.c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,6 +166,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\paho.mqtt.c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
