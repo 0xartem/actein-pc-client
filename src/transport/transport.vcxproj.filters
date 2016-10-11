@@ -9,5 +9,48 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\policies">
+      <UniqueIdentifier>{450e75a3-7a2c-47fe-85c2-67a222126bad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttBrokerEndPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttClientEndPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Topics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IConnectionPolicy.h">
+      <Filter>Header Files\policies</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultConnectionPolicy.h">
+      <Filter>Header Files\policies</Filter>
+    </ClInclude>
+    <ClInclude Include="OneTimeConnectionPolicy.h">
+      <Filter>Header Files\policies</Filter>
+    </ClInclude>
+    <ClInclude Include="PreciseDeliveryConnectionPolicy.h">
+      <Filter>Header Files\policies</Filter>
+    </ClInclude>
+    <ClInclude Include="QualityOfService.h">
+      <Filter>Header Files\policies</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MqttBrokerEndPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
