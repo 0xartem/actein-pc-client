@@ -1,6 +1,6 @@
 #include "MqttBrokerEndPoint.h"
 
-namespace transport
+namespace mqtt_transport
 {
     MqttBrokerEndPoint::MqttBrokerEndPoint(
         const std::string & brokerHost,

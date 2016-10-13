@@ -4,7 +4,7 @@
 #include "DefaultConnectionPolicy.h"
 #include "QualityOfService.h"
 
-namespace transport
+namespace mqtt_transport
 {
     class OneTimeConnectionPolicy : public DefaultConnectionPolicy
     {

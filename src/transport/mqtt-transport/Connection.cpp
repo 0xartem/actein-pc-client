@@ -5,7 +5,7 @@
 #include "PreciseDeliveryConnectionPolicy.h"
 #include <mqtt/async_client.h>
 
-namespace transport
+namespace mqtt_transport
 {
     Connection * Connection::createInstance(const std::string & brokerHost)
     {

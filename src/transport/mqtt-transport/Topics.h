@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace transport
+namespace mqtt_transport
 {
     class Topics
     {

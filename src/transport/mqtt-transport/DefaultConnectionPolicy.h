@@ -3,7 +3,7 @@
 
 #include "IConnectionPolicy.h"
 
-namespace transport
+namespace mqtt_transport
 {
     class DefaultConnectionPolicy : public IConnectionPolicy
     {

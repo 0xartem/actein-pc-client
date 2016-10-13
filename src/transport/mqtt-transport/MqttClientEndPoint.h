@@ -4,7 +4,7 @@
 #include <string>
 #include <UUIDGenerator.h>
 
-namespace transport
+namespace mqtt_transport
 {
     class MqttClientEndPoint
     {

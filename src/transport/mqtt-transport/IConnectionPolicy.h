@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace transport
+namespace mqtt_transport
 {
     class IConnectionPolicy
     {

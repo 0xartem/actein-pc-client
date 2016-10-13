@@ -5,7 +5,7 @@
 #include "QualityOfService.h"
 #include "Topics.h"
 
-namespace transport
+namespace mqtt_transport
 {
     class PreciseDeliveryConnectionPolicy : public DefaultConnectionPolicy
     {

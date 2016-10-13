@@ -9,7 +9,7 @@ namespace mqtt
     class iasync_client;
 }
 
-namespace transport
+namespace mqtt_transport
 {
     class MqttBrokerEndPoint;
     class MqttClientEndPoint;

@@ -1,7 +1,7 @@
 #ifndef QUALITY_OF_SERVICE_H__
 #define QUALITY_OF_SERVICE_H__
 
-namespace transport
+namespace mqtt_transport
 {
     enum class QualityOfService
     {

@@ -1,6 +1,6 @@
 #include "Topics.h"
 
-namespace transport
+namespace mqtt_transport
 {
     const std::string Topics::FACTORY = u8"factory";
     const std::string Topics::FACTORY_ALL = u8"factory/#";
