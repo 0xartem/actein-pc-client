@@ -35,9 +35,9 @@ namespace mqtt_transport
             return Topics::PC_ONLINE_STATUS;
         }
 
-        virtual std::vector<char> getLastWillPayload() const override
+        virtual std::string getLastWillPayload() const override
         {
-            return std::vector<char>();//TODO
+            return "offline";
         }
     };
 }

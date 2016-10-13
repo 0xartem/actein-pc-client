@@ -11,10 +11,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PreciseDeliveryConnectionPolicyTest.cpp">
+    <ClInclude Include="ArrayUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrayUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

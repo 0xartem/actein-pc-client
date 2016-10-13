@@ -34,9 +34,9 @@ namespace mqtt_transport
             return std::string();
         }
 
-        virtual std::vector<char> getLastWillPayload() const override
+        virtual std::string getLastWillPayload() const override
         {
-            return std::vector<char>();
+            return std::string();
         }
     };
 }

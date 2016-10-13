@@ -16,7 +16,7 @@ namespace mqtt_transport
 
         virtual bool shouldUseLastWill() const = 0;
         virtual std::string getLastWillTopic() const = 0;
-        virtual std::vector<char> getLastWillPayload() const = 0;
+        virtual std::string getLastWillPayload() const = 0;
 
         virtual int getKeepAliveInterval() const = 0;
         virtual int getConnectionTimeout() const = 0;
