@@ -13,11 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "third-parties\goog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "transport-unit-test", "..\test\transport-unit-test\transport-unit-test.vcxproj", "{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gmock", "third-parties\googlemock\msvc\2015\gmock.vcxproj", "{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mqtt-transport", "transport\mqtt-transport\mqtt-transport.vcxproj", "{F53FE4F8-D750-44B5-9D80-700EAF1790F4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mqtt-transport-unit-test", "..\test\mqtt-transport-unit-test\mqtt-transport-unit-test.vcxproj", "{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,6 @@ Global
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x64.ActiveCfg = Release|Win32
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x86.ActiveCfg = Release|Win32
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x86.Build.0 = Release|Win32
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x64.ActiveCfg = Debug|x64
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x64.Build.0 = Debug|x64
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x86.ActiveCfg = Debug|Win32
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x86.Build.0 = Debug|Win32
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x64.ActiveCfg = Release|x64
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x64.Build.0 = Release|x64
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x86.ActiveCfg = Release|Win32
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x86.Build.0 = Release|Win32
 		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x64.ActiveCfg = Debug|Win32
 		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x86.ActiveCfg = Debug|Win32
 		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x86.Build.0 = Debug|Win32
@@ -71,6 +63,14 @@ Global
 		{F53FE4F8-D750-44B5-9D80-700EAF1790F4}.Release|x64.Build.0 = Release|x64
 		{F53FE4F8-D750-44B5-9D80-700EAF1790F4}.Release|x86.ActiveCfg = Release|Win32
 		{F53FE4F8-D750-44B5-9D80-700EAF1790F4}.Release|x86.Build.0 = Release|Win32
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x64.ActiveCfg = Debug|x64
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x64.Build.0 = Debug|x64
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x86.ActiveCfg = Debug|Win32
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Debug|x86.Build.0 = Debug|Win32
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x64.ActiveCfg = Release|x64
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x64.Build.0 = Release|x64
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x86.ActiveCfg = Release|Win32
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,7 +78,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F42D7A64-6A69-4466-AD3F-BB9168EC1EC7} = {E26BCE76-2B4A-47F3-BBD3-2613C57D48D2}
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7} = {E26BCE76-2B4A-47F3-BBD3-2613C57D48D2}
-		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF} = {659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}
 		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5} = {E26BCE76-2B4A-47F3-BBD3-2613C57D48D2}
+		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF} = {659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}
 	EndGlobalSection
 EndGlobal
