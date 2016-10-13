@@ -92,23 +92,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)</IntDir>
     <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)</IntDir>
     <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)</IntDir>
     <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\lib\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(Platform)\$(ProjectName)\$(Configuration)</IntDir>
     <TargetName>lmqttpp</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
