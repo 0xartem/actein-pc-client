@@ -32,6 +32,9 @@ extern "C" {
 #include <memory>
 #include <stdexcept> 
 
+#pragma warning(push)
+#pragma warning(disable:4290) // C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+
 namespace mqtt {
 
 /////////////////////////////////////////////////////////////////////////////  
@@ -178,6 +181,8 @@ typedef message::ptr_t message_ptr;
 /////////////////////////////////////////////////////////////////////////////
 // end namespace mqtt
 }
+
+#pragma warning(pop)
 
 #endif		// __mqtt_message_h
 

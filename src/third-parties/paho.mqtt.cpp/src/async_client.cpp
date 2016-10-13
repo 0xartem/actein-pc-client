@@ -27,6 +27,9 @@
 
 #include <cstdio>
 
+#pragma warning(push)
+#pragma warning(disable:4290) // C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+
 namespace mqtt {
 
 /////////////////////////////////////////////////////////////////////////////
@@ -203,7 +206,7 @@ std::vector<char*> async_client::alloc_topic_filters(
 	std::vector<char*> filts;
 	for (const auto& t : topicFilters) {
 		char* filt = new char[t.size()+1];
-		std::strcpy(filt, t.c_str());
+		strcpy_s(filt, t.size()+1, t.c_str());
 		filts.push_back(filt);
 	}
 	return filts;
@@ -662,3 +665,4 @@ itoken_ptr async_client::unsubscribe(const std::string& topicFilter,
 // end namespace mqtt
 }
 
+#pragma warning(pop)

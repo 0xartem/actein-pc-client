@@ -42,6 +42,9 @@ extern "C" {
 #include <memory>
 #include <stdexcept>
 
+#pragma warning(push)
+#pragma warning(disable:4290) // C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+
 namespace mqtt {
 
 const uint32_t		VERSION = 0x00010000;
@@ -646,5 +649,6 @@ typedef async_client::ptr_t async_client_ptr;
 // end namespace mqtt
 }
 
-#endif		// __mqtt_async_client_h
+#pragma warning(pop)
 
+#endif		// __mqtt_async_client_h
