@@ -19,7 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
- *    Artem Brazhnikov - add exception to the 'on_failure' method
+ *    Artem Brazhnikov - add message to the 'on_failure' method
  *******************************************************************************/
 
 #ifndef __mqtt_iaction_listener_h
@@ -65,9 +65,9 @@ public:
 	/**
 	 * This method is invoked when an action fails. 
 	 * @param asyncActionToken 
-	 * @param exc 
+	 * @param error message 
 	 */
-	virtual void on_failure(const itoken& asyncActionToken, exception exc) =0;
+	virtual void on_failure(const itoken& asyncActionToken, const char * message) =0;
 	/**
 	 * This method is invoked when an action has completed successfully. 
 	 * @param asyncActionToken 

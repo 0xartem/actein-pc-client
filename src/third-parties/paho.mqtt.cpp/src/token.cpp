@@ -14,7 +14,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
- *    Artem Brazhnikov - add exception to the 'on_failure' method
+ *    Artem Brazhnikov - add error message to the 'on_failure' method
  *******************************************************************************/
 
 #include "mqtt/token.h"
@@ -80,7 +80,7 @@ void token::on_failure(MQTTAsync_failureData* rsp)
 
 	// Note: callback always completes before the object is signaled.
 	if (listener)
-		listener->on_failure(*this, exception(rsp->code, rsp->message));
+		listener->on_failure(*this, rsp->message);
 	cond_.notify_all();
 }
 
