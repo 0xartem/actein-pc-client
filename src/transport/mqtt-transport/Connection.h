@@ -26,6 +26,8 @@ namespace mqtt_transport
             std::unique_ptr<MqttClientEndPoint> clientEndPoint,
             std::unique_ptr<IConnectionPolicy> connectionPolicy
             );
+        Connection(const Connection &) = delete;
+        Connection & operator=(const Connection &) = delete;
 
     private:
         std::unique_ptr<MqttBrokerEndPoint> mBrokerEndPoint;
