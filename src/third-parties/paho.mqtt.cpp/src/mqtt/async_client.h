@@ -19,6 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - disable warning 4290
  *******************************************************************************/
 
 #ifndef __mqtt_async_client_h

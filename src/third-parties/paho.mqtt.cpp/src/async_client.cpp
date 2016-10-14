@@ -14,6 +14,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - disable warning 4290
  *******************************************************************************/
 
 #include "mqtt/async_client.h"

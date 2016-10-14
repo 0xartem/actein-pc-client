@@ -19,6 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - add exception to the 'on_failure' method
  *******************************************************************************/
 
 #ifndef __mqtt_iaction_listener_h
@@ -31,6 +32,7 @@ extern "C" {
 #include <string>
 #include <vector>
 #include <memory>
+#include "mqtt/exception.h"
 
 namespace mqtt {
 	
@@ -65,7 +67,7 @@ public:
 	 * @param asyncActionToken 
 	 * @param exc 
 	 */
-	virtual void on_failure(const itoken& asyncActionToken /*, java.lang.Throwable exc*/) =0;
+	virtual void on_failure(const itoken& asyncActionToken, exception exc) =0;
 	/**
 	 * This method is invoked when an action has completed successfully. 
 	 * @param asyncActionToken 

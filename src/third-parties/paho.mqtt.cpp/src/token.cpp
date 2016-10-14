@@ -14,6 +14,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - add exception to the 'on_failure' method
  *******************************************************************************/
 
 #include "mqtt/token.h"
@@ -77,9 +78,9 @@ void token::on_failure(MQTTAsync_failureData* rsp)
 	complete_ = true;
 	g.unlock();
 
-	// Note: callback always completes before the obect is signalled.
+	// Note: callback always completes before the object is signaled.
 	if (listener)
-		listener->on_failure(*this);
+		listener->on_failure(*this, exception(rsp->code, rsp->message));
 	cond_.notify_all();
 }
 

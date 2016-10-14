@@ -19,6 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - add exception constructor with a message
  *******************************************************************************/
 
 #ifndef __mqtt_exception_h
@@ -49,6 +50,12 @@ class exception : public std::runtime_error
 public:
 	explicit exception(int reasonCode) : std::runtime_error("mqtt::exception"),
 											code_(reasonCode) {}
+    exception(int reasonCode, const std::string & message)
+        : std::runtime_error("mqtt::exception: " + message)
+        , code_(reasonCode)
+    {
+    }
+
 	/**
 	 * Returns the underlying cause of this exception, if available.
 	 */
