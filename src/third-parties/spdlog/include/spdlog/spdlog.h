@@ -20,6 +20,8 @@
 namespace spdlog
 {
 
+static const char * COMMON_LOGGER_NAME = "common_logger";
+
 //
 // Return an existing logger or nullptr if a logger with such name doesn't exist.
 // example: spdlog::get("my_logger")->info("hello {}", "world");
