@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package vr_events;
+
+import "vr_booth_info.proto";
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.vr_events";
+option java_outer_classname = "VrGameOffProtos";
+
+message VrGameOffEvent
+{
+  VrBoothInfo vr_booth_info = 1;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package vr_events;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.vr_events";
+option java_outer_classname = "VrGameProtos";
+
+message VrGame
+{
+  string game_name = 1;
+  int64 steam_game_id = 2;
+  int64 game_duration_seconds = 3;
+}

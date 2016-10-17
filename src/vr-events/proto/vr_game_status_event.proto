@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package vr_events;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.vr_events";
+option java_outer_classname = "VrGameStatusProtos";
+
+enum VrGameStatus
+{
+  UNKNOWN = 0;
+  GAME_OFF = 1;
+  GAME_ON = 2;
+}
+
+message VrGameStatusEvent
+{
+  VrGameStatus status = 1;
+}

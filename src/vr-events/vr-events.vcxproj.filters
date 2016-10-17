@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\interfaces">
+      <UniqueIdentifier>{c29ca5ce-0501-488b-8b9c-fd21d399c49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{20ae8765-779a-4975-903d-6ae7fbd4ea15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gen">
+      <UniqueIdentifier>{d977b6bb-6a0f-4eb8-bfc5-2f7bde9958c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gen">
+      <UniqueIdentifier>{b56c31cc-05d5-4620-b572-c2411b50a4bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="VrEventsHandler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\vr_booth_info.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\vr_game.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\vr_game_off_event.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\vr_game_on_event.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\vr_game_status_event.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="proto\vr_booth_info.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="proto\vr_game.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="proto\vr_game_off_event.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="proto\vr_game_on_event.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="proto\vr_game_status_event.proto">
+      <Filter>proto</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gen\vr_booth_info.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+    <ClCompile Include="gen\vr_game.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+    <ClCompile Include="gen\vr_game_off_event.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+    <ClCompile Include="gen\vr_game_on_event.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+    <ClCompile Include="gen\vr_game_status_event.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

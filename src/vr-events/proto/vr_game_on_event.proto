@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package vr_events;
+
+import "vr_game.proto";
+import "vr_booth_info.proto";
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.vr_events";
+option java_outer_classname = "VrGameOnProtos";
+
+message VrGameOnEvent
+{
+  VrBoothInfo vr_booth_info = 1;
+  VrGame game = 2;
+}

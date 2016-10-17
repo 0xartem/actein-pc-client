@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test-utils", "..\test\test-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spdlog", "third-parties\spdlog\platforms\windows\spdlog\spdlog.vcxproj", "{AE7D93D1-A84E-4E00-8175-F88CECE5DE3E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vr-events", "vr-events\vr-events.vcxproj", "{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{AE7D93D1-A84E-4E00-8175-F88CECE5DE3E}.Release|x64.Build.0 = Release|x64
 		{AE7D93D1-A84E-4E00-8175-F88CECE5DE3E}.Release|x86.ActiveCfg = Release|Win32
 		{AE7D93D1-A84E-4E00-8175-F88CECE5DE3E}.Release|x86.Build.0 = Release|Win32
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Debug|x64.ActiveCfg = Debug|x64
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Debug|x64.Build.0 = Debug|x64
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Debug|x86.ActiveCfg = Debug|Win32
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Debug|x86.Build.0 = Debug|Win32
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Release|x64.ActiveCfg = Release|x64
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Release|x64.Build.0 = Release|x64
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Release|x86.ActiveCfg = Release|Win32
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
