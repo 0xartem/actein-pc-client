@@ -6,12 +6,12 @@
 
 namespace mqtt_transport
 {
-    class ActionStatusObserver
+    class IActionStatusObserver
     {
     public:
         virtual void OnActionSuccess(Action action, const std::string & message) = 0;
         virtual void OnActionFailure(Action action, const std::string & message) = 0;
-        virtual ~ActionStatusObserver() = default;
+        virtual ~IActionStatusObserver() = default;
     };
 }
 

@@ -21,11 +21,14 @@
     <Filter Include="Source Files\gen">
       <UniqueIdentifier>{b56c31cc-05d5-4620-b572-c2411b50a4bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\topics">
+      <UniqueIdentifier>{5301fd93-0f53-4ff9-acc4-583a5efeed96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\topics">
+      <UniqueIdentifier>{e77e1383-a766-4435-bb99-f71fd0e78c2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VrEventsHandler.h">
-      <Filter>Header Files\interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="gen\vr_booth_info.pb.h">
       <Filter>Header Files\gen</Filter>
     </ClInclude>
@@ -40,6 +43,30 @@
     </ClInclude>
     <ClInclude Include="gen\vr_game_status_event.pb.h">
       <Filter>Header Files\gen</Filter>
+    </ClInclude>
+    <ClInclude Include="IVrEventsHandler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VrEventsException.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IVrEventsManager.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IVrEventsPublisher.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IVrEventsSubscriber.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VrTopics.h">
+      <Filter>Header Files\topics</Filter>
+    </ClInclude>
+    <ClInclude Include="VrTopicBuilder.h">
+      <Filter>Header Files\topics</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttVrEventsPublisher.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="gen\vr_game_status_event.pb.cc">
       <Filter>Source Files\gen</Filter>
+    </ClCompile>
+    <ClCompile Include="VrTopics.cpp">
+      <Filter>Source Files\topics</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttVrEventsPublisher.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

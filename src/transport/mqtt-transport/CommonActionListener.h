@@ -16,12 +16,12 @@ namespace mqtt
 
 namespace mqtt_transport
 {
-    class ActionStatusObserver;
+    class IActionStatusObserver;
 
     class CommonActionListener : public mqtt::iaction_listener
     {
     public:
-        CommonActionListener(Action action, ActionStatusObserver * actionStatusObserver);
+        CommonActionListener(Action action, IActionStatusObserver * actionStatusObserver);
 
         void on_success(const mqtt::itoken & asyncActionToken) override;
         void on_failure(const mqtt::itoken & asyncActionToken, const char * message) override;
@@ -36,7 +36,7 @@ namespace mqtt_transport
 
     private:
         Action mAction;
-        ActionStatusObserver * mActionStatusObserver;
+        IActionStatusObserver * mActionStatusObserver;
         std::shared_ptr<spdlog::logger> mLogger;
     };
 }

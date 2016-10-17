@@ -1,12 +1,12 @@
 #include <sstream>
 #include <mqtt/token.h>
 #include <spdlog/spdlog.h>
-#include "CommonActionListener.h"
 #include "IActionStatusObserver.h"
+#include "CommonActionListener.h"
 
 namespace mqtt_transport
 {
-    CommonActionListener::CommonActionListener(Action action, ActionStatusObserver * actionStatusObserver)
+    CommonActionListener::CommonActionListener(Action action, IActionStatusObserver * actionStatusObserver)
     {
         mAction = action;
         mActionStatusObserver = actionStatusObserver;
