@@ -11,6 +11,8 @@ namespace mqtt_transport
         static const std::string FACTORY;
         static const std::string FACTORY_ALL;
 
+        static const std::string BOOTH_ID;
+
         static const std::string PC_ONLINE_STATUS;
         static const std::string EMB_DEVICE_ONLINE_STATUS;
     };

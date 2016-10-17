@@ -56,8 +56,32 @@
     <ClInclude Include="CommonActionListener.h">
       <Filter>Header Files\action</Filter>
     </ClInclude>
-    <ClInclude Include="IActionStatusObserver.h">
+    <ClInclude Include="IConnectionObserver.h">
       <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageHandler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ISubscriber.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IPublisher.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttPublisher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IActionStatusObserver.h">
+      <Filter>Header Files\action</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttSubscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttSubscriberCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectOptionsBuilder.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +96,18 @@
     </ClCompile>
     <ClCompile Include="CommonActionListener.cpp">
       <Filter>Source Files\action</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttPublisher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttSubscriber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttSubscriberCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectOptionsBuilder.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

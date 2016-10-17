@@ -23,8 +23,8 @@ namespace mqtt_transport
     public:
         CommonActionListener(Action action, ActionStatusObserver * actionStatusObserver);
 
-        virtual void on_success(const mqtt::itoken & asyncActionToken) override;
-        virtual void on_failure(const mqtt::itoken & asyncActionToken, const char * message) override;
+        void on_success(const mqtt::itoken & asyncActionToken) override;
+        void on_failure(const mqtt::itoken & asyncActionToken, const char * message) override;
 
     protected:
         std::string BuildOnSuccessMessage(const mqtt::itoken & asyncActionToken);
