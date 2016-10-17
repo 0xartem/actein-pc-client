@@ -2,13 +2,11 @@
 #include <ArrayUtils.h>
 #include <PreciseDeliveryConnectionPolicy.h>
 
-using PrecisePolicy = mqtt_transport::PreciseDeliveryConnectionPolicy;
-
 namespace mqtt_transport_test
 {
     TEST(PreciseDeliveryConnectionPolicyTest, DefaultValues)
     {
-        PrecisePolicy policy;
+        mqtt_transport::PreciseDeliveryConnectionPolicy policy;
 
         ASSERT_FALSE(policy.isPersistentSession());
         ASSERT_EQ(policy.getKeepAliveInterval(), 60);
