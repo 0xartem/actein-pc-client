@@ -12,9 +12,9 @@ namespace vr_events
     class IVrEventsHandler
     {
     public:
-        virtual void HandleVrGameOnEvent(std::shared_ptr<VrGameOnEvent> event) = 0;
-        virtual void HandleVrOffEvent(std::shared_ptr<VrGameOffEvent> event) = 0;
-        virtual void HandleVrGameStatusEvent(std::shared_ptr<VrGameOnEvent> event) = 0;
+        virtual void HandleVrGameOnEvent(const std::shared_ptr<VrGameOnEvent> & event) = 0;
+        virtual void HandleVrGameOffEvent(const std::shared_ptr<VrGameOffEvent> & event) = 0;
+        virtual void HandleVrGameStatusEvent(const std::shared_ptr<VrGameStatusEvent> & event) = 0;
         virtual ~IVrEventsHandler() = default;
     };
 }

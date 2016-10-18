@@ -28,7 +28,9 @@
     <ClInclude Include="IVrEventsManager.h" />
     <ClInclude Include="IVrEventsPublisher.h" />
     <ClInclude Include="IVrEventsSubscriber.h" />
+    <ClInclude Include="MqttVrEventsManager.h" />
     <ClInclude Include="MqttVrEventsPublisher.h" />
+    <ClInclude Include="MqttVrEventsSubscriber.h" />
     <ClInclude Include="VrEventsException.h" />
     <ClInclude Include="VrTopicBuilder.h" />
     <ClInclude Include="VrTopics.h" />
@@ -46,7 +48,9 @@
     <ClCompile Include="gen\vr_game_off_event.pb.cc" />
     <ClCompile Include="gen\vr_game_on_event.pb.cc" />
     <ClCompile Include="gen\vr_game_status_event.pb.cc" />
+    <ClCompile Include="MqttVrEventsManager.cpp" />
     <ClCompile Include="MqttVrEventsPublisher.cpp" />
+    <ClCompile Include="MqttVrEventsSubscriber.cpp" />
     <ClCompile Include="VrTopics.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -124,7 +128,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,7 +145,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,7 +164,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -181,7 +185,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

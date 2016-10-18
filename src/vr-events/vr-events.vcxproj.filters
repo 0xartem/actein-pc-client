@@ -68,6 +68,12 @@
     <ClInclude Include="MqttVrEventsPublisher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MqttVrEventsSubscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MqttVrEventsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="proto\vr_booth_info.proto">
@@ -106,6 +112,12 @@
       <Filter>Source Files\topics</Filter>
     </ClCompile>
     <ClCompile Include="MqttVrEventsPublisher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttVrEventsSubscriber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MqttVrEventsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

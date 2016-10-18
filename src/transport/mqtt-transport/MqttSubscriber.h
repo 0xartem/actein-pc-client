@@ -15,7 +15,7 @@ namespace mqtt_transport
     {
     public:
         MqttSubscriber(mqtt::iasync_client & client, IConnectionPolicy & connectionPolicy);
-        void SetupCallback(mqtt::callback & callback) override;
+        void SetupCallback(std::unique_ptr<MqttSubscriberCallback> callback) override;
         void Subscribe(const std::string & topic, mqtt::iaction_listener & listener) override;
         void Subscribe(const TopicsVec & topics, mqtt::iaction_listener & listener) override;
         void Unsubscribe(const std::string & topic, mqtt::iaction_listener & listener) override;
@@ -24,6 +24,7 @@ namespace mqtt_transport
     private:
         mqtt::iasync_client & mClient;
         IConnectionPolicy & mConnectionPolicy;
+        std::unique_ptr<MqttSubscriberCallback> mCallback;
     };
 }
 

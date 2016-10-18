@@ -3,11 +3,6 @@
 
 #include "gen/vr_game_status_event.pb.h"
 
-namespace mqtt_transport
-{
-    class IActionStatusObserver;
-}
-
 namespace vr_events
 {
     class VrGame;
@@ -16,17 +11,13 @@ namespace vr_events
     {
     public:
             // throws VrEventsException
-            virtual void PublishVrGameOnEvent(
-                const VrGame & vrGame,
-                mqtt_transport::IActionStatusObserver * actionObserver) = 0;
+            virtual void PublishVrGameOnEvent(std::unique_ptr<VrGame> vrGame) = 0;
 
             // throws VrEventsException
-            virtual void PublishVrGameOffEvent(mqtt_transport::IActionStatusObserver * actionObserver) = 0;
+            virtual void PublishVrGameOffEvent() = 0;
 
             // throws VrEventsException
-            virtual void PublishVrGameStatusEvent(
-                const VrGameStatus & status,
-                mqtt_transport::IActionStatusObserver * actionObserver) = 0;
+            virtual void PublishVrGameStatusEvent(const VrGameStatus & status) = 0;
 
         virtual ~IVrEventsPublisher() = default;
     };

@@ -3,9 +3,16 @@
 
 #include "IVrEventsPublisher.h"
 
+namespace spdlog
+{
+    class logger;
+}
+
 namespace mqtt_transport
 {
     class IPublisher;
+    class IActionStatusObserver;
+    class CommonActionListener;
 }
 
 namespace vr_events
@@ -15,21 +22,21 @@ namespace vr_events
     class MqttVrEventsPublisher : public IVrEventsPublisher
     {
     public:
-        MqttVrEventsPublisher(mqtt_transport::IPublisher & publisher, const VrBoothInfo & vrBoothInfo);
+        MqttVrEventsPublisher(
+            mqtt_transport::IPublisher & publisher,
+            const std::shared_ptr<VrBoothInfo> & vrBoothInfo,
+            mqtt_transport::IActionStatusObserver * actionObserver
+        );
 
-        void PublishVrGameOnEvent(
-            const VrGame & vrGame,
-            mqtt_transport::IActionStatusObserver * actionObserver) override;
-
-        void PublishVrGameOffEvent(mqtt_transport::IActionStatusObserver * actionObserver) override;
-
-        void PublishVrGameStatusEvent(
-            const VrGameStatus & status,
-            mqtt_transport::IActionStatusObserver * actionObserver) override;
+        void PublishVrGameOnEvent(std::unique_ptr<VrGame> vrGame) override;
+        void PublishVrGameOffEvent() override;
+        void PublishVrGameStatusEvent(const VrGameStatus & status) override;
 
     private:
         mqtt_transport::IPublisher & mPublisher;
-        const VrBoothInfo & mVrBoothInfo;
+        std::shared_ptr<VrBoothInfo> mVrBoothInfo;
+        std::unique_ptr<mqtt_transport::CommonActionListener> mCommonListener;
+        std::shared_ptr<spdlog::logger> mLogger;
     };
 }
 

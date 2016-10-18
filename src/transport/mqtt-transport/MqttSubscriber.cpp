@@ -1,4 +1,5 @@
 #include "MqttSubscriber.h"
+#include "MqttSubscriberCallback.h"
 #include <mqtt/async_client.h>
 
 namespace mqtt_transport
@@ -11,9 +12,10 @@ namespace mqtt_transport
     {
     }
 
-    void MqttSubscriber::SetupCallback(mqtt::callback & callback)
+    void MqttSubscriber::SetupCallback(std::unique_ptr<MqttSubscriberCallback> callback)
     {
-        mClient.set_callback(callback);
+        mCallback = std::move(callback);
+        mClient.set_callback(*mCallback);
     }
 
     void MqttSubscriber::Subscribe(const std::string & topic, mqtt::iaction_listener & listener)

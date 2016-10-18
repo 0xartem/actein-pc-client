@@ -3,21 +3,23 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace mqtt
 {
-    class callback;
     class iaction_listener;
 }
 
+using TopicsVec = std::vector<std::string>;
+
 namespace mqtt_transport
 {
-    using TopicsVec = std::vector<std::string>;
+    class MqttSubscriberCallback;
 
     class ISubscriber
     {
     public:
-        virtual void SetupCallback(mqtt::callback & callback) = 0;
+        virtual void SetupCallback(std::unique_ptr<MqttSubscriberCallback> callback) = 0;
         
         // throws mqtt::exception
         virtual void Subscribe(const std::string & topic, mqtt::iaction_listener & listener) = 0;

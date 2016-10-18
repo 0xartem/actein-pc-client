@@ -6,6 +6,8 @@
 #include "VrTopics.h"
 #include "Topics.h"
 
+using TrTopics = mqtt_transport::Topics;
+
 namespace vr_events
 {
     class VrTopicBuilder
@@ -41,7 +43,7 @@ namespace vr_events
             return *this;
         }
 
-        VrTopicBuilder & setBoothId(int boothId)
+        VrTopicBuilder & SetBoothId(int boothId)
         {
             SetBoothIdOrWildcard(std::to_string(boothId));
             return *this;
@@ -53,9 +55,15 @@ namespace vr_events
         }
 
     private:
-        void SetBoothIdOrWildcard(const std::string & value)
+        bool SetBoothIdOrWildcard(const std::string & value)
         {
-            std::replace(mTopic.begin(), mTopic.end(), mqtt_transport::Topics::BOOTH_ID, value);
+            size_t boothIdIdx = mTopic.find(TrTopics::BOOTH_ID);
+            if (boothIdIdx == std::string::npos)
+            {
+                return false;
+            }
+            mTopic.replace(boothIdIdx, TrTopics::BOOTH_ID.size(), value);
+            return true;
         }
 
     private:
