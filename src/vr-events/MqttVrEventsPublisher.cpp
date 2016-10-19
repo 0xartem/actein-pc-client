@@ -17,7 +17,7 @@ namespace vr_events
         mqtt_transport::IActionStatusObserver * actionObserver)
         : mPublisher(publisher)
         , mVrBoothInfo(vrBoothInfo)
-        , mCommonListener(new mqtt_transport::CommonActionListener(
+        , mPublishListener(new mqtt_transport::CommonActionListener(
             mqtt_transport::Action::PUBLISH, actionObserver
         ))
     {
@@ -37,7 +37,7 @@ namespace vr_events
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
 
-            mPublisher.Publish(topic, event, *mCommonListener);
+            mPublisher.Publish(topic, event, *mPublishListener);
         }
         catch (const mqtt::exception & ex)
         {
@@ -56,7 +56,7 @@ namespace vr_events
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
 
-            mPublisher.Publish(topic, event, *mCommonListener);
+            mPublisher.Publish(topic, event, *mPublishListener);
         }
         catch (const mqtt::exception & ex)
         {
@@ -75,7 +75,7 @@ namespace vr_events
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameStatus().SetBoothId(mVrBoothInfo->id()).Build();
 
-            mPublisher.Publish(topic, event, *mCommonListener);
+            mPublisher.Publish(topic, event, *mPublishListener);
         }
         catch (const mqtt::exception & ex)
         {

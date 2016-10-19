@@ -144,7 +144,7 @@ namespace vr_events
 
     void MqttVrEventsSubscriber::ProcessGameOnEvent(mqtt::message_ptr message)
     {
-        std::shared_ptr<VrGameOnEvent> event = std::make_shared<VrGameOnEvent>();
+        auto event = std::make_shared<VrGameOnEvent>();
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game on event");
@@ -157,7 +157,7 @@ namespace vr_events
 
     void MqttVrEventsSubscriber::ProcessGameOffEvent(mqtt::message_ptr message)
     {
-        std::shared_ptr<VrGameOffEvent> event = std::make_shared<VrGameOffEvent>();
+        auto event = std::make_shared<VrGameOffEvent>();
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game off event");
@@ -170,7 +170,7 @@ namespace vr_events
 
     void MqttVrEventsSubscriber::ProcessVrStatusEvent(mqtt::message_ptr message)
     {
-        std::shared_ptr<VrGameStatusEvent> event = std::make_shared<VrGameStatusEvent>();
+        auto event = std::make_shared<VrGameStatusEvent>();
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game status event");

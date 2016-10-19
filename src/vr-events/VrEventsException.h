@@ -8,10 +8,8 @@ namespace vr_events
     class VrEventsException : public std::runtime_error
     {
     public:
-        explicit VrEventsException(
-            const std::string & message,
-            const std::string & mqttMessage = std::string())
-            : std::runtime_error(message + " " + mqttMessage)
+        explicit VrEventsException(const std::string & message)
+            : std::runtime_error("vr_events::VrEventsException: " + message)
         {
         }
     };

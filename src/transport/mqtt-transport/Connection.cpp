@@ -1,7 +1,4 @@
 #include "Connection.h"
-#include "MqttBrokerEndPoint.h"
-#include "MqttClientEndPoint.h"
-#include "IConnectionPolicy.h"
 #include "PreciseDeliveryConnectionPolicy.h"
 #include "MqttPublisher.h"
 #include "MqttSubscriber.h"
@@ -52,8 +49,7 @@ namespace mqtt_transport
     // throws mqtt::exception
     void Connection::Connect(mqtt::iaction_listener & listener)
     {
-        mqtt::connect_options_ptr connectOptions =
-            ConnectOptionsBuilder::BuildConnectOptions(*mConnectionPolicy);
+        auto connectOptions = ConnectOptionsBuilder::BuildConnectOptions(*mConnectionPolicy);
         mqtt::itoken_ptr token = mClient->connect(*connectOptions);
         token->set_action_callback(listener);
     }

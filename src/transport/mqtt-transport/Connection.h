@@ -5,6 +5,9 @@
 #include <memory>
 #include "IPublisher.h"
 #include "ISubscriber.h"
+#include "MqttBrokerEndPoint.h"
+#include "MqttClientEndPoint.h"
+#include "IConnectionPolicy.h"
 
 namespace mqtt
 {
@@ -14,12 +17,6 @@ namespace mqtt
 
 namespace mqtt_transport
 {
-    class MqttBrokerEndPoint;
-    class MqttClientEndPoint;
-    class MqttPublisher;
-    class MqttSubscriber;
-    class IConnectionPolicy;
-
     class Connection
     {
     public:
@@ -52,8 +49,8 @@ namespace mqtt_transport
     private:
         std::unique_ptr<MqttBrokerEndPoint> mBrokerEndPoint;
         std::unique_ptr<MqttClientEndPoint> mClientEndPoint;
-        std::unique_ptr<MqttPublisher> mPublisher;
-        std::unique_ptr<MqttSubscriber> mSubscriber;
+        std::unique_ptr<IPublisher> mPublisher;
+        std::unique_ptr<ISubscriber> mSubscriber;
         std::unique_ptr<IConnectionPolicy> mConnectionPolicy;
 
         std::unique_ptr<mqtt::iasync_client> mClient;

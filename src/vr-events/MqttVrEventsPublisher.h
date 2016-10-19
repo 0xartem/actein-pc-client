@@ -35,7 +35,7 @@ namespace vr_events
     private:
         mqtt_transport::IPublisher & mPublisher;
         std::shared_ptr<VrBoothInfo> mVrBoothInfo;
-        std::unique_ptr<mqtt_transport::CommonActionListener> mCommonListener;
+        std::unique_ptr<mqtt_transport::CommonActionListener> mPublishListener;
         std::shared_ptr<spdlog::logger> mLogger;
     };
 }
