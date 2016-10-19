@@ -19,6 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - add support of MQTT will options
  *******************************************************************************/
 
 #ifndef __mqtt_connect_options_h
@@ -48,6 +49,15 @@ class connect_options
 {
 	/** The underlying C connection options */
 	MQTTAsync_connectOptions opts_;
+    /** The underlying C will options */
+    MQTTAsync_willOptions willOpts_;
+    /** Topic to send LWT*/
+    std::string willMessageTopic_;
+    /** Message for LWT*/
+    message_ptr willMessage_;
+    /** Message string for LWT C structure;
+    TODO: find better solution, don't keep a copy of the message*/
+    std::string willMessageStr_;
 
 	/** The client has special access */
 	friend class async_client;
@@ -60,12 +70,16 @@ public:
 	/**
 	 * Constructs a new MqttConnectOptions object using the default values.
 	 */
-	connect_options() : opts_( MQTTAsync_connectOptions_initializer ) {}
+    connect_options()
+        : opts_(MQTTAsync_connectOptions_initializer)
+        , willOpts_(MQTTAsync_willOptions_initializer) {}
 	/**
 	 * Returns the connection timeout value. 
 	 * @return int 
 	 */
-	int get_connection_timeout() const;
+    int get_connection_timeout() const {
+        return opts_.connectTimeout;
+    }
 
 	//java.util.Properties getDebug()
            
@@ -103,12 +117,16 @@ public:
 	 * Returns the topic to be used for last will and testament (LWT).
 	 * @return std::string 
 	 */
-	std::string get_will_destination() const;
+    std::string get_will_destination() const {
+        return willOpts_.topicName;
+    }
 	/**
 	 * Returns the message to be sent as last will and testament (LWT).
 	 * @return MqttMessage 
 	 */
-	message get_will_message() const;
+    message get_will_message() const {
+        return *willMessage_;
+    }
 	/**
 	 * Returns whether the server should remember state for the client 
 	 * across reconnects.
@@ -173,7 +191,9 @@ public:
 	 * @param qos 
 	 * @param retained 
 	 */
-	void set_will(const std::string& top, void* payload, size_t n, int qos, bool retained);
+    void set_will(const std::string& top, void* payload, size_t n, int qos, bool retained) {
+        set_will(top, message(payload, n), qos, retained);
+    }
 	/**
 	 * Sets up the will information, based on the supplied parameters. 
 	 * @param top 
@@ -181,7 +201,17 @@ public:
 	 * @param qos 
 	 * @param retained 
 	 */
-	/*protected*/ void set_will(const std::string& top, message msg, int qos, bool retained);
+    /*protected*/ void set_will(const std::string& top, message msg, int qos, bool retained) {
+        willMessageTopic_ = top;
+        willOpts_.topicName = willMessageTopic_.c_str();
+
+        willMessage_ = std::make_shared<message>(msg);
+        willMessageStr_ = willMessage_->get_payload();
+        willOpts_.message = willMessageStr_.c_str();
+
+        willOpts_.qos = qos;
+        willOpts_.retained = retained;
+    }
 
 	std::string to_str() const;
 };
