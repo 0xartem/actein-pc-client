@@ -41,8 +41,8 @@ namespace vr_events
     void MqttVrEventsManager::Stop()
     {
         mIsRunning = false;
-        mVrEventsSubscriber.reset();
-        mVrEventsPublisher.reset();
+        //mVrEventsSubscriber.reset();
+        //mVrEventsPublisher.reset();
     }
 
     bool MqttVrEventsManager::IsRunning() const
@@ -50,13 +50,13 @@ namespace vr_events
         return mIsRunning;
     }
 
-    IVrEventsPublisher & MqttVrEventsManager::GetPublisher() const
+    IVrEventsPublisher * MqttVrEventsManager::GetPublisher() const
     {
-        return *mVrEventsPublisher;
+        return mVrEventsPublisher.get();
     }
 
-    IVrEventsSubscriber & MqttVrEventsManager::GetSubscriber() const
+    IVrEventsSubscriber * MqttVrEventsManager::GetSubscriber() const
     {
-        return *mVrEventsSubscriber;
+        return mVrEventsSubscriber.get();
     }
 }

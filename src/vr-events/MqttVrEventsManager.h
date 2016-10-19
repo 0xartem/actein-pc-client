@@ -29,8 +29,8 @@ namespace vr_events
         void Stop() override;
         bool IsRunning() const override;
 
-        IVrEventsPublisher & GetPublisher() const override;
-        IVrEventsSubscriber & GetSubscriber() const override;
+        IVrEventsPublisher * GetPublisher() const override;
+        IVrEventsSubscriber * GetSubscriber() const override;
 
     private:
         bool mIsRunning;

@@ -26,8 +26,8 @@ namespace vr_events
         virtual void Stop() = 0;
         virtual bool IsRunning() const = 0;
 
-        virtual IVrEventsPublisher & GetPublisher() const = 0;
-        virtual IVrEventsSubscriber & GetSubscriber() const = 0;
+        virtual IVrEventsPublisher * GetPublisher() const = 0;
+        virtual IVrEventsSubscriber * GetSubscriber() const = 0;
 
         virtual ~IVrEventsManager() = default;
     };

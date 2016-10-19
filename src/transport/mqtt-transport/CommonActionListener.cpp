@@ -19,6 +19,7 @@ namespace mqtt_transport
         {
             std::string resultMessage = BuildOnSuccessMessage(asyncActionToken);
             mLogger->info(resultMessage);
+
             if (mActionStatusObserver != nullptr)
             {
                 mActionStatusObserver->OnActionSuccess(mAction, resultMessage);
@@ -34,8 +35,15 @@ namespace mqtt_transport
     {
         try
         {
-            std::string resultMessage = BuildOnFailureMessage(asyncActionToken, message);
+            std::string pahoMessage;
+            if (message != nullptr)
+            {
+                pahoMessage = message;
+            }
+
+            std::string resultMessage = BuildOnFailureMessage(asyncActionToken, pahoMessage);
             mLogger->info(resultMessage);
+            
             if (mActionStatusObserver != nullptr)
             {
                 mActionStatusObserver->OnActionFailure(mAction, resultMessage);

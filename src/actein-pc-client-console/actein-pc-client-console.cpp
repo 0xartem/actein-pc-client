@@ -31,7 +31,7 @@ int main()
         logger->flush_on(spdlog::level::info);
         try
         {
-            ConnectionModel model;
+            ConnectionModel model("iot.eclipse.org", 1);
             model.Start();
 
             std::cout << "Press ESC and ENTER to stop..." << std::endl;
