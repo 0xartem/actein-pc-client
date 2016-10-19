@@ -37,7 +37,7 @@ namespace vr_events
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
 
-            mPublisher.Publish(topic, event, *mPublishListener);
+            mPublisher.Publish(topic, event, *mPublishListener, false);
         }
         catch (const mqtt::exception & ex)
         {
@@ -56,7 +56,7 @@ namespace vr_events
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
 
-            mPublisher.Publish(topic, event, *mPublishListener);
+            mPublisher.Publish(topic, event, *mPublishListener, false);
         }
         catch (const mqtt::exception & ex)
         {

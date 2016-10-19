@@ -18,7 +18,7 @@ namespace mqtt_transport
         mqtt::iaction_listener & listener)
     {
         std::string messageData = message.SerializeAsString();
-        //TODO: check empty string behavior
+        
         mqtt::idelivery_token_ptr token = mClient.publish(
             topic,
             messageData.data(),
@@ -37,7 +37,7 @@ namespace mqtt_transport
         bool retained)
     {
         std::string messageData = message.SerializeAsString();
-        //TODO: check empty string behavior
+        
         mqtt::idelivery_token_ptr token = mClient.publish(
             topic,
             messageData.data(),
