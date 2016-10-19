@@ -29,4 +29,23 @@ namespace mqtt_transport
 
         token->set_action_callback(listener);
     }
+
+    void MqttPublisher::Publish(
+        const std::string & topic,
+        const google::protobuf::MessageLite & message,
+        mqtt::iaction_listener & listener,
+        bool retained)
+    {
+        std::string messageData = message.SerializeAsString();
+        //TODO: check empty string behavior
+        mqtt::idelivery_token_ptr token = mClient.publish(
+            topic,
+            messageData.data(),
+            messageData.size(),
+            mConnectionPolicy.getQualityOfService(),
+            retained
+        );
+
+        token->set_action_callback(listener);
+    }
 }

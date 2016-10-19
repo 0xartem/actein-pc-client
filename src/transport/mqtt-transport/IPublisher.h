@@ -27,6 +27,13 @@ namespace mqtt_transport
             const google::protobuf::MessageLite & message,
             mqtt::iaction_listener & listener) = 0;
 
+        // throws mqtt::exception
+        virtual void Publish(
+            const std::string & topic,
+            const google::protobuf::MessageLite & message,
+            mqtt::iaction_listener & listener,
+            bool retained) = 0;
+
         virtual ~IPublisher() = default;
     };
 }
