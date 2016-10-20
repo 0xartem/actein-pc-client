@@ -20,6 +20,7 @@
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
  *    Artem Brazhnikov - disable warning 4290
+ *    Artem Brazhnikov - add 'get_pending_tokens', 'get_pending_token' methods
  *******************************************************************************/
 
 #ifndef __mqtt_async_client_h
@@ -160,6 +161,17 @@ public:
 	 * @return idelivery_token[]
 	 */
 	virtual std::vector<idelivery_token_ptr> get_pending_delivery_tokens() const =0;
+
+    /**
+    * Returns the token for the specified message ID.
+    * @return itoken
+    */
+    virtual itoken_ptr get_pending_token(int msgID) const = 0;
+    /**
+    * Returns the tokens for any outstanding not publish operations.
+    * @return itoken[]
+    */
+    virtual std::vector<itoken_ptr> get_pending_tokens() const = 0;
 	/**
 	 * Returns the client ID used by this client.
 	 * @return std::string 
@@ -490,6 +502,16 @@ public:
 	 * @return idelivery_token[]
 	 */
 	virtual std::vector<idelivery_token_ptr> get_pending_delivery_tokens() const;
+    /**
+    * Returns the token for the specified message ID.
+    * @return itoken
+    */
+    virtual itoken_ptr get_pending_token(int msgID) const;
+    /**
+    * Returns the tokens for any outstanding not publish operations.
+    * @return itoken[]
+    */
+    virtual std::vector<itoken_ptr> get_pending_tokens() const;
 	/**
 	 * Returns the client ID used by this client.
 	 * @return std::string 

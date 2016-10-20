@@ -15,6 +15,7 @@
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
  *    Artem Brazhnikov - disable warning 4290
+ *    Artem Brazhnikov - add 'get_pending_tokens', 'get_pending_token' methods
  *******************************************************************************/
 
 #include "mqtt/async_client.h"
@@ -352,6 +353,27 @@ std::vector<idelivery_token_ptr> async_client::get_pending_delivery_tokens() con
 	for (const auto& t : pendingDeliveryTokens_)
 		toks.push_back(t);
 	return toks;
+}
+
+itoken_ptr async_client::get_pending_token(int msgID) const
+{
+    if (msgID > 0) {
+        guard g(lock_);
+        for (const auto& t : pendingTokens_) {
+            if (t->get_message_id() == msgID)
+                return t;
+        }
+    }
+    return itoken_ptr();
+}
+
+std::vector<itoken_ptr> async_client::get_pending_tokens() const
+{
+    std::vector<itoken_ptr> toks;
+    guard g(lock_);
+    for (const auto& t : pendingTokens_)
+        toks.push_back(t);
+    return toks;
 }
 
 idelivery_token_ptr async_client::publish(const std::string& topic, const void* payload, 
