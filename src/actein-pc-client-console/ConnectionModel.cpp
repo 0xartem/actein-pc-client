@@ -44,6 +44,7 @@ void ConnectionModel::Stop()
     {
         mVrEventsManager->GetSubscriber()->UnsubscribeFromGameOffEvent();
         mVrEventsManager->GetSubscriber()->UnsubscribeFromGameOnEvent();
+        mConnection->WaitPendingTokens();
         mVrEventsManager->Stop();
     }
 
