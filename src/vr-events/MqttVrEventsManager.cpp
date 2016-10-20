@@ -41,8 +41,8 @@ namespace vr_events
     void MqttVrEventsManager::Stop()
     {
         mIsRunning = false;
-        //mVrEventsSubscriber.reset();
-        //mVrEventsPublisher.reset();
+        mVrEventsSubscriber.reset();
+        mVrEventsPublisher.reset();
     }
 
     bool MqttVrEventsManager::IsRunning() const

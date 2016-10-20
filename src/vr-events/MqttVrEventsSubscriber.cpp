@@ -87,7 +87,7 @@ namespace vr_events
     {
         try
         {
-            mSubscriber.Subscribe(mGameOnVrTopic, *mUnsubscribeListener);
+            mSubscriber.Unsubscribe(mGameOnVrTopic, *mUnsubscribeListener);
         }
         catch (const mqtt::exception & ex)
         {
@@ -113,7 +113,7 @@ namespace vr_events
     {
         try
         {
-            mSubscriber.Subscribe(mGameOffVrTopic, *mUnsubscribeListener);
+            mSubscriber.Unsubscribe(mGameOffVrTopic, *mUnsubscribeListener);
         }
         catch (const mqtt::exception & ex)
         {

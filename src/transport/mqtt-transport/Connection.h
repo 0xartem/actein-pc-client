@@ -26,16 +26,17 @@ namespace mqtt_transport
             std::unique_ptr<MqttClientEndPoint> clientEndPoint,
             std::unique_ptr<IConnectionPolicy> connectionPolicy);
 
-        // throws mqtt::exception
-        void Connect(mqtt::iaction_listener & listener);
-        // throws mqtt::exception
-        void Disconnect(mqtt::iaction_listener & listener);
+        void Connect(mqtt::iaction_listener & listener); // throws mqtt::exception
+        void Disconnect(mqtt::iaction_listener & listener); // throws mqtt::exception
+        void WaitPendingTokens(); // throws mqtt::exception
 
         mqtt::iasync_client & GetClient() const;
         IPublisher & GetPublisher() const;
         ISubscriber & GetSubcriber() const;
         MqttBrokerEndPoint & GetBrokerEndPoint() const;
         MqttClientEndPoint & GetClientEndPoint() const;
+
+        ~Connection();
 
     private:
         Connection(
@@ -45,6 +46,9 @@ namespace mqtt_transport
 
         Connection(const Connection &) = delete;
         Connection & operator=(const Connection &) = delete;
+
+        template<typename TokenType>
+        void WaitPendingTokens(const std::vector<TokenType> & tokens);
 
     private:
         std::unique_ptr<MqttBrokerEndPoint> mBrokerEndPoint;

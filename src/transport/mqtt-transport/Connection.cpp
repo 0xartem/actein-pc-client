@@ -46,7 +46,10 @@ namespace mqtt_transport
         mSubscriber = std::make_unique<MqttSubscriber>(*mClient, *mConnectionPolicy);
     }
 
-    // throws mqtt::exception
+    Connection::~Connection()
+    {
+    }
+
     void Connection::Connect(mqtt::iaction_listener & listener)
     {
         auto connectOptions = ConnectOptionsBuilder::BuildConnectOptions(*mConnectionPolicy);
@@ -54,11 +57,12 @@ namespace mqtt_transport
         token->set_action_callback(listener);
     }
 
-    // throws mqtt::exception
     void Connection::Disconnect(mqtt::iaction_listener & listener)
     {
         mqtt::itoken_ptr token = mClient->disconnect();
         token->set_action_callback(listener);
+
+        WaitPendingTokens();
     }
 
     mqtt::iasync_client & Connection::GetClient() const
@@ -84,5 +88,30 @@ namespace mqtt_transport
     MqttClientEndPoint & Connection::GetClientEndPoint() const
     {
         return *mClientEndPoint;
+    }
+
+    void Connection::WaitPendingTokens()
+    {
+        WaitPendingTokens(mClient->get_pending_delivery_tokens());
+        WaitPendingTokens(mClient->get_pending_tokens());
+    }
+
+    template<typename TokenType>
+    void Connection::WaitPendingTokens(const std::vector<TokenType> & tokens)
+    {
+        for (const auto & token : tokens)
+        {
+            try
+            {
+                if (!token->is_complete())
+                    token->wait_for_completion();
+            }
+            catch (const mqtt::exception & ex)
+            {
+                if (ex.get_reason_code() == MQTTASYNC_OPERATION_INCOMPLETE)
+                    continue;
+                throw ex;
+            }
+        }
     }
 }

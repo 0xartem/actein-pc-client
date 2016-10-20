@@ -33,6 +33,7 @@ class ConnectionModel :
 {
 public:
     ConnectionModel(const std::string & brokerHost, int boothId);
+    ~ConnectionModel();
     void Start();
     void Stop();
     vr_events::IVrEventsManager * GetVrEventsManager() const;

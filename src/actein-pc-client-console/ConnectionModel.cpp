@@ -29,6 +29,10 @@ ConnectionModel::ConnectionModel(const std::string & brokerHost, int boothId)
     mVrEventsManager = std::make_unique<vr_events::MqttVrEventsManager>(*mConnection, vrBoothInfo);
 }
 
+ConnectionModel::~ConnectionModel()
+{
+}
+
 void ConnectionModel::Start()
 {
     mConnection->Connect(*mConnectListener);
