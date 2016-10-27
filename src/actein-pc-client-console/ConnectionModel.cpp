@@ -12,6 +12,8 @@
 #include <IVrEventsSubscriber.h>
 #include <IVrEventsPublisher.h>
 
+#include "GameRunner.h"
+
 using CommonListener = mqtt_transport::CommonActionListener;
 using MqttAction = mqtt_transport::Action;
 
@@ -83,6 +85,10 @@ void ConnectionModel::OnConnectionLost()
 void ConnectionModel::HandleVrGameOnEvent(const std::shared_ptr<vr_events::VrGameOnEvent> & event)
 {
     mLogger->info("VR game on event received. Game {}", event->game().game_name());
+
+    GameRunner gameRunner(event->game());
+    gameRunner.Run();
+
     mVrEventsManager->GetPublisher()->PublishVrGameStatusEvent(vr_events::VrGameStatus::GAME_ON);
 }
 
