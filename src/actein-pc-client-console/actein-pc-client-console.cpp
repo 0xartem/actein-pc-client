@@ -10,6 +10,7 @@
 
 //#include <public/steam/steam_api.h>
 //#include <thread>
+#include "GameRunner.h"
 
 
 std::shared_ptr<spdlog::logger> ConfigLog()
@@ -28,6 +29,8 @@ std::shared_ptr<spdlog::logger> ConfigLog()
 
 int main()
 {
+    GameRunner runner;
+    runner.Stop();
     /*bool res = SteamAPI_RestartAppIfNecessary(0);
     if (res)
     {
