@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vr-events", "vr-events\vr-e
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-console", "actein-pc-client-console\actein-pc-client-console.vcxproj", "{96CDDD28-951A-41C1-8D4A-E5BCB9093106}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-service", "actein-pc-client-service\actein-pc-client-service.vcxproj", "{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -115,6 +117,14 @@ Global
 		{96CDDD28-951A-41C1-8D4A-E5BCB9093106}.Release|x64.Build.0 = Release|x64
 		{96CDDD28-951A-41C1-8D4A-E5BCB9093106}.Release|x86.ActiveCfg = Release|Win32
 		{96CDDD28-951A-41C1-8D4A-E5BCB9093106}.Release|x86.Build.0 = Release|Win32
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Debug|x64.ActiveCfg = Debug|x64
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Debug|x64.Build.0 = Debug|x64
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Debug|x86.ActiveCfg = Debug|Win32
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Debug|x86.Build.0 = Debug|Win32
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x64.ActiveCfg = Release|x64
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x64.Build.0 = Release|x64
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x86.ActiveCfg = Release|Win32
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
