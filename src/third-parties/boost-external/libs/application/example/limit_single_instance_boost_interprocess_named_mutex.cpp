@@ -15,9 +15,6 @@
 
 // -----------------------------------------------------------------------------
 
-#define BOOST_ALL_DYN_LINK
-#define BOOST_LIB_DIAGNOSTIC
-
 #define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
 
 // Single instance mechanism that will support aspect based on
@@ -80,7 +77,7 @@ int main(int argc, char *argv[])
    boost::uuids::string_generator gen;
 
    app_context.insert<application::limit_single_instance>(
-      boost::make_shared<application::limit_single_instance_named_mutex_behaviour>(
+      boost::make_shared<application::limit_single_instance_default_behaviour>(
          gen("{0F1164AD-ECA5-175D-8784-4BAA329EF9F2}")));
 
    return application::launch<application::common>(app, app_context);

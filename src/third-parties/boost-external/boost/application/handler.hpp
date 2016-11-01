@@ -19,8 +19,6 @@
 #include <boost/application/config.hpp>
 #include <boost/application/context.hpp>
 
-#include <boost/function.hpp>
-
 namespace boost { namespace application {
 
     /*!
@@ -39,6 +37,7 @@ namespace boost { namespace application {
      * instace_aready_running the application mechanism will continue,
      * if your return false the application mechanism will exit.
      *
+     *
      */
    
    template<class HandlerReturnType = bool>
@@ -46,7 +45,7 @@ namespace boost { namespace application {
    {
    public:
 
-      typedef boost::function< HandlerReturnType (void) > callback;
+      typedef csbl::function< HandlerReturnType (void) > callback;
 
       /*!
        * Constructs an void handler.
@@ -73,8 +72,7 @@ namespace boost { namespace application {
        *
        * \param callback An callback method as param.
        */
-      void set(const callback& cb)
-      {
+      void set(const callback& cb) {
          callback_ = cb;
       }
 
@@ -87,10 +85,8 @@ namespace boost { namespace application {
        * \return true if callback pointer is valid.
        *
        */
-      bool get(callback*& cb)
-      {
-          if(is_valid())
-          {
+      bool get(callback*& cb) {
+          if(is_valid()) {
             cb = &callback_;
             return true;
           }
@@ -105,12 +101,11 @@ namespace boost { namespace application {
        * \return true if callback pointer is valid.
        *
        */
-      bool is_valid() const
-      {
-          if(callback_.empty())
-            return false;
+      bool is_valid() const {
+         if(callback_)
+            return true;
 
-          return true;
+         return false;
       }
 
       /*!
@@ -119,8 +114,7 @@ namespace boost { namespace application {
        * \return the handler instance.
        *
        */
-      handler &get_handler()
-      {
+      handler &get_handler() {
          return *this;
       }
 
@@ -145,15 +139,13 @@ namespace boost { namespace application {
        *
        */
       template< typename App, typename Handler >
-      static boost::function< HandlerReturnType (void) > 
-         make_callback(App& app, Handler h)
-      {
+      static csbl::function< HandlerReturnType (void) > 
+         make_callback(App& app, Handler h) {
          return boost::bind(h, &app);
       }
 
    private:
       callback callback_;
-
    };
 
    // usual handler 

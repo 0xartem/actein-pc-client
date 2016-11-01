@@ -12,6 +12,13 @@
 #include <boost/filesystem/path.hpp>
 
 #include <cstdlib>
+
+#include <boost/detail/winapi/config.hpp>
+#if BOOST_USE_WINAPI_VERSION < BOOST_WINAPI_VERSION_VISTA
+#error Boost.Application requires at least the windows vista feature level of the windows sdk.
+#endif
+#include <boost/detail/winapi/dll.hpp>
+
 #include <shlobj.h>
 
 #ifdef BOOST_HAS_PRAGMA_ONCE
@@ -24,22 +31,22 @@ namespace boost { namespace application { namespace detail {
     {
         filesystem::path full_path_;
         
-        boost::filesystem::path path_from_me(boost::system::error_code &ec) {
+        static boost::filesystem::path path_from_me(boost::system::error_code &ec) {
             boost::filesystem::path ret;
             
             // A handle to the loaded module whose path is being requested.
             // If this parameter is NULL, GetModuleFileName retrieves the path of the
             // executable file of the current process.
-            WCHAR path_hldr[MAX_PATH];
-            LPWSTR path = path_hldr;
-            ::GetModuleFileNameW(NULL, path, MAX_PATH);
+            boost::detail::winapi::WCHAR_ path_hldr[MAX_PATH];
+            boost::detail::winapi::LPWSTR_ path = path_hldr;
+            boost::detail::winapi::get_module_file_name(NULL, path, MAX_PATH);
             ec = last_error_code();
     
             // In case of ERROR_INSUFFICIENT_BUFFER_ trying to get buffer big enough to store the whole path
-            for (unsigned i = 2; i < 1025 && ec.value() == ERROR_INSUFFICIENT_BUFFER; i *= 2) {
+            for (unsigned i = 2; i < 129 && ec.value() == ERROR_INSUFFICIENT_BUFFER; i *= 2) {
                 path = new WCHAR[MAX_PATH * i];
     
-                ::GetModuleFileNameW(NULL, path, MAX_PATH * i);
+                boost::detail::winapi::get_module_file_name(NULL, path, MAX_PATH * i);
                 ec = last_error_code();
     
                 if (ec) {
@@ -60,7 +67,7 @@ namespace boost { namespace application { namespace detail {
             return ret;
         }
 
-        boost::filesystem::path getenv(const char* env_name)
+        static boost::filesystem::path getenv(const char* env_name)
         {
     #if defined(_MSC_VER) && _MSC_VER >= 14
             std::vector<char> buf;
@@ -84,6 +91,18 @@ namespace boost { namespace application { namespace detail {
     #endif
         }
 
+        static bool KnownFolderPath( REFKNOWNFOLDERID _Id, filesystem::path &out )
+        {
+            PWSTR res = NULL;
+            if ( SUCCEEDED( ::SHGetKnownFolderPath( _Id, KF_FLAG_CREATE, NULL, &res ) ) )
+            {
+                out = res;
+                CoTaskMemFree( static_cast<void*>( res ) );
+                return true;
+            }
+            return false;
+        }
+
     public:
 
         filesystem::path current_path(void)
@@ -93,109 +112,57 @@ namespace boost { namespace application { namespace detail {
 
         const filesystem::path& location(boost::system::error_code &ec)
         {
-            if(!full_path_.empty())
-                return full_path_;
-
-            boost::filesystem::path full_path
-                = path_from_me(ec);
-            if(ec)
-                full_path_ = boost::filesystem::path();
-            
-            full_path_ = full_path;
-
+            if ( full_path_.empty( ) )
+            {
+                full_path_ = path_from_me(ec);
+            }
             return full_path_;
         }
 
         const filesystem::path& location()
         {
-            if(!full_path_.empty())
-                return full_path_;
+            if ( full_path_.empty( ) )
+            {
+                boost::system::error_code ec;
 
-            boost::system::error_code ec;
+                full_path_ = location( ec );
 
-            full_path_ = location(ec);
-
-            if (ec) {
-                boost::throw_exception(
-                    boost::system::system_error(
-                    ec, "location() failed"
-                    ));
+                if ( ec )
+                {
+                    boost::throw_exception(
+                        boost::system::system_error(
+                        ec, "location() failed"
+                        ) );
+                }
             }
-
             return full_path_;
         }
     
         boost::filesystem::path home_path()
         {
-    #if NTDDI_VERSION >= 0x06010000
-            wchar_t* res = NULL;
-            if(SUCCEEDED(::SHGetKnownFolderPath(
-                             FOLDERID_Profile, 0, NULL, (PWSTR*)res))) {
-                boost::filesystem::path p(res);
-                CoTaskMemFree(static_cast<void*>(res));
-                return p;
-            }
-    #else
-            TCHAR res[MAX_PATH];
-            if(SUCCEEDED(::SHGetFolderPath(
-                             NULL, CSIDL_PROFILE, NULL, 0, res)))
-                return res;
-    #endif
-    
-            boost::filesystem::path ret = getenv("USERPROFILE");
-            if(ret.empty()) {
-                ret = getenv("HOMEDRIVE") / getenv("HOMEPATH");
-                if(ret.empty()) {
-                    ret = getenv("HOME");
-                    if(ret.empty())
-                        return boost::filesystem::path(".");
-                }
-            }
-    
-            return ret;
+            boost::filesystem::path home( L"." );
+            KnownFolderPath( FOLDERID_Profile, home );
+            return home;
         }
     
         boost::filesystem::path app_data_path()
         {
-    #if NTDDI_VERSION >= 0x06010000
-            wchar_t* ret = NULL;
-            if(SUCCEEDED(::SHGetKnownFolderPath(
-                             FOLDERID_RoamingAppData, 0, NULL, (PWSTR*)ret))) {
-                boost::filesystem::path p(ret);
-                CoTaskMemFree(static_cast<void*>(ret));
-                return p;
-            }
-    #else
-            TCHAR ret[MAX_PATH];
-            if(SUCCEEDED(::SHGetFolderPath(
-                             NULL, CSIDL_APPDATA, NULL, 0, ret)))
-                return ret;
-    #endif
-            return boost::filesystem::path(".");
+            boost::filesystem::path p( L"." );
+            KnownFolderPath( FOLDERID_LocalAppData, p );
+            return p;
         }
     
         boost::filesystem::path config_path()
         {
-            return app_data_path();
+            boost::filesystem::path p( L"." );
+            KnownFolderPath( FOLDERID_RoamingAppData, p );
+            return p;
         }
     
         boost::filesystem::path temp_path()
         {
-            // taken from msdn example for GetTempPath()
-            DWORD ret = ::GetTempPath(0, (char*)"");
-    
-            if(ret == 0)
-                return boost::filesystem::path(".");
-    
-            std::vector<TCHAR> res(ret);
-    
-            ret = ::GetTempPath(static_cast<DWORD>(res.size()), res.data());
-            if(ret == 0 || ret > res.size())
-                return boost::filesystem::path(".");
-    
-            return res.data();
+            return boost::filesystem::temp_directory_path();
         }
-    public:
     };
 
     
