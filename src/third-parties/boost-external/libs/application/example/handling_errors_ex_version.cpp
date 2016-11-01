@@ -14,6 +14,9 @@
 
 // -----------------------------------------------------------------------------
 
+#define BOOST_ALL_DYN_LINK
+#define BOOST_LIB_DIAGNOSTIC
+
 
 #include <iostream>
 #include <boost/application.hpp>

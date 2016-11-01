@@ -5,7 +5,8 @@
 
 // For more information, see http://www.boost.org
 
-#define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
+// #define BOOST_ALL_DYN_LINK
+// #define BOOST_LIB_DIAGNOSTIC
 
 #include <iostream>
 #include <boost/application.hpp>

@@ -51,6 +51,9 @@
 // Stoping my application...
 //
 
+#define BOOST_ALL_DYN_LINK
+#define BOOST_LIB_DIAGNOSTIC
+
 #define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
 
 #include <iostream>
@@ -256,7 +259,7 @@ int main(int argc, char *argv[])
    // my server aspects
 
    app_context.insert<application::path>(
-      boost::make_shared<application::path>());
+      boost::make_shared<application::default_path>());
 
    app_context.insert<application::args>(
       boost::make_shared<application::args>(argc, argv));

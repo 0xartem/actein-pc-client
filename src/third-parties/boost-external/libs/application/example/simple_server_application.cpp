@@ -44,8 +44,10 @@
 // Stoping my application...
 //
 
+#define BOOST_ALL_DYN_LINK
+#define BOOST_LIB_DIAGNOSTIC
+
 #define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
-// #define BOOST_APPLICATION_FEATURE_NS_SELECT_STD
 
 #include <iostream>
 #include <fstream>
@@ -62,11 +64,8 @@ using namespace boost;
 
 // my application code
 
-BOOST_APPLICATION_FEATURE_SELECT
-
 class myapp
 {
-
 public:
 
    myapp(application::context& context)
@@ -97,7 +96,7 @@ public:
 
       // run logic
 
-      application::csbl::shared_ptr<application::status> st =
+      boost::shared_ptr<application::status> st =
          context_.find<application::status>();
 
       int count = 0;
@@ -122,7 +121,7 @@ public:
       my_log_file_ << "Start Log..." << std::endl;
 
       // launch a work thread
-      application::csbl::thread thread(&myapp::worker, this);
+      boost::thread thread(&myapp::worker, this);
 
       context_.find<application::wait_for_termination_request>()->wait();
 
@@ -170,10 +169,10 @@ bool setup(application::context& context)
 {
    strict_lock<application::aspect_map> guard(context);
 
-   application::csbl::shared_ptr<application::args> myargs
+   boost::shared_ptr<application::args> myargs
       = context.find<application::args>(guard);
 
-   application::csbl::shared_ptr<application::path> mypath
+   boost::shared_ptr<application::path> mypath
       = context.find<application::path>(guard);
 
 // provide setup for windows service
@@ -200,7 +199,7 @@ bool setup(application::context& context)
 
       if (vm.count("help"))
       {
-         std::cout << install << std::endl;
+         std::cout << install << std::cout;
          return true;
       }
 
@@ -244,7 +243,7 @@ int main(int argc, char *argv[])
    // my server aspects
 
    app_context.insert<application::args>(
-      application::csbl::make_shared<application::args>(argc, argv));
+      boost::make_shared<application::args>(argc, argv));
 
    // add termination handler
 
@@ -252,7 +251,7 @@ int main(int argc, char *argv[])
       = boost::bind(&myapp::stop, &app);
 
    app_context.insert<application::termination_handler>(
-      application::csbl::make_shared<application::termination_handler_default_behaviour>(termination_callback));
+      boost::make_shared<application::termination_handler_default_behaviour>(termination_callback));
 
    // To  "pause/resume" works, is required to add the 2 handlers.
 
@@ -264,7 +263,7 @@ int main(int argc, char *argv[])
       = boost::bind(&myapp::pause, &app);
 
    app_context.insert<application::pause_handler>(
-      application::csbl::make_shared<application::pause_handler_default_behaviour>(pause_callback));
+      boost::make_shared<application::pause_handler_default_behaviour>(pause_callback));
 
    // windows only : add resume handler
 
@@ -272,7 +271,7 @@ int main(int argc, char *argv[])
       = boost::bind(&myapp::resume, &app);
 
    app_context.insert<application::resume_handler>(
-      application::csbl::make_shared<application::resume_handler_default_behaviour>(resume_callback));
+      boost::make_shared<application::resume_handler_default_behaviour>(resume_callback));
 
 #endif
 
@@ -292,7 +291,7 @@ int main(int argc, char *argv[])
    if(ec)
    {
       std::cout << "[E] " << ec.message()
-         << " <" << ec.value() << "> " << std::endl;
+         << " <" << ec.value() << "> " << std::cout;
    }
 
    return result;

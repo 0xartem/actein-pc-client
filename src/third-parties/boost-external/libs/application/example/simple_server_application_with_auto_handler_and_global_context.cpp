@@ -43,6 +43,9 @@
 // Stoping my application...
 //
 
+#define BOOST_ALL_DYN_LINK
+#define BOOST_LIB_DIAGNOSTIC
+
 #define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
 
 #include <iostream>
@@ -227,21 +230,9 @@ bool setup(application::context& context)
 }
 // main
 
-
 int main(int argc, char *argv[])
 {
-
-   boost::system::error_code ec;
-
-   application::global_context_ptr ctx = application::global_context::create(ec);
- 
-   if(ec)
-   {
-      std::cout << "[E] " << ec.message()
-         << " <" << ec.value() << "> " << std::cout;
-
-      return 1;
-   }
+   application::global_context_ptr ctx = application::global_context::create();
 
    // auto_handler will automatically add termination, pause and resume (windows) handlers
    application::auto_handler<myapp> app(ctx);
@@ -251,10 +242,6 @@ int main(int argc, char *argv[])
 
    this_application()->insert<application::args>(
       boost::make_shared<application::args>(argc, argv));
-
-   // in this case we need add path be yoyr hand to use it in "setup"
-   this_application()->insert<application::path>(
-               boost::make_shared<application::path>());
 
    // check if we need setup
 
@@ -267,7 +254,7 @@ int main(int argc, char *argv[])
 
    // my server instantiation
 
-  
+   boost::system::error_code ec;
    int result = application::launch<application::server>(app, ctx, ec);
 
    if(ec)
@@ -276,16 +263,7 @@ int main(int argc, char *argv[])
          << " <" << ec.value() << "> " << std::cout;
    }
 
-   application::global_context::destroy(ec);
-
-   if(ec)
-   {
-      std::cout << "[E] " << ec.message()
-         << " <" << ec.value() << "> " << std::cout;
-
-      return 1;
-   }  
+   application::global_context::destroy();
 
    return result;
-
 }

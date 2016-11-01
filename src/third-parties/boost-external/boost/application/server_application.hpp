@@ -60,7 +60,8 @@ namespace boost { namespace application {
        * Retrieves a id that identify application run mode.
        *
        */
-      static int mode() {
+      static int mode()
+      {
          static int id = new_run_mode<int>();
          return id;
       }
@@ -85,7 +86,8 @@ namespace boost { namespace application {
        */
       template <typename Application, typename SignalManager>
       server(Application& myapp, SignalManager &sm,
-             application::context &context, boost::system::error_code& ec) {
+             application::context &context, boost::system::error_code& ec)
+      {
          // default aspects patterns added to this kind of application
 
          if(!context.find<run_mode>())
@@ -102,7 +104,7 @@ namespace boost { namespace application {
                
          if(!context.find<path>())
               context.insert<path>(
-               csbl::make_shared<path>());
+               csbl::make_shared<default_path>());
                
          // need be created after run_mode, status
 
@@ -115,7 +117,8 @@ namespace boost { namespace application {
        * Prepare application and run user functor operator.
        *
        */
-      int run() {
+      int run()
+      {
          return impl_->run();
       }
 
@@ -123,7 +126,8 @@ namespace boost { namespace application {
        * Destruct an server application.
        *
        */
-      virtual ~server() {
+      virtual ~server()
+      {
          impl_->get_context().find<status>()->state(status::stopped);
       }
 

@@ -22,8 +22,8 @@
 #include <boost/application/context.hpp>
 #include <boost/application/handler.hpp>
 
-// #include <boost/bind.hpp>
-// #include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
 
 #include <boost/application/aspects/termination_handler.hpp>
 #include <boost/application/aspects/limit_single_instance.hpp>
@@ -52,7 +52,9 @@ namespace boost { namespace application {
    public:
       explicit signal_binder(context &cxt)
          : signals_(io_service_)
-         , context_(cxt) {
+         , io_service_thread_(0)
+         , context_(cxt)
+      {
          signals_.async_wait(
             boost::bind(&signal_binder::signal_handler, this,
             boost::asio::placeholders::error,
@@ -61,19 +63,22 @@ namespace boost { namespace application {
 
       explicit signal_binder(global_context_ptr cxt)
          : signals_(io_service_)
-         , context_(*cxt.get()) {
+         , io_service_thread_(0)
+         , context_(*cxt.get())
+      {
          signals_.async_wait(
             boost::bind(&signal_binder::signal_handler, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::signal_number));
       }
 
-      virtual ~signal_binder() {
-         if(io_service_thread_) {
+      virtual ~signal_binder()
+      {
+         if(io_service_thread_)
+         {
             io_service_.stop();
-            if (io_service_thread_->joinable()) {
-               io_service_thread_->join();
-            }
+            io_service_thread_->join();
+            delete io_service_thread_;
          }
       }
 
@@ -86,7 +91,8 @@ namespace boost { namespace application {
        *          arrives.
        *
        */
-      void bind(int signal_number, const handler<>& h) {
+      void bind(int signal_number, const handler<>& h)
+      {
          boost::system::error_code ec;
          bind(signal_number, h, handler<>(), ec);
 
@@ -107,7 +113,8 @@ namespace boost { namespace application {
        *           first handler return true;
        *
        */
-      void bind(int signal_number, const handler<>& h1, const handler<>& h2) {
+      void bind(int signal_number, const handler<>& h1, const handler<>& h2)
+      {
          boost::system::error_code ec;
          bind(signal_number, h1, h2, ec);
 
@@ -126,7 +133,8 @@ namespace boost { namespace application {
        *
        */
       void bind(int signal_number, const handler<>& h,
-         boost::system::error_code& ec) {
+         boost::system::error_code& ec)
+      {
          bind(signal_number, h, handler<>(), ec);
       }
 
@@ -144,7 +152,8 @@ namespace boost { namespace application {
        *
        */
       void bind(int signal_number, const handler<>& h1, const handler<>& h2,
-         boost::system::error_code& ec) {
+         boost::system::error_code& ec)
+      {
          signals_.add(signal_number, ec);
          handler_map_[signal_number] = std::make_pair(h1, h2);
       }
@@ -155,7 +164,8 @@ namespace boost { namespace application {
        * \param signal_number The signal constant, e.g.: SIGUSR2, SIGINT.
        *
        */
-      void unbind(int signal_number) {
+      void unbind(int signal_number)
+      {
          boost::system::error_code ec;
          unbind(signal_number, ec);
 
@@ -170,7 +180,8 @@ namespace boost { namespace application {
        * \param signal_number The signal constant, e.g.: SIGUSR2, SIGINT.
        *
        */
-      void unbind(int signal_number, boost::system::error_code& ec) {
+      void unbind(int signal_number, boost::system::error_code& ec)
+      {
          if(handler_map_.cend() != handler_map_.find(signal_number))
          {
             // replace
@@ -185,24 +196,28 @@ namespace boost { namespace application {
        * \param signal_number The signal constant, e.g.: SIGUSR2, SIGINT.
        *
        */
-      bool is_bound(int signal_number) {
+      bool is_bound(int signal_number)
+      {
          return (handler_map_.cend() != handler_map_.find(signal_number));
       }
 
     protected:
 
-      void start() {
-         io_service_thread_.reset(new csbl::thread(
-            boost::bind(&signal_binder::run_io_service, this)));
+      void start()
+      {
+          io_service_thread_ = new boost::thread(
+            boost::bind(&signal_binder::run_io_service, this));
       }
 
-      void run_io_service() {
+      void run_io_service()
+      {
          io_service_.run();
       }
 
       void signal_handler(const boost::system::error_code& ec,
-         int signal_number) {
-         spawn(ec, signal_number);
+         int signal_number)
+      {
+         boost::thread thread(&signal_binder::spawn, this, ec, signal_number);
 
          // triggers again
          signals_.async_wait(
@@ -213,15 +228,19 @@ namespace boost { namespace application {
 
    protected:
 
-      void spawn(const boost::system::error_code& ec, int signal_number) {
+      void spawn(const boost::system::error_code& ec, int signal_number)
+      {
          if (ec)
             return;
 
-         if(handler_map_[signal_number].first.is_valid()) {
+         if(handler_map_[signal_number].first.is_valid())
+         {
             handler<>::callback* cb = 0;
 
-            if(handler_map_[signal_number].first.get(cb)) {
-               if((*cb)()) {
+            if(handler_map_[signal_number].first.get(cb))
+            {
+               if((*cb)())
+               {
                   // user tell us to call second callback
                   if(handler_map_[signal_number].second.get(cb))
                      (*cb)();
@@ -241,7 +260,7 @@ namespace boost { namespace application {
       asio::io_service io_service_;
       asio::signal_set signals_;
 
-      csbl::shared_ptr<csbl::thread> io_service_thread_;
+      boost::thread *io_service_thread_;
 
    protected:
 
@@ -324,11 +343,11 @@ namespace boost { namespace application {
       {
          // we need set application_state to stop
          context_.find<status>()->state(status::stopped);
-
+         
          // remove process lock
-         csbl::shared_ptr<limit_single_instance> si
+         csbl::shared_ptr<limit_single_instance> si 
             = context_.find<limit_single_instance>();
-
+            
          if(si)
             si->release(true);
 

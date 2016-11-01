@@ -29,7 +29,8 @@
 #include <boost/application/detail/application_impl.hpp>
 #include <boost/application/signal_binder.hpp>
 
-//#include <boost/lambda/lambda.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/lambda/lambda.hpp>
 
 #ifdef BOOST_MSVC
 #  pragma warning(push)
@@ -52,16 +53,16 @@ namespace boost { namespace application {
    public:
 
       // callback for app code
-      typedef csbl::function< int (void) > mainop;
+      typedef boost::function< int (void) > mainop;
 
       // string types to be used internaly to handle unicode on windows
       typedef CharType char_type;
       typedef std::basic_string<char_type> string_type;
 
-      server_application_impl_(const mainop &main_op, signal_binder &sb,
+      server_application_impl_(const mainop &main, signal_binder &sb,
          application::context &context, boost::system::error_code& ec)
          : application_impl(context)
-         , main_(main_op)
+         , main_(main)
          , launch_thread_(0)
          , result_code_(0)
          , terminate_event_(0)
@@ -354,7 +355,7 @@ namespace boost { namespace application {
          	 error = terminate_code_;
          }
 
-      	stop();
+      	 stop();
 
          csbl::shared_ptr<status> st =
             context_.find<status>();
@@ -414,7 +415,7 @@ namespace boost { namespace application {
          }
 
          // Launch work thread (main)
-         launch_thread_ = new csbl::thread(
+         launch_thread_ = new boost::thread(
             boost::bind(&server_application_impl_::work_thread, this, dw_argc, lpsz_argv));
 
          HANDLE hevent[2];
@@ -483,7 +484,7 @@ namespace boost { namespace application {
       // the SCM. Created by RegisterServiceCtrlHandler
       SERVICE_STATUS_HANDLE service_status_handle_;
 
-      csbl::thread *launch_thread_;
+      boost::thread *launch_thread_;
 
       // app code
       mainop main_;

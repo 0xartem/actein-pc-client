@@ -32,7 +32,7 @@ namespace boost { namespace application {
    {
    public:
 
-      typedef csbl::function< int (void) > mainop;
+      typedef boost::function< int (void) > mainop;
 
       // string types to be used internaly to handle unicode on windows
       typedef CharType char_type;

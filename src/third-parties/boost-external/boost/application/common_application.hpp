@@ -61,7 +61,8 @@ namespace boost { namespace application {
        * Retrieves a id that identify application run mode.
        *
        */
-      static int mode() {
+      static int mode()
+      {
          static int id = new_run_mode<int>();
          return id;
       }
@@ -90,7 +91,8 @@ namespace boost { namespace application {
          boost::system::error_code& ec)
          : impl_(new common_application_impl(
                  boost::bind(&Application::operator(), &myapp), sm,
-                 context, ec)) {
+                 context, ec))
+      {
          if(ec) return;
 
          // default aspects patterns added to this kind of application
@@ -109,14 +111,15 @@ namespace boost { namespace application {
                
          if(!impl_->get_context().find<path>())
               impl_->get_context().insert<path>(
-               csbl::make_shared<path>());
+               csbl::make_shared<default_path>());
       }
 
       /*!
        * Prepare application and run user functor operator.
        *
        */
-      int run() {
+      int run()
+      {
          return impl_->run();
       }
 
@@ -124,7 +127,8 @@ namespace boost { namespace application {
        * Destruct an common application.
        *
        */
-      virtual ~common() {
+      virtual ~common()
+      {
          impl_->get_context().find<status>()->state(status::stopped);
       }
 
