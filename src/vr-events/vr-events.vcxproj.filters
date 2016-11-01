@@ -74,6 +74,9 @@
     <ClInclude Include="MqttVrEventsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IVrEventsManagerOwner.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="proto\vr_booth_info.proto">

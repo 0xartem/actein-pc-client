@@ -26,6 +26,7 @@
     <ClInclude Include="gen\vr_game_status_event.pb.h" />
     <ClInclude Include="IVrEventsHandler.h" />
     <ClInclude Include="IVrEventsManager.h" />
+    <ClInclude Include="IVrEventsManagerOwner.h" />
     <ClInclude Include="IVrEventsPublisher.h" />
     <ClInclude Include="IVrEventsSubscriber.h" />
     <ClInclude Include="MqttVrEventsManager.h" />

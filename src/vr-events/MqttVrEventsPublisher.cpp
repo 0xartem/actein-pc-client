@@ -54,7 +54,7 @@ namespace vr_events
             event.mutable_vr_booth_info()->set_id(mVrBoothInfo->id());
 
             VrTopicBuilder topicBuilder;
-            std::string topic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
+            std::string topic = topicBuilder.SetToGameOff().SetBoothId(mVrBoothInfo->id()).Build();
 
             mPublisher.Publish(topic, event, *mPublishListener, false);
         }

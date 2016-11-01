@@ -170,11 +170,13 @@
     <ClCompile Include="ConnectionModel.cpp" />
     <ClCompile Include="DlcInstallationHandler.cpp" />
     <ClCompile Include="GameRunner.cpp" />
+    <ClCompile Include="ScheduleVrEventsHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionModel.h" />
     <ClInclude Include="DlcInstallationHandler.h" />
     <ClInclude Include="GameRunner.h" />
+    <ClInclude Include="ScheduleVrEventsHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\third-parties\paho.mqtt.cpp\platforms\windows\paho-mqtt-cpp\paho-mqtt-cpp.vcxproj">

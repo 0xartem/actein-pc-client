@@ -4,7 +4,7 @@
 #include <memory>
 #include "IActionStatusObserver.h"
 #include "IConnectionObserver.h"
-#include "IVrEventsHandler.h"
+#include "IVrEventsManagerOwner.h"
 
 namespace spdlog
 {
@@ -23,19 +23,22 @@ namespace mqtt_transport
 
 namespace vr_events
 {
+    class IVrEventsHandler;
     class IVrEventsManager;
 }
 
 class ConnectionModel :
     public mqtt_transport::IActionStatusObserver,
     public mqtt_transport::IConnectionObserver,
-    public vr_events::IVrEventsHandler
+    public vr_events::IVrEventsManagerOwner
 {
 public:
     ConnectionModel(const std::string & brokerHost, int boothId);
     ~ConnectionModel();
     void Start();
     void Stop();
+
+    // vr_events::IVrEventsManagerOwner
     vr_events::IVrEventsManager * GetVrEventsManager() const;
 
     // mqtt_transport::IActionStatusObserver
@@ -45,14 +48,10 @@ public:
     // mqtt_transport::IConnectionObserver
     void OnConnectionLost() override;
 
-    // vr_events::IVrEventsHandler
-    void HandleVrGameOnEvent(const std::shared_ptr<vr_events::VrGameOnEvent> & event) override;
-    void HandleVrGameOffEvent(const std::shared_ptr<vr_events::VrGameOffEvent> & event) override;
-    void HandleVrGameStatusEvent(const std::shared_ptr<vr_events::VrGameStatusEvent> & event) override;
-
 private:
-    std::unique_ptr<mqtt_transport::Connection> mConnection;
+    std::unique_ptr<vr_events::IVrEventsHandler> mVrEventsHandler;
     std::unique_ptr<vr_events::IVrEventsManager> mVrEventsManager;
+    std::unique_ptr<mqtt_transport::Connection> mConnection;
     std::unique_ptr<mqtt::iaction_listener> mConnectListener;
     std::unique_ptr<mqtt::iaction_listener> mDisconnectListener;
 

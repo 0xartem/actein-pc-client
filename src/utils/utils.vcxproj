@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="UUIDGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="UUIDGenerator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
