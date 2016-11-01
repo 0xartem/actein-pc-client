@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}</ProjectGuid>
+    <ProjectGuid>{36C81A97-68F5-4DF6-981D-80862BD157F8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>acteinpcclientservice</RootNamespace>
+    <RootNamespace>acteinpcclientserviceinstaller</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -95,14 +95,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\boost-external;c:\Code\third-parties\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\;c:\Code\third-parties\steamworks-sdk\redistributable_bin\;c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,14 +110,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\boost-external;c:\Code\third-parties\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\steamworks-sdk\redistributable_bin\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,16 +126,15 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\boost-external;c:\Code\third-parties\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;c:\Code\third-parties\steamworks-sdk\redistributable_bin\;c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,24 +145,18 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\boost-external;c:\Code\third-parties\boost_1_62_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\steamworks-sdk\redistributable_bin\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActeinPcClientService.cpp" />
-    <ClCompile Include="ActeinService.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ActeinService.h" />
+    <ClCompile Include="..\third-parties\boost-external\libs\application\example\setup\windows\setup.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

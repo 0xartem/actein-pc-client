@@ -33,6 +33,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-console", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-service", "actein-pc-client-service\actein-pc-client-service.vcxproj", "{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-service-installer", "actein-pc-client-service-installer\actein-pc-client-service-installer.vcxproj", "{36C81A97-68F5-4DF6-981D-80862BD157F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -125,6 +127,14 @@ Global
 		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x64.Build.0 = Release|x64
 		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x86.ActiveCfg = Release|Win32
 		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}.Release|x86.Build.0 = Release|Win32
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Debug|x64.ActiveCfg = Debug|x64
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Debug|x64.Build.0 = Debug|x64
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Debug|x86.ActiveCfg = Debug|Win32
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Debug|x86.Build.0 = Debug|Win32
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x64.ActiveCfg = Release|x64
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x64.Build.0 = Release|x64
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.ActiveCfg = Release|Win32
+		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +146,5 @@ Global
 		{EFF95C8B-85D2-4B36-A777-3B01A5A36BAF} = {659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}
 		{95E3F7CA-A991-4857-A8A9-C42639B0B877} = {659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}
 		{AE7D93D1-A84E-4E00-8175-F88CECE5DE3E} = {E26BCE76-2B4A-47F3-BBD3-2613C57D48D2}
-		{96CDDD28-951A-41C1-8D4A-E5BCB9093106} = {659C1BF5-C0F7-4A1D-9102-C5FFB84BEBE0}
 	EndGlobalSection
 EndGlobal

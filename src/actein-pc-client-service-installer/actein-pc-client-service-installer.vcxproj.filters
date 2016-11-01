@@ -11,16 +11,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ActeinPcClientService.cpp">
+    <ClCompile Include="..\third-parties\boost-external\libs\application\example\setup\windows\setup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ActeinService.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ActeinService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
