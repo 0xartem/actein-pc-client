@@ -97,6 +97,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +114,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +154,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;$(SolutionDir)third-parties\boost-external\libs\application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

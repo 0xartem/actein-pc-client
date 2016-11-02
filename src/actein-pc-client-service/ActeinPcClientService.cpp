@@ -8,7 +8,6 @@ int main(int argc, wchar_t ** argv)
     try
     {
         boost_app::context appContext;
-
         boost_app::auto_handler<as::ActeinService> app(appContext);
 
         appContext.insert<boost_app::path>(std::make_shared<boost_app::path>());

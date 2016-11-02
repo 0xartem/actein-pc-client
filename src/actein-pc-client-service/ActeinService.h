@@ -1,8 +1,6 @@
 #ifndef ACTEIN_SERVICE_H__
 #define ACTEIN_SERVICE_H__
 
-#define BOOST_APPLICATION_FEATURE_NS_SELECT_BOOST
-
 #include <vector>
 #include <boost/application.hpp>
 
@@ -13,9 +11,7 @@ namespace as
     class ActeinService
     {
     public:
-        // Default constructor is needed for boost_app::auto_handler
-        ActeinService();
-        explicit ActeinService(boost_app::context & context);
+        ActeinService(boost_app::context & context);
 
         int operator()();
         bool stop();
@@ -23,7 +19,7 @@ namespace as
         bool pause();
 
     private:
-        boost_app::context * mContext;
+        boost_app::context & mContext;
     };
 }
 
