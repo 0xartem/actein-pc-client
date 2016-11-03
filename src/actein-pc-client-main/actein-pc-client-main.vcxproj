@@ -19,19 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ThreadTimer.h" />
-    <ClInclude Include="UUIDGenerator.h" />
-    <ClInclude Include="WinServiceUtils.h" />
+    <ClCompile Include="ConnectionModel.cpp" />
+    <ClCompile Include="DlcInstallationHandler.cpp" />
+    <ClCompile Include="GameRunner.cpp" />
+    <ClCompile Include="ScheduleVrEventsHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ThreadTimer.cpp" />
-    <ClCompile Include="UUIDGenerator.cpp" />
-    <ClCompile Include="WinServiceUtils.cpp" />
+    <ClInclude Include="ConnectionModel.h" />
+    <ClInclude Include="DlcInstallationHandler.h" />
+    <ClInclude Include="GameRunner.h" />
+    <ClInclude Include="ScheduleVrEventsHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{33F541C0-8ABE-40A6-9519-AEC0CBA980E9}</ProjectGuid>
+    <ProjectGuid>{939BAA5E-C37F-4C54-B346-771D9771F8AF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>utils</RootNamespace>
+    <RootNamespace>acteinpcclientmain</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -99,33 +101,33 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -133,17 +135,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -151,10 +153,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)transport\mqtt-transport;$(SolutionDir)third-parties\protobuf\include;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\spdlog\include;$(SolutionDir)vr-events;$(SolutionDir)utils;c:\Code\third-parties\steamworks-sdk;c:\Code\third-parties\boost_1_62_0;$(SolutionDir)third-parties\boost-external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>

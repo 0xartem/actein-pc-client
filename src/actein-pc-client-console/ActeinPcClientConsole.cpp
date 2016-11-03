@@ -32,7 +32,7 @@ int main()
 {
     vr_events::VrGame game;
     game.set_steam_game_id(392190);
-    GameRunner runner;
+    actein::GameRunner runner;
     runner.Run(game);
 
     std::cout << "Press any key to stop the game..." << std::endl;
@@ -73,7 +73,7 @@ int main()
         logger->flush_on(spdlog::level::info);
         try
         {
-            ConnectionModel model("test.mosquitto.org", 2);
+            actein::ConnectionModel model("test.mosquitto.org", 2);
             model.Start();
 
             std::cout << "Press 's' and ENTER to stop the game..." << std::endl;

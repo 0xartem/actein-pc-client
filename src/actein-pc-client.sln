@@ -30,10 +30,31 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vr-events", "vr-events\vr-e
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-console", "actein-pc-client-console\actein-pc-client-console.vcxproj", "{96CDDD28-951A-41C1-8D4A-E5BCB9093106}"
+	ProjectSection(ProjectDependencies) = postProject
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF} = {939BAA5E-C37F-4C54-B346-771D9771F8AF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-service", "actein-pc-client-service\actein-pc-client-service.vcxproj", "{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF} = {939BAA5E-C37F-4C54-B346-771D9771F8AF}
+		{F42D7A64-6A69-4466-AD3F-BB9168EC1EC7} = {F42D7A64-6A69-4466-AD3F-BB9168EC1EC7}
+		{33F541C0-8ABE-40A6-9519-AEC0CBA980E9} = {33F541C0-8ABE-40A6-9519-AEC0CBA980E9}
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20} = {B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}
+		{F53FE4F8-D750-44B5-9D80-700EAF1790F4} = {F53FE4F8-D750-44B5-9D80-700EAF1790F4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-service-installer", "actein-pc-client-service-installer\actein-pc-client-service-installer.vcxproj", "{36C81A97-68F5-4DF6-981D-80862BD157F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF} = {C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-client-main", "actein-pc-client-main\actein-pc-client-main.vcxproj", "{939BAA5E-C37F-4C54-B346-771D9771F8AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F42D7A64-6A69-4466-AD3F-BB9168EC1EC7} = {F42D7A64-6A69-4466-AD3F-BB9168EC1EC7}
+		{33F541C0-8ABE-40A6-9519-AEC0CBA980E9} = {33F541C0-8ABE-40A6-9519-AEC0CBA980E9}
+		{B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20} = {B11F5ED6-BF2A-4346-BDA4-DA9D67CA7A20}
+		{F53FE4F8-D750-44B5-9D80-700EAF1790F4} = {F53FE4F8-D750-44B5-9D80-700EAF1790F4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +156,14 @@ Global
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x64.Build.0 = Release|x64
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.ActiveCfg = Release|Win32
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.Build.0 = Release|Win32
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Debug|x64.ActiveCfg = Debug|x64
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Debug|x64.Build.0 = Debug|x64
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Debug|x86.ActiveCfg = Debug|Win32
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Debug|x86.Build.0 = Debug|Win32
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Release|x64.ActiveCfg = Release|x64
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Release|x64.Build.0 = Release|x64
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Release|x86.ActiveCfg = Release|Win32
+		{939BAA5E-C37F-4C54-B346-771D9771F8AF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
