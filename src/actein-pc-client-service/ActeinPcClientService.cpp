@@ -12,7 +12,9 @@ int main(int argc, char ** argv)
             appContext.insert<boost_app::args>(std::make_shared<boost_app::args>(argc, argv));
 
             boost_app::auto_handler<as::ActeinService> app(appContext);
-            return boost_app::launch<boost_app::common>(app, appContext);
+            
+            // To run service in console mode replace 'server' -> 'common'
+            return boost_app::launch<boost_app::server>(app, appContext);
         }
         catch (const boost::system::system_error & se)
         {
