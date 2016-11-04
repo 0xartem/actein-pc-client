@@ -73,7 +73,7 @@ public:
          ("help", "produce a help message")
          (",i", "install service")
          (",c", "check service")
-         (",u", "unistall service")
+         (",u", "uninstall service")
          ("path", po::value<std::string>(), "service path")
          ("name", po::value<std::string>(), "service name")
          ("user", po::value<std::string>()->default_value(""), "user logon (optional, installation only)")

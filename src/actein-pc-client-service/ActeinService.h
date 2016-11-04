@@ -3,9 +3,11 @@
 
 #include <thread>
 #include <boost/application.hpp>
+#include <boost/program_options.hpp>
 #include <GameRunner.h>
 
 namespace boost_app = boost::application;
+namespace po = boost::program_options;
 
 namespace spdlog
 {
@@ -34,13 +36,18 @@ namespace as
         void OnStart();
         void ConfigureLog();
 
+        po::options_description BuildServiceOptions();
+        void ParseCommandLineArgs(const po::options_description & opts);
+
     private:
         ActeinService(const ActeinService &) = delete;
         ActeinService & operator=(const ActeinService &) = delete;
 
     private:
-        boost_app::context & mContext;
+        int mBoothId;
+        std::string mBrokerHost;
         std::thread mWorker;
+        boost_app::context & mContext;
 
         std::unique_ptr<actein::ConnectionModel> mConnectionModel;
         std::shared_ptr<spdlog::logger> mLogger;

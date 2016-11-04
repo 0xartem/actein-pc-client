@@ -2,7 +2,7 @@
 #include <boost/application/auto_handler.hpp>
 #include "ActeinService.h"
 
-int main(int argc, wchar_t ** argv)
+int main(int argc, char ** argv)
 {
         try
         {
@@ -12,11 +12,11 @@ int main(int argc, wchar_t ** argv)
             appContext.insert<boost_app::args>(std::make_shared<boost_app::args>(argc, argv));
 
             boost_app::auto_handler<as::ActeinService> app(appContext);
-            return boost_app::launch<boost_app::server>(app, appContext);
+            return boost_app::launch<boost_app::common>(app, appContext);
         }
         catch (const boost::system::system_error & se)
         {
-            std::cout << se.what() << std::endl;
+            std::cerr << se.what() << std::endl;
             return 1;
         }
 }
