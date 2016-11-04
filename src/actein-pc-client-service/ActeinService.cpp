@@ -16,7 +16,9 @@ namespace as
         , mTestMode(false)
         , mTestGameId(392190)
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        auto execPath = mContext.find<boost_app::path>()->executable_path().wstring();
+        ::SetCurrentDirectory(execPath.c_str());
+        ConfigureLog();
     }
 
     ActeinService::~ActeinService()
@@ -28,14 +30,13 @@ namespace as
     {
         try
         {
-            //auto execPath = mContext.find<boost_app::path>()->executable_path().wstring();
-            //auto args = mContext.find<boost_app::args>()->arg_vector();
+            auto args = mContext.find<boost_app::args>()->arg_vector();
             auto status = mContext.find<boost_app::status>();
 
             mConnectionModel = std::make_unique<actein::ConnectionModel>("test.mosquitto.org", 1);
             mConnectionModel->Start();
 
-            mWorker = std::thread(&ActeinService::onStart, this);
+            mWorker = std::thread(&ActeinService::OnStart, this);
 
             mContext.find<boost_app::wait_for_termination_request>()->wait();
 
@@ -60,10 +61,12 @@ namespace as
         return 0;
     }
 
-    void ActeinService::onStart()
+    void ActeinService::OnStart()
     {
         try
         {
+            ::Sleep(15000);
+            auto args = mContext.find<boost_app::args>()->arg_vector();
             if (mTestMode)
             {
                 vr_events::VrGame game;
@@ -122,5 +125,28 @@ namespace as
     bool ActeinService::pause()
     {
         return true;
+    }
+
+    void ActeinService::ConfigureLog()
+    {
+        try
+        {
+            std::vector<spdlog::sink_ptr> sinks;
+            sinks.push_back(std::make_shared<spdlog::sinks::wincolor_stdout_sink_mt>());
+            sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("CommonLog", "log", 1048576 * 5, 3));
+
+            mLogger = std::make_shared<spdlog::logger>(
+                spdlog::COMMON_LOGGER_NAME, sinks.begin(), sinks.end()
+                );
+
+            spdlog::register_logger(mLogger);
+
+            mLogger->info("Log configured");
+            mLogger->flush_on(spdlog::level::info);
+        }
+        catch (const spdlog::spdlog_ex & ex)
+        {
+            std::cout << "Log init failed" << ex.what() << std::endl;
+        }
     }
 }

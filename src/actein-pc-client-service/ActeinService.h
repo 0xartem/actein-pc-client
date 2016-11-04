@@ -31,7 +31,8 @@ namespace as
         bool pause();
 
     private:
-        void onStart();
+        void OnStart();
+        void ConfigureLog();
 
     private:
         ActeinService(const ActeinService &) = delete;
