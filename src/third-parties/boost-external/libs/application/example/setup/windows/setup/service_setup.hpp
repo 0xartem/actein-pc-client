@@ -218,15 +218,15 @@ namespace boost { namespace application { namespace example {
       {
       }
 
-      virtual void uninstall(boost::system::error_code &ec)
+      virtual void uninstall(boost::system::error_code &ec, bool stopService = true)
       {
-         uninstall_service(ec);
+         uninstall_service(ec, stopService);
       }
 
-      virtual void uninstall()
+      virtual void uninstall(bool stopService = true)
       {
          boost::system::error_code ec;
-         uninstall_service(ec);
+         uninstall_service(ec, stopService);
 
          if(ec)
          {
@@ -238,7 +238,7 @@ namespace boost { namespace application { namespace example {
    protected:
 
       // This method uninstall a given service (by name) on current machine
-      void uninstall_service(boost::system::error_code &ec)
+      void uninstall_service(boost::system::error_code &ec, bool stopService)
       {
          boost::filesystem::path path(service_path_name_);
 
@@ -257,19 +257,52 @@ namespace boost { namespace application { namespace example {
          }
 
          // Open this service for DELETE access
-         SC_HANDLE hservice = OpenService(scm.get(), service_name_.c_str(), DELETE);
+         SC_HANDLE hService = OpenService(
+             scm.get(),
+             service_name_.c_str(),
+             SERVICE_STOP | SERVICE_QUERY_STATUS | DELETE
+         );
 
-         if (hservice == NULL)
+         if (hService == NULL)
          {
             ec = last_error_code();
             return;
          }
 
+         if (stopService)
+         {
+             try_to_stop_service(ec, hService);
+         }
+
          // Remove this service from the SCM's database.
-         DeleteService(hservice);
-         CloseServiceHandle(hservice);
+         DeleteService(hService);
+         CloseServiceHandle(hService);
 
          unregister_application(ec);
+      }
+
+      void try_to_stop_service(boost::system::error_code &ec, SC_HANDLE hService)
+      {
+          SERVICE_STATUS ssSvcStatus = {};
+          // Try to stop the service
+          if (ControlService(hService, SERVICE_CONTROL_STOP, &ssSvcStatus))
+          {
+              Sleep(1000);
+
+              while (QueryServiceStatus(hService, &ssSvcStatus))
+              {
+                  if (ssSvcStatus.dwCurrentState == SERVICE_STOP_PENDING)
+                  {
+                      Sleep(1000);
+                  }
+                  else break;
+              }
+
+              if (ssSvcStatus.dwCurrentState != SERVICE_STOPPED)
+              {
+                  ec = last_error_code();
+              }
+          }
       }
 
       // Unregister the App Paths of application.
