@@ -49,7 +49,10 @@ namespace actein
 
     void ScheduleVrEventsHandler::StopGameRoutine()
     {
-        mGameRunner.Stop();
+        if (mGameRunner.IsGameRunning())
+        {
+            mGameRunner.Stop();
+        }
         SendStatusEvent(vr_events::VrGameStatus::GAME_OFF);
     }
 

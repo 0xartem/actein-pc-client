@@ -20,6 +20,9 @@
     <ClInclude Include="WinServiceUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Win32Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UUIDGenerator.cpp">

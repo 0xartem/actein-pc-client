@@ -6,16 +6,15 @@
 #include <IVrEventsManager.h>
 #include <VrEventsException.h>
 #include <ConnectionModel.h>
+#include <WinServiceUtils.h>
 #include "ActeinService.h"
-
-//temp
-#include <gen/vr_game.pb.h>
-#include "GameRunner.h"
 
 namespace as
 {
     ActeinService::ActeinService(boost_app::context & context)
         : mContext(context)
+        , mTestMode(false)
+        , mTestGameId(392190)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
     }
@@ -65,9 +64,14 @@ namespace as
     {
         try
         {
-            vr_events::VrGame game;
-            game.set_steam_game_id(392190);
-            mTestGameRunner.Run(game);
+            if (mTestMode)
+            {
+                vr_events::VrGame game;
+                game.set_steam_game_id(mTestGameId);
+                mTestGameRunner.Run(game);
+            }
+
+            //std::wstring runDllLockScreen = L"rundll32.exe user32.dll,LockWorkStation";
         }
         catch (const std::exception & ex)
         {
@@ -83,12 +87,13 @@ namespace as
             {
                 mWorker.join();
             }
+
             mConnectionModel->Stop();
-            if (mTestGameRunner.IsGameRunning())
+            
+            if (mTestMode && mTestGameRunner.IsGameRunning())
             {
                 mTestGameRunner.Stop();
             }
-            return true;
         }
         catch (const vr_events::VrEventsException & ex)
         {
@@ -106,7 +111,7 @@ namespace as
         {
             mLogger->error(ex.what());
         }
-        return false;
+        return true;
     }
 
     bool ActeinService::resume()

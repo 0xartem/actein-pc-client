@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="UUIDGenerator.h" />
+    <ClInclude Include="Win32Exception.h" />
     <ClInclude Include="WinServiceUtils.h" />
   </ItemGroup>
   <ItemGroup>

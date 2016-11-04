@@ -1,7 +1,9 @@
 #include "WinServiceUtils.h"
+#include "Win32Exception.h"
 #include <wtsapi32.h>
-#pragma comment(lib, "wtsapi32.lib")
 #include <userenv.h>
+
+#pragma comment(lib, "wtsapi32.lib")
 #pragma comment(lib, "userenv.lib")
 
 namespace utils
@@ -78,6 +80,7 @@ namespace utils
         return dwSessionId;
     }
 
+    // TODO: get rid if 'goto', implement handle guard
     BOOL CreateInteractiveProcess(
         DWORD dwSessionId,
         PWSTR pszCommandLine,
@@ -140,7 +143,7 @@ namespace utils
                 // If the process exits before timeout, get the exit code.
                 GetExitCodeProcess(pi.hProcess, pExitCode);
             }
-            /*else if (dwWaitResult == WAIT_TIMEOUT)
+            else if (dwWaitResult == WAIT_TIMEOUT)
             {
                 // If it times out, terminate the process.
                 TerminateProcess(pi.hProcess, IDTIMEOUT);
@@ -150,7 +153,7 @@ namespace utils
             {
                 dwError = GetLastError();
                 goto Cleanup;
-            }*/
+            }
         }
         else
         {
@@ -190,6 +193,26 @@ namespace utils
         else
         {
             return TRUE;
+        }
+    }
+
+    void RunInteractiveProcess(const std::wstring & commandLineStr)
+    {
+        // Get the ID of the session attached to the physical console.
+        DWORD dwSessionId = utils::GetSessionIdOfUser(nullptr, nullptr);
+        if (dwSessionId == 0xFFFFFFFF)
+        {
+            throw Win32Exception("Can not get current user id", ::GetLastError());
+        }
+
+        DWORD dwExitCode = 0;
+        if (!utils::CreateInteractiveProcess(
+            dwSessionId,
+            const_cast<wchar_t *>(commandLineStr.c_str()),
+            FALSE, 0,
+            &dwExitCode))
+        {
+            throw Win32Exception("Can not start interactive process", ::GetLastError());
         }
     }
 }

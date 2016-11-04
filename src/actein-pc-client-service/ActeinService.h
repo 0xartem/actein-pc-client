@@ -42,9 +42,11 @@ namespace as
         std::thread mWorker;
 
         std::unique_ptr<actein::ConnectionModel> mConnectionModel;
-        actein::GameRunner mTestGameRunner;
-
         std::shared_ptr<spdlog::logger> mLogger;
+
+        bool mTestMode;
+        google::protobuf::int64 mTestGameId;
+        actein::GameRunner mTestGameRunner;
     };
 }
 

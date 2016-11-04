@@ -16,17 +16,18 @@ namespace actein
     {
     public:
         GameRunner();
-        bool Run(const vr_events::VrGame & game);
-        bool Stop();
+        void Run(const vr_events::VrGame & game);
+        void Stop();
         bool IsGameRunning() const;
+        const vr_events::VrGame * GetCurrentGame() const;
         
     private:
-        bool RunSteamProcess(const std::wstring & commandLineStr);
-
-    private:
-        bool mGameRunning;
-        std::wstring mSteamPath;
+        const std::wstring mSteamPath;
         mutable std::mutex mSync;
+        
+        bool mGameRunning;
+        std::unique_ptr<vr_events::VrGame> mCurrentGame;
+        
         std::shared_ptr<spdlog::logger> mLogger;
     };
 }
