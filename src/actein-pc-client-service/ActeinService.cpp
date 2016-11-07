@@ -47,8 +47,6 @@ namespace as
     {
         try
         {
-            auto status = mContext.find<boost_app::status>();
-
             mConnectionModel = std::make_unique<actein::ConnectionModel>(mBrokerHost, mBoothId);
             mConnectionModel->Start();
 
@@ -148,7 +146,7 @@ namespace as
             ("help", "produce a help message")
             ("test", "test mode - start/stop game using service console")
             ("broker",
-                po::value<std::string>(&mBrokerHost)->default_value("test.mosquitto.org"),
+                po::value<std::string>(&mBrokerHost)->default_value("iot.eclipse.org"),
                 "MQTT broker address")
             ("booth",
                 po::value<int>(&mBoothId)->default_value(1),

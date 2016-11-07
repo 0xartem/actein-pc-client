@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package vr_events;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.vr_events";
+option java_outer_classname = "VrGameErrorProtos";
+
+enum VrGameErrorCode
+{
+  FAIL = 0;
+}
+
+message VrGameError
+{
+  VrGameErrorCode error_code = 1;
+  string error_message = 2;
+}

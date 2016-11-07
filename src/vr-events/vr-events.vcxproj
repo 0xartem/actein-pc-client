@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="gen\vr_booth_info.pb.h" />
     <ClInclude Include="gen\vr_game.pb.h" />
+    <ClInclude Include="gen\vr_game_error.pb.h" />
     <ClInclude Include="gen\vr_game_off_event.pb.h" />
     <ClInclude Include="gen\vr_game_on_event.pb.h" />
     <ClInclude Include="gen\vr_game_status_event.pb.h" />
@@ -39,6 +40,7 @@
   <ItemGroup>
     <None Include="proto\vr_booth_info.proto" />
     <None Include="proto\vr_game.proto" />
+    <None Include="proto\vr_game_error.proto" />
     <None Include="proto\vr_game_off_event.proto" />
     <None Include="proto\vr_game_on_event.proto" />
     <None Include="proto\vr_game_status_event.proto" />
@@ -46,6 +48,7 @@
   <ItemGroup>
     <ClCompile Include="gen\vr_booth_info.pb.cc" />
     <ClCompile Include="gen\vr_game.pb.cc" />
+    <ClCompile Include="gen\vr_game_error.pb.cc" />
     <ClCompile Include="gen\vr_game_off_event.pb.cc" />
     <ClCompile Include="gen\vr_game_on_event.pb.cc" />
     <ClCompile Include="gen\vr_game_status_event.pb.cc" />
@@ -135,7 +138,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_error.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -152,7 +155,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_error.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -173,7 +176,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_error.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -194,7 +197,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\vr_game.proto  $(ProjectDir)proto\vr_booth_info.proto $(ProjectDir)proto\vr_game_on_event.proto $(ProjectDir)proto\vr_game_off_event.proto $(ProjectDir)proto\vr_game_error.proto $(ProjectDir)proto\vr_game_status_event.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

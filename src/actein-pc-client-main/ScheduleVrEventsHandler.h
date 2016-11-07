@@ -26,6 +26,7 @@ namespace actein
     {
     public:
         explicit ScheduleVrEventsHandler(vr_events::IVrEventsManagerOwner * vrEventsManagerOwner);
+        ~ScheduleVrEventsHandler();
 
         // vr_events::IVrEventsHandler
         void HandleVrGameOnEvent(const std::shared_ptr<vr_events::VrGameOnEvent> & event) override;
@@ -35,6 +36,10 @@ namespace actein
     private:
         void StopGameRoutine();
         void SendStatusEvent(const vr_events::VrGameStatus & status);
+        void SendStatusEvent(
+            const vr_events::VrGameStatus & status,
+            std::unique_ptr<vr_events::VrGameError> error
+        );
 
     private:
         GameRunner mGameRunner;

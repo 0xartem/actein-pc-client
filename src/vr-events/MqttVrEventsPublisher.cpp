@@ -67,10 +67,23 @@ namespace vr_events
 
     void MqttVrEventsPublisher::PublishVrGameStatusEvent(const VrGameStatus & status)
     {
+        PublishVrGameStatusEvent(status, std::unique_ptr<VrGameError>());
+    }
+
+    void MqttVrEventsPublisher::PublishVrGameStatusEvent(
+        const VrGameStatus & status,
+        std::unique_ptr<VrGameError> error)
+    {
         try
         {
             VrGameStatusEvent event;
             event.set_status(status);
+
+            if (error.get() != nullptr)
+            {
+                event.set_allocated_error(error.get());
+                error.release();
+            }
 
             VrTopicBuilder topicBuilder;
             std::string topic = topicBuilder.SetToGameStatus().SetBoothId(mVrBoothInfo->id()).Build();

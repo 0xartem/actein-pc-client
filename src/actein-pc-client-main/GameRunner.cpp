@@ -23,6 +23,7 @@ namespace actein
         utils::RunInteractiveProcess(commandLineStrm.str());
 
         mCurrentGame = std::make_unique<vr_events::VrGame>(game);
+        mGameRunning = true;
     }
 
     bool GameRunner::IsGameRunning() const
@@ -41,6 +42,7 @@ namespace actein
     {
         std::unique_lock<std::mutex> locker(mSync);
 
+        mGameRunning = false;
         // Discard current game
         mCurrentGame.reset();
 

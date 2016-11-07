@@ -31,6 +31,9 @@ namespace vr_events
         void PublishVrGameOnEvent(std::unique_ptr<VrGame> vrGame) override;
         void PublishVrGameOffEvent() override;
         void PublishVrGameStatusEvent(const VrGameStatus & status) override;
+        void PublishVrGameStatusEvent(
+            const VrGameStatus & status,
+            std::unique_ptr<VrGameError> error) override;
 
     private:
         mqtt_transport::IPublisher & mPublisher;

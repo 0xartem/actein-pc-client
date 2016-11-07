@@ -18,6 +18,11 @@ namespace vr_events
 
             // throws VrEventsException
             virtual void PublishVrGameStatusEvent(const VrGameStatus & status) = 0;
+            
+            // throws VrEventsException
+            virtual void PublishVrGameStatusEvent(
+                const VrGameStatus & status,
+                std::unique_ptr<VrGameError> error) = 0;
 
         virtual ~IVrEventsPublisher() = default;
     };

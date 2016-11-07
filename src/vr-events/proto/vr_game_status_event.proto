@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package vr_events;
 
+import "vr_game_error.proto";
+
 option optimize_for = LITE_RUNTIME;
 option java_package = "com.actein.vr_events";
 option java_outer_classname = "VrGameStatusProtos";
@@ -16,4 +18,5 @@ enum VrGameStatus
 message VrGameStatusEvent
 {
   VrGameStatus status = 1;
+  VrGameError error = 10;
 }

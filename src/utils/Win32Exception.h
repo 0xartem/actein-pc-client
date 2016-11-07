@@ -2,6 +2,7 @@
 #define WIN32_EXCEPTION_H__
 
 #include <stdexcept>
+#include <sstream>
 
 namespace utils
 {
@@ -12,6 +13,12 @@ namespace utils
             : std::runtime_error(message)
             , mWinErrorCode(winErrorCode)
         {
+            mErrorMessage = message + "; Windows error code: " + std::to_string(mWinErrorCode);
+        }
+
+        const char * what() const override
+        {
+            return mErrorMessage.c_str();
         }
 
         unsigned long GetWindowsErrorCode() const
@@ -21,6 +28,7 @@ namespace utils
 
     private:
         unsigned long mWinErrorCode;
+        std::string mErrorMessage;
     };
 }
 
