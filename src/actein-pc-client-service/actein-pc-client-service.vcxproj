@@ -168,9 +168,11 @@
   <ItemGroup>
     <ClCompile Include="ActeinPcClientService.cpp" />
     <ClCompile Include="ActeinService.cpp" />
+    <ClCompile Include="CommandLineHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActeinService.h" />
+    <ClInclude Include="CommandLineHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\actein-pc-client-main\actein-pc-client-main.vcxproj">

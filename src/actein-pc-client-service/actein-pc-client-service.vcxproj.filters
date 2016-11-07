@@ -17,9 +17,15 @@
     <ClCompile Include="ActeinService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandLineHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActeinService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandLineHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

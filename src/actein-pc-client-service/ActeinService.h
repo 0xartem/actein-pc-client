@@ -2,12 +2,10 @@
 #define ACTEIN_SERVICE_H__
 
 #include <thread>
-#include <boost/application.hpp>
-#include <boost/program_options.hpp>
 #include <GameRunner.h>
+#include "CommandLineHelper.h"
 
 namespace boost_app = boost::application;
-namespace po = boost::program_options;
 
 namespace spdlog
 {
@@ -36,24 +34,19 @@ namespace as
         void OnStart();
         void ConfigureLog();
 
-        po::options_description BuildServiceOptions();
-        void ParseCommandLineArgs(const po::options_description & opts);
-
     private:
         ActeinService(const ActeinService &) = delete;
         ActeinService & operator=(const ActeinService &) = delete;
 
     private:
-        int mBoothId;
-        std::string mBrokerHost;
-        std::thread mWorker;
         boost_app::context & mContext;
 
+        std::thread mWorker;
+        std::unique_ptr<as::CommandLineHelper> mCommandLineHelper;
         std::unique_ptr<actein::ConnectionModel> mConnectionModel;
+
         std::shared_ptr<spdlog::logger> mLogger;
 
-        bool mTestMode;
-        google::protobuf::int64 mTestGameId;
         actein::GameRunner mTestGameRunner;
     };
 }
