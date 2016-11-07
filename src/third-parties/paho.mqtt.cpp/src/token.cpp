@@ -80,7 +80,7 @@ void token::on_failure(MQTTAsync_failureData* rsp)
 
 	// Note: callback always completes before the object is signaled.
 	if (listener)
-		listener->on_failure(*this, rsp->message);
+		listener->on_failure(*this, rsp != nullptr ? rsp->message : nullptr);
 	cond_.notify_all();
 }
 
