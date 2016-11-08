@@ -16,6 +16,11 @@
                  Description="Full installation" ConfigurableDirectory="INSTALLFOLDER" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
+
+        <UI Id="MyWixUI_Mondo">
+            <UIRef Id="WixUI_Mondo" />
+            <UIRef Id="WixUI_ErrorProgressText" />
+        </UI>
 	</Product>
 
 	<Fragment>
