@@ -106,6 +106,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\;c:\Code\third-parties\steamworks-sdk\redistributable_bin\;c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,6 +126,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\steamworks-sdk\redistributable_bin\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -141,9 +147,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;c:\Code\third-parties\steamworks-sdk\redistributable_bin\;c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\;c:\Code\third-parties\steamworks-sdk\redistributable_bin\;c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -165,6 +174,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\steamworks-sdk\redistributable_bin\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
