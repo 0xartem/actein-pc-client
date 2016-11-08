@@ -55,6 +55,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "actein-pc-service-installer
 		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF} = {C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}
 	EndProjectSection
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "actein-pc-client-install", "actein-pc-client-install\actein-pc-client-install.wixproj", "{A6AF4982-9D0F-4929-8972-D379A54BD2B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C484CA3F-46E4-4896-B3EC-25E24FB6DEAF} = {C484CA3F-46E4-4896-B3EC-25E24FB6DEAF}
+		{36C81A97-68F5-4DF6-981D-80862BD157F8} = {36C81A97-68F5-4DF6-981D-80862BD157F8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -155,6 +161,12 @@ Global
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x64.Build.0 = Release|x64
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.ActiveCfg = Release|Win32
 		{36C81A97-68F5-4DF6-981D-80862BD157F8}.Release|x86.Build.0 = Release|Win32
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Debug|x64.ActiveCfg = Debug|x86
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Debug|x86.ActiveCfg = Debug|x86
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Debug|x86.Build.0 = Debug|x86
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Release|x64.ActiveCfg = Release|x86
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Release|x86.ActiveCfg = Release|x86
+		{A6AF4982-9D0F-4929-8972-D379A54BD2B4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
