@@ -159,6 +159,15 @@
   <ItemGroup>
     <ClCompile Include="..\third-parties\boost-external\libs\application\example\setup\windows\setup.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="actein-pc-service-installer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="actein_icon_original.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
