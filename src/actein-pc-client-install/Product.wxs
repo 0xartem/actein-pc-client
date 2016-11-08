@@ -21,6 +21,11 @@
             <UIRef Id="WixUI_Mondo" />
             <UIRef Id="WixUI_ErrorProgressText" />
         </UI>
+
+        <Icon Id="actein_icon_original.ico"
+              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
+        <Property Id="ARPPRODUCTICON" Value="actein_icon_original.ico" />
+        
 	</Product>
 
 	<Fragment>
@@ -35,22 +40,25 @@
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+            
 			<Component Id="ActeinServiceComponent" Guid="91A801C9-B13D-4E34-B19B-D9FD8AC81131">
                 <File Id="ActeinServiceExe" Name="$(var.actein-pc-service.TargetFileName)"
                       Source="$(var.actein-pc-service.TargetPath)" KeyPath="yes">
                 </File>
 			</Component>
+            
             <Component Id="PahoDllComponent" Guid="490F724F-ECFB-45B4-A24E-BED81B0EAEFF">
                 <File Id="PahoDll" Name="paho-mqtt3a.dll"
                       Source="$(var.actein-pc-service.TargetDir)paho-mqtt3a.dll" KeyPath="yes">
                 </File>
             </Component>
+            
             <Component Id="ActeinServiceInstallerComponent" Guid="94AA0436-443C-473F-98F3-F3DB1DC34404">
                 <File Id="ActeinServiceInstallerExe" Name="$(var.actein-pc-service-installer.TargetFileName)"
                       Source="$(var.actein-pc-service-installer.TargetPath)" KeyPath="yes">
                 </File>
             </Component>
-		</ComponentGroup>
+		
+        </ComponentGroup>
 	</Fragment>
 </Wix>
