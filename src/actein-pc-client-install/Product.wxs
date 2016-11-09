@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="B40FA4B8-9CA6-4BD9-996B-14EF1BC4E378"
-             Name="Actein PC Client" Language="1033" Version="1.0.0" Manufacturer="Actein"
+             Name="Actein PC Client" Language="1033" Version="1.0.0" Manufacturer="Actein AS"
              UpgradeCode="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
         
-		<Package Id="*" Manufacturer="Actein"
+		<Package Id="*" Manufacturer="Actein AS"
                  Description="Actein's PC Client Installation"
-                 Comments="Actein is a registered trademark of Actein AS"
+                 Comments="This installer database contains the logic and data required to install Actein's PC Client. Actein is a registered trademark of Actein AS."
                  InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+		<MediaTemplate EmbedCab="yes" />
 
 		<Feature Id="ProductFeature" Title="Actein PC Client Application"
                  Description="Full installation" ConfigurableDirectory="INSTALLFOLDER" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 
-        <UI Id="MyWixUI_Mondo">
-            <UIRef Id="WixUI_Mondo" />
+        <WixVariable Id="WixUIBannerBmp" Value="Resources/actein_logo_banner.png" />
+        <WixVariable Id="WixUIDialogBmp" Value="Resources/actein_logo_dialog.png" />
+
+        <UI Id="WixUI_Main">
+            <UIRef Id="WixUI_FeatureTreeCustom" />
             <UIRef Id="WixUI_ErrorProgressText" />
         </UI>
 

@@ -26,6 +26,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
+    <Compile Include="ApplicationInfoDlg.wxs" />
+    <Compile Include="WixUI_FeatureTree_Custom.wxs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\actein-pc-service-installer\actein-pc-service-installer.vcxproj">
@@ -50,6 +52,13 @@
       <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
       <Name>WixUIExtension</Name>
     </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\actein_logo_banner.png" />
+    <Content Include="Resources\actein_logo_dialog.png" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
