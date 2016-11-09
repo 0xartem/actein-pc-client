@@ -34,6 +34,10 @@
             <UIRef Id="WixUI_FeatureTreeCustom" />
             <UIRef Id="WixUI_ErrorProgressText" />
         </UI>
+
+        <Condition Message="This application is only supported on Windows Vista, Windows Server 2008, or higher.">
+            <![CDATA[Installed OR (VersionNT >= 600)]]>
+        </Condition>
         
 	</Product>
 
