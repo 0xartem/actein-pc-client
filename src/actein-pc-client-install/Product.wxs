@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="B40FA4B8-9CA6-4BD9-996B-14EF1BC4E378"
-             Name="Actein PC Client" Language="1033" Version="1.0.0" Manufacturer="Actein AS"
+             Name="Actein PC Client" Language="1033" Version="1.0.0" Manufacturer="Actein"
              UpgradeCode="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
         
-		<Package Id="*" Manufacturer="Actein AS"
+		<Package Id="*" Manufacturer="Actein"
                  Description="Actein's PC Client Installation"
                  Comments="This installer database contains the logic and data required to install Actein's PC Client. Actein is a registered trademark of Actein AS."
                  InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -20,14 +20,20 @@
         <WixVariable Id="WixUIBannerBmp" Value="Resources/actein_logo_banner.png" />
         <WixVariable Id="WixUIDialogBmp" Value="Resources/actein_logo_dialog.png" />
 
+        <Icon Id="actein_icon_original.ico"
+              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
+        
+        <Property Id="ARPPRODUCTICON" Value="actein_icon_original.ico" />
+        <Property Id="STEAMACCOUNTNAME" Value="actein" />
+        <Property Id="STEAMACCOUNTPASSWORD" Hidden="yes" />
+        <Property Id="MQTTBROKERADDRESS" Value="iot.eclipse.org" />
+        <Property Id="BOOTHID" Value="1" />
+        <Property Id="BoothIdMaskedEditTemplate" Value="&lt;##&gt;" />
+
         <UI Id="WixUI_Main">
             <UIRef Id="WixUI_FeatureTreeCustom" />
             <UIRef Id="WixUI_ErrorProgressText" />
         </UI>
-
-        <Icon Id="actein_icon_original.ico"
-              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
-        <Property Id="ARPPRODUCTICON" Value="actein_icon_original.ico" />
         
 	</Product>
 
@@ -60,6 +66,15 @@
                 <File Id="ActeinServiceInstallerExe" Name="$(var.actein-pc-service-installer.TargetFileName)"
                       Source="$(var.actein-pc-service-installer.TargetPath)" KeyPath="yes">
                 </File>
+            </Component>
+            
+            <Component Id="ManageRegistryKeys" Guid="4676FC9B-983C-460C-88E1-4B64B31DC19A">
+                <RegistryKey Root="HKLM" Key="Software\[Manufacturer]\[ProductName]">
+                    <RegistryValue Type="string" Name="SteamAccountName" Value="[STEAMACCOUNTNAME]" />
+                    <RegistryValue Type="string" Name="SteamAccountPassword" Value="[STEAMACCOUNTPASSWORD]" />
+                    <RegistryValue Type="string" Name="MqttBrokerAddress" Value="[MQTTBROKERADDRESS]" KeyPath="yes" />
+                    <RegistryValue Type="string" Name="BoothId" Value="[BOOTHID]" />
+                </RegistryKey>
             </Component>
 		
         </ComponentGroup>

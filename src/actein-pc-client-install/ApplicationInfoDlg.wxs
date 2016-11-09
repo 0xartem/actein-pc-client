@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
-        <Property Id="SteamUserName" Value="actein" />
-        <Property Id="SteamUserPassword" Hidden="yes" />
-        <Property Id="MqttBrokerUrl" Value="iot.eclipse.org" />
-        <Property Id="BoothId" Value="1" />
-        <Property Id="BoothIdMaskedEditTemplate" Value="&lt;##&gt;" />
         <UI>
             <Dialog Id="ApplicationInfoDlg" Width="370" Height="270" Title="!(loc.LicenseAgreementDlg_Title)">
                 <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.LicenseAgreementDlgBannerBitmap)" />
@@ -23,13 +18,13 @@
                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
                 </Control>
                 <Control Type="Text" Id="SteamUserNameText" Width="85" Height="14" X="28" Y="73" Transparent="yes" Text="Steam Account Name:" />
-                <Control Type="Edit" Id="SteamUserNameEdit" Width="134" Height="15" X="112" Y="71" Property="SteamUserName" />
+                <Control Type="Edit" Id="SteamUserNameEdit" Width="134" Height="15" X="112" Y="71" Property="STEAMACCOUNTNAME" />
                 <Control Type="Text" Id="SteamUserPasswordText" Width="98" Height="14" X="15" Y="96" Transparent="yes" Text="Steam Account Password:" />
-                <Control Type="Edit" Id="SteamUserPasswordEdit" Width="134" Height="15" X="112" Y="94" Property="SteamUserPassword" Password="yes" />
-                <Control Type="Text" Id="MqttBrokerUrlText" Width="87" Height="14" X="26" Y="138" Transparent="yes" Text="MQTT Broker Address:" />
-                <Control Type="Edit" Id="MqttBrokerUrlEdit" Width="134" Height="15" X="112" Y="135" Property="MqttBrokerUrl" />
+                <Control Type="Edit" Id="SteamUserPasswordEdit" Width="134" Height="15" X="112" Y="94" Property="STEAMACCOUNTPASSWORD" Password="yes" />
+                <Control Type="Text" Id="MqttBrokerAddressText" Width="87" Height="14" X="26" Y="138" Transparent="yes" Text="MQTT Broker Address:" />
+                <Control Type="Edit" Id="MqttBrokerAddressEdit" Width="134" Height="15" X="112" Y="135" Property="MQTTBROKERADDRESS" />
                 <Control Type="Text" Id="BoothIdText" Width="38" Height="10" X="74" Y="160" Transparent="yes" Text="Booth Id:" />
-                <Control Type="MaskedEdit" Id="BoothIdMaskedEdit" Width="134" Height="15" X="112" Y="158" Property="BoothId" Text="[BoothIdMaskedEditTemplate]" />
+                <Control Type="MaskedEdit" Id="BoothIdMaskedEdit" Sunken="yes" Width="134" Height="15" X="112" Y="158" Property="BOOTHID" Text="[BoothIdMaskedEditTemplate]" />
             </Dialog>
         </UI>
     </Fragment>
