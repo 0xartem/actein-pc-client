@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="B40FA4B8-9CA6-4BD9-996B-14EF1BC4E378"
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <Product Id="B40FA4B8-9CA6-4BD9-996B-14EF1BC4E378"
              Name="Actein PC Client" Language="1033" Version="1.0.0" Manufacturer="Actein"
              UpgradeCode="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
-        
-		<Package Id="*" Manufacturer="Actein"
+
+        <Package Id="*" Manufacturer="Actein"
                  Description="Actein's PC Client Installation"
                  Comments="This installer database contains the logic and data required to install Actein's PC Client. Actein is a registered trademark of Actein AS."
                  InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate EmbedCab="yes" />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="Actein PC Client Application"
+        <Feature Id="ProductFeature" Title="Actein PC Client Application"
                  Description="Full installation" ConfigurableDirectory="INSTALLFOLDER" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+        
+        <Icon Id="actein_icon_original.ico"
+              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
 
         <WixVariable Id="WixUIBannerBmp" Value="Resources/actein_logo_banner.png" />
         <WixVariable Id="WixUIDialogBmp" Value="Resources/actein_logo_dialog.png" />
 
-        <Icon Id="actein_icon_original.ico"
-              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
-        
         <Property Id="ARPPRODUCTICON" Value="actein_icon_original.ico" />
         <Property Id="STEAMACCOUNTNAME" Value="actein" />
         <Property Id="STEAMACCOUNTPASSWORD" Hidden="yes" />
@@ -38,8 +39,8 @@
         <Condition Message="This application is only supported on Windows Vista, Windows Server 2008, or higher.">
             <![CDATA[Installed OR (VersionNT >= 600)]]>
         </Condition>
-        
-	</Product>
+
+    </Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
@@ -56,20 +57,29 @@
             
 			<Component Id="ActeinServiceComponent" Guid="91A801C9-B13D-4E34-B19B-D9FD8AC81131">
                 <File Id="ActeinServiceExe" Name="$(var.actein-pc-service.TargetFileName)"
-                      Source="$(var.actein-pc-service.TargetPath)" KeyPath="yes">
-                </File>
-			</Component>
+                      Source="$(var.actein-pc-service.TargetPath)" KeyPath="yes" />
+                <ServiceInstall Id="WixServiceInstaller" Type="ownProcess" Vital="yes"
+                                Name="Actein Service" DisplayName="Actein Service"
+                                Description="Manages the Steam VR games for Actein activity centers"
+                                Start="auto" Account="LocalSystem" ErrorControl="normal"
+                                Interactive="no">
+                    <util:ServiceConfig FirstFailureActionType='restart'
+                                        SecondFailureActionType='restart'
+                                        ThirdFailureActionType='restart'
+                                        RestartServiceDelayInSeconds='30' />
+                </ServiceInstall>
+                <ServiceControl Id="StartActeinService" Name="Actein Service"
+                                Start="install" Stop="both" Remove="uninstall" Wait="yes" />
+            </Component>
             
             <Component Id="PahoDllComponent" Guid="490F724F-ECFB-45B4-A24E-BED81B0EAEFF">
                 <File Id="PahoDll" Name="paho-mqtt3a.dll"
-                      Source="$(var.actein-pc-service.TargetDir)paho-mqtt3a.dll" KeyPath="yes">
-                </File>
+                      Source="$(var.actein-pc-service.TargetDir)paho-mqtt3a.dll" KeyPath="yes" />
             </Component>
             
             <Component Id="ActeinServiceInstallerComponent" Guid="94AA0436-443C-473F-98F3-F3DB1DC34404">
                 <File Id="ActeinServiceInstallerExe" Name="$(var.actein-pc-service-installer.TargetFileName)"
-                      Source="$(var.actein-pc-service-installer.TargetPath)" KeyPath="yes">
-                </File>
+                      Source="$(var.actein-pc-service-installer.TargetPath)" KeyPath="yes" />
             </Component>
             
             <Component Id="ManageRegistryKeys" Guid="4676FC9B-983C-460C-88E1-4B64B31DC19A">
