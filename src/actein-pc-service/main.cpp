@@ -4,21 +4,25 @@
 
 int main(int argc, char ** argv)
 {
-        try
-        {
-            boost_app::context appContext;
+    try
+    {
+        boost_app::context appContext;
 
-            appContext.insert<boost_app::path>(std::make_shared<boost_app::path>());
-            appContext.insert<boost_app::args>(std::make_shared<boost_app::args>(argc, argv));
+        appContext.insert<boost_app::path>(std::make_shared<boost_app::path>());
+        appContext.insert<boost_app::args>(std::make_shared<boost_app::args>(argc, argv));
 
-            boost_app::auto_handler<as::ActeinService> app(appContext);
-            
-            // To run service in console mode replace 'server' -> 'common'
-            return boost_app::launch<boost_app::server>(app, appContext);
-        }
-        catch (const boost::system::system_error & se)
-        {
-            std::cerr << se.what() << std::endl;
-            return 1;
-        }
+        boost_app::auto_handler<as::ActeinService> app(appContext);
+
+        // To run service in console mode replace 'server' -> 'common'
+        return boost_app::launch<boost_app::server>(app, appContext);
+    }
+    catch (const boost::system::system_error & se)
+    {
+        std::cerr << se.what() << std::endl;
+        return 1;
+    }
+    catch (const std::exception & ex)
+    {
+        std::cerr << ex.what() << std::endl;
+    }
 }
