@@ -37,10 +37,11 @@ namespace as
             mRegistrySettings = std::make_unique<actein::RegistrySettings>();
             mTestGameRunner = std::make_unique<actein::GameRunner>(*mCommandLineHelper);
         }
-        // Need to handle exceptions here because constructor is being called by boost_app code
+        // Need to write information to the log here and re-throw the exception
         catch (const std::exception & ex)
         {
             mLogger->error(ex.what());
+            throw;
         }
     }
 
@@ -152,17 +153,6 @@ namespace as
 
     actein::Settings * ActeinService::ChooseSettings()
     {
-        if (mRegistrySettings.get() == nullptr)
-        {
-            mLogger->error("Registry settings are not initialized");
-            return nullptr;
-        }
-        if (mCommandLineHelper.get() == nullptr)
-        {
-            mLogger->error("Command line settings are not initialized");
-            return nullptr;
-        }
-
         actein::Settings * settings = mRegistrySettings.get();
         if (mCommandLineHelper->IsNoRegistry())
         {
