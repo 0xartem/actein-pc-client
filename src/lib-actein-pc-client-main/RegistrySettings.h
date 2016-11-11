@@ -12,7 +12,10 @@ namespace actein
         RegistrySettings();
 
     private:
-        static const std::string REGISTRY_ACTEIN_KEY;
+        static const std::string REG_KEY_VALVE_STEAM;
+        static const std::string REG_VALUE_STEAM_INSTALL_PATH;
+
+        static const std::string REG_KEY_ACTEIN_CLIENT;
         static const std::string REG_VALUE_STEAM_ACCOUNT_NAME;
         static const std::string REG_VALUE_STEAM_ACCOUNT_PASSSWORD;
         static const std::string REG_VALUE_MQTT_BROKER_ADDRESS;

@@ -10,7 +10,8 @@ namespace actein
     public:
         Settings()
             : mBoothId(0)
-            , mSteamExePath(u8"C:\\Program Files (x86)\\Steam\\Steam.exe")
+            , mSteamPath(u8"C:\\Program Files (x86)\\Steam")
+            , mSteamExeName(u8"Steam.exe")
         {
         }
 
@@ -36,7 +37,7 @@ namespace actein
 
         virtual const std::string & GetSteamExePath() const
         {
-            return mSteamExePath;
+            return mSteamPath + "\\" + mSteamExeName;
         }
 
         virtual ~Settings() = default;
@@ -46,7 +47,8 @@ namespace actein
         std::string mBrokerHost;
         std::string mSteamAccountName;
         std::string mSteamAccountPassword;
-        std::string mSteamExePath;
+        std::string mSteamPath;
+        const std::string mSteamExeName;
     };
 }
 
