@@ -53,11 +53,7 @@ namespace as
     {
         try
         {
-            actein::Settings * settings = mRegistrySettings.get();
-            if (mCommandLineHelper->IsNoRegistry())
-            {
-                settings = mCommandLineHelper.get();
-            }
+            actein::Settings * settings = ChooseSettings();
 
             mLogger->info("MQTT Broker: {}", settings->GetBrokerHost());
             mLogger->info("Booth Id: {}", settings->GetBoothId());
@@ -152,6 +148,27 @@ namespace as
     bool ActeinService::pause()
     {
         return true;
+    }
+
+    actein::Settings * ActeinService::ChooseSettings()
+    {
+        if (mRegistrySettings.get() == nullptr)
+        {
+            mLogger->error("Registry settings are not initialized");
+            return nullptr;
+        }
+        if (mCommandLineHelper.get() == nullptr)
+        {
+            mLogger->error("Command line settings are not initialized");
+            return nullptr;
+        }
+
+        actein::Settings * settings = mRegistrySettings.get();
+        if (mCommandLineHelper->IsNoRegistry())
+        {
+            settings = mCommandLineHelper.get();
+        }
+        return settings;
     }
 
     void ActeinService::ConfigureLog()

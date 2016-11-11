@@ -12,6 +12,7 @@ namespace spdlog
 
 namespace actein
 {
+    class Settings;
     class GameRunner;
     class RegistrySettings;
     class ConnectionModel;
@@ -35,6 +36,7 @@ namespace as
     private:
         void OnStart();
         void ConfigureLog();
+        actein::Settings * ChooseSettings();
 
     private:
         ActeinService(const ActeinService &) = delete;
