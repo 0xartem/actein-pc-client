@@ -35,7 +35,6 @@ namespace as
 
             mCommandLineHelper = std::make_unique<as::CommandLineHelper>(mContext.find<boost_app::args>());
             mRegistrySettings = std::make_unique<actein::RegistrySettings>();
-            mTestGameRunner = std::make_unique<actein::GameRunner>(*mCommandLineHelper);
         }
         // Need to write information to the log here and re-throw the exception
         catch (const std::exception & ex)
@@ -60,6 +59,7 @@ namespace as
             mLogger->info("Booth Id: {}", settings->GetBoothId());
             mLogger->info("Steam Account: {}", settings->GetSteamAccountName());
 
+            mTestGameRunner = std::make_unique<actein::GameRunner>(*settings);
             mConnectionModel = std::make_unique<actein::ConnectionModel>(*settings);
             mConnectionModel->Start();
 
