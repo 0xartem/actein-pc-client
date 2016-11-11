@@ -8,7 +8,7 @@
         <Package Id="*" Manufacturer="Actein"
                  Description="Actein's PC Client Installation"
                  Comments="This installer database contains the logic and data required to install Actein's PC Client. Actein is a registered trademark of Actein AS."
-                 InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+                 InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         
         <Upgrade Id="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
             <UpgradeVersion OnlyDetect="no" Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.0.1" IncludeMaximum="no"
@@ -23,10 +23,12 @@
                  Description="Full installation" ConfigurableDirectory="INSTALLFOLDER" Level="1">
             <ComponentGroupRef Id="ProductComponents" />
         </Feature>
-        
-        <Icon Id="actein_icon_original.ico"
-              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
 
+        <?define RegValueSteamAccountName="SteamAccountName"?>
+        <?define RegValueSteamAccountPassword="SteamAccountPassword"?>
+        <?define RegValueMqttBrokerAddress="MqttBrokerAddress"?>
+        <?define RegValueBoothId="BoothId"?>
+        
         <WixVariable Id="WixUIBannerBmp" Value="Resources/actein_logo_banner.png" />
         <WixVariable Id="WixUIDialogBmp" Value="Resources/actein_logo_dialog.png" />
 
@@ -37,6 +39,9 @@
         <Property Id="BOOTHID" Value="1" />
         <Property Id="BoothIdMaskedEditTemplate" Value="&lt;##&gt;" />
 
+        <Icon Id="actein_icon_original.ico"
+              SourceFile="$(var.actein-pc-service-installer.ProjectDir)actein_icon_original.ico"/>
+        
         <UI Id="WixUI_Main">
             <UIRef Id="WixUI_FeatureTreeCustom" />
             <UIRef Id="WixUI_ErrorProgressText" />
@@ -90,10 +95,10 @@
             
             <Component Id="ManageRegistryKeys" Guid="4676FC9B-983C-460C-88E1-4B64B31DC19A">
                 <RegistryKey Root="HKLM" Key="Software\[Manufacturer]\[ProductName]">
-                    <RegistryValue Type="string" Name="SteamAccountName" Value="[STEAMACCOUNTNAME]" />
-                    <RegistryValue Type="string" Name="SteamAccountPassword" Value="[STEAMACCOUNTPASSWORD]" />
-                    <RegistryValue Type="string" Name="MqttBrokerAddress" Value="[MQTTBROKERADDRESS]" KeyPath="yes" />
-                    <RegistryValue Type="string" Name="BoothId" Value="[BOOTHID]" />
+                    <RegistryValue Type="string" Name="$(var.RegValueSteamAccountName)" Value="[STEAMACCOUNTNAME]" />
+                    <RegistryValue Type="string" Name="$(var.RegValueSteamAccountPassword)" Value="[STEAMACCOUNTPASSWORD]" />
+                    <RegistryValue Type="string" Name="$(var.RegValueMqttBrokerAddress)" Value="[MQTTBROKERADDRESS]" KeyPath="yes" />
+                    <RegistryValue Type="integer" Name="$(var.RegValueBoothId)" Value="[BOOTHID]" />
                 </RegistryKey>
             </Component>
 		
