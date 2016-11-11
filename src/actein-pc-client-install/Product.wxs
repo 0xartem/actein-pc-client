@@ -70,7 +70,7 @@
                 <File Id="ActeinServiceExe" Name="$(var.actein-pc-service.TargetFileName)"
                       Source="$(var.actein-pc-service.TargetPath)" KeyPath="yes" />
                 <ServiceInstall Id="WixServiceInstaller" Type="ownProcess" Vital="yes"
-                                Name="Actein Service" DisplayName="Actein Service"
+                                Name="ActeinService" DisplayName="Actein Service"
                                 Description="Manages Steam VR games for Actein activity centers"
                                 Start="auto" Account="LocalSystem" ErrorControl="normal"
                                 Interactive="no">
@@ -79,7 +79,7 @@
                                         ThirdFailureActionType='restart'
                                         RestartServiceDelayInSeconds='30' />
                 </ServiceInstall>
-                <ServiceControl Id="StartActeinService" Name="Actein Service"
+                <ServiceControl Id="StartActeinService" Name="ActeinService"
                                 Start="install" Stop="both" Remove="uninstall" Wait="yes" />
             </Component>
             
