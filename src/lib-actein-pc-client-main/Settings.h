@@ -35,7 +35,7 @@ namespace actein
             return mSteamAccountPassword;
         }
 
-        virtual const std::string & GetSteamExePath() const
+        virtual std::string GetSteamExePath() const
         {
             return mSteamPath + "\\" + mSteamExeName;
         }
