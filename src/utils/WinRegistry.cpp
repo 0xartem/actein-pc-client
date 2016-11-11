@@ -54,7 +54,7 @@ namespace utils
         return result;
     }
 
-    template<typename CharType = char>
+    template<typename CharType>
     std::vector<CharType> WinRegistry::ReadSpecificTypeValue(
         HKEY parentKey,
         const std::string & valueName,
