@@ -19,13 +19,16 @@ namespace actein
     {
         std::unique_lock<std::mutex> locker(mSync);
 
-        std::wstringstream commandLineStrm;
-        commandLineStrm << utils::string2wstring(mSettings.GetSteamExePath())
+        std::wstringstream steamCommanLine;
+        steamCommanLine << utils::string2wstring(mSettings.GetSteamExePath())
             << L" -applaunch " << std::to_wstring(game.steam_game_id()) << " -login "
             << utils::string2wstring(mSettings.GetSteamAccountName()) << " "
             << utils::string2wstring(mSettings.GetSteamAccountPassword());
 
-        utils::RunInteractiveProcess(commandLineStrm.str());
+        utils::RunInteractiveProcess(steamCommanLine.str());
+        
+        //std::wstring runDllLockScreen = L"rundll32.exe user32.dll,LockWorkStation";
+        //utils::RunInteractiveProcess(runDllLockScreen);
 
         mCurrentGame = std::make_unique<vr_events::VrGame>(game);
         mGameRunning = true;
@@ -51,12 +54,12 @@ namespace actein
         // Discard current game
         mCurrentGame.reset();
 
-        std::wstringstream commandLineStrm;
-        commandLineStrm << utils::string2wstring(mSettings.GetSteamExePath())
+        std::wstringstream steamCommandLine;
+        steamCommandLine << utils::string2wstring(mSettings.GetSteamExePath())
             << L" -shutdown " << " -login "
             << utils::string2wstring(mSettings.GetSteamAccountName()) << " "
             << utils::string2wstring(mSettings.GetSteamAccountPassword());
 
-        utils::RunInteractiveProcess(commandLineStrm.str());
+        utils::RunInteractiveProcess(steamCommandLine.str());
     }
 }
