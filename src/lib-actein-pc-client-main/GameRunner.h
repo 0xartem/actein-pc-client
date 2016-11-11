@@ -3,31 +3,37 @@
 
 #include <string>
 #include <mutex>
-#include <gen/vr_game.pb.h>
 
 namespace spdlog
 {
     class logger;
 }
 
+namespace vr_events
+{
+    class VrGame;
+}
+
 namespace actein
 {
+    class Settings;
+
     class GameRunner
     {
     public:
-        GameRunner();
+        explicit GameRunner(Settings & settings);
         void Run(const vr_events::VrGame & game);
         void Stop();
         bool IsGameRunning() const;
         const vr_events::VrGame * GetCurrentGame() const;
         
     private:
-        const std::wstring mSteamPath;
-        mutable std::mutex mSync;
-        
         bool mGameRunning;
+        Settings & mSettings;
         std::unique_ptr<vr_events::VrGame> mCurrentGame;
         
+        mutable std::mutex mSync;
+
         std::shared_ptr<spdlog::logger> mLogger;
     };
 }

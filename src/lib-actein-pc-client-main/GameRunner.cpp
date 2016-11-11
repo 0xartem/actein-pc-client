@@ -1,13 +1,16 @@
 #include <sstream>
 #include <spdlog/spdlog.h>
+#include <gen/vr_game.pb.h>
+#include <StringUtils.h>
 #include <WinServiceUtils.h>
+#include "Settings.h"
 #include "GameRunner.h"
 
 namespace actein
 {
-    GameRunner::GameRunner()
-        : mSteamPath(L"\"C:\\Program Files (x86)\\Steam\\Steam.exe\"")
-        , mGameRunning(false)
+    GameRunner::GameRunner(Settings & settings)
+        : mGameRunning(false)
+        , mSettings(settings)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
     }
@@ -17,8 +20,10 @@ namespace actein
         std::unique_lock<std::mutex> locker(mSync);
 
         std::wstringstream commandLineStrm;
-        commandLineStrm << mSteamPath << L" -applaunch "
-            << std::to_wstring(game.steam_game_id()) << " -login actein RimRam66!";
+        commandLineStrm << utils::string2wstring(mSettings.GetSteamExePath())
+            << L" -applaunch " << std::to_wstring(game.steam_game_id()) << " -login "
+            << utils::string2wstring(mSettings.GetSteamAccountName()) << " "
+            << utils::string2wstring(mSettings.GetSteamAccountPassword());
 
         utils::RunInteractiveProcess(commandLineStrm.str());
 
@@ -47,7 +52,10 @@ namespace actein
         mCurrentGame.reset();
 
         std::wstringstream commandLineStrm;
-        commandLineStrm << mSteamPath << " -shutdown -login actein RimRam66!";
+        commandLineStrm << utils::string2wstring(mSettings.GetSteamExePath())
+            << L" -shutdown " << " -login "
+            << utils::string2wstring(mSettings.GetSteamAccountName()) << " "
+            << utils::string2wstring(mSettings.GetSteamAccountPassword());
 
         utils::RunInteractiveProcess(commandLineStrm.str());
     }

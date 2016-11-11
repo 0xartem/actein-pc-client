@@ -29,13 +29,15 @@ namespace vr_events
 
 namespace actein
 {
+    class Settings;
+
     class ConnectionModel :
         public mqtt_transport::IActionStatusObserver,
         public mqtt_transport::IConnectionObserver,
         public vr_events::IVrEventsManagerOwner
     {
     public:
-        ConnectionModel(const std::string & brokerHost, int boothId);
+        ConnectionModel(Settings & settings);
         ~ConnectionModel();
         void Start();
         void Stop();

@@ -2,8 +2,6 @@
 #define ACTEIN_SERVICE_H__
 
 #include <thread>
-#include <GameRunner.h>
-#include "CommandLineHelper.h"
 
 namespace boost_app = boost::application;
 
@@ -14,11 +12,15 @@ namespace spdlog
 
 namespace actein
 {
+    class GameRunner;
+    class RegistrySettings;
     class ConnectionModel;
 }
 
 namespace as
 {
+    class CommandLineHelper;
+
     class ActeinService
     {
     public:
@@ -40,14 +42,14 @@ namespace as
 
     private:
         boost_app::context & mContext;
-
         std::thread mWorker;
+
         std::unique_ptr<as::CommandLineHelper> mCommandLineHelper;
+        std::unique_ptr<actein::RegistrySettings> mRegistrySettings;
         std::unique_ptr<actein::ConnectionModel> mConnectionModel;
+        std::unique_ptr<actein::GameRunner> mTestGameRunner;
 
         std::shared_ptr<spdlog::logger> mLogger;
-
-        actein::GameRunner mTestGameRunner;
     };
 }
 

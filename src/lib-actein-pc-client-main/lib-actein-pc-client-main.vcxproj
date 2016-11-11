@@ -22,12 +22,15 @@
     <ClCompile Include="ConnectionModel.cpp" />
     <ClCompile Include="DlcInstallationHandler.cpp" />
     <ClCompile Include="GameRunner.cpp" />
+    <ClCompile Include="RegistrySettings.cpp" />
     <ClCompile Include="ScheduleVrEventsHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionModel.h" />
     <ClInclude Include="DlcInstallationHandler.h" />
     <ClInclude Include="GameRunner.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="RegistrySettings.h" />
     <ClInclude Include="ScheduleVrEventsHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -3,11 +3,15 @@
 #include <mqtt/async_client.h>
 #include <mqtt/exception.h>
 #include <mqtt/iaction_listener.h>
+#include <gen/vr_game.pb.h>
 #include <Connection.h>
 #include <IVrEventsManager.h>
 #include <VrEventsException.h>
 #include <ConnectionModel.h>
 #include <WinServiceUtils.h>
+#include <GameRunner.h>
+#include <RegistrySettings.h>
+#include "CommandLineHelper.h"
 #include "ActeinService.h"
 
 namespace as
@@ -20,13 +24,18 @@ namespace as
             auto execPath = mContext.find<boost_app::path>()->executable_path().string();
             ::SetCurrentDirectory(execPath.c_str());
 
-            ConfigureLog();
+            try
+            {
+                ConfigureLog();
+            }
+            catch (const spdlog::spdlog_ex & ex)
+            {
+                std::cerr << "Log init failed" << ex.what() << std::endl;
+            }
 
             mCommandLineHelper = std::make_unique<as::CommandLineHelper>(mContext.find<boost_app::args>());
-        }
-        catch (const spdlog::spdlog_ex & ex)
-        {
-            std::cerr << "Log init failed" << ex.what() << std::endl;
+            mRegistrySettings = std::make_unique<actein::RegistrySettings>();
+            mTestGameRunner = std::make_unique<actein::GameRunner>(*mCommandLineHelper);
         }
         // Need to handle exceptions here because constructor is being called by boost_app code
         catch (const std::exception & ex)
@@ -44,11 +53,17 @@ namespace as
     {
         try
         {
-            mConnectionModel = std::make_unique<actein::ConnectionModel>(
-                mCommandLineHelper->GetBrokerHost(),
-                mCommandLineHelper->GetBoothId()
-                );
+            actein::Settings * settings = mRegistrySettings.get();
+            if (mCommandLineHelper->IsNoRegistry())
+            {
+                settings = mCommandLineHelper.get();
+            }
 
+            mLogger->info("MQTT Broker: {}", settings->GetBrokerHost());
+            mLogger->info("Booth Id: {}", settings->GetBoothId());
+            mLogger->info("Steam Account: {}", settings->GetSteamAccountName());
+
+            mConnectionModel = std::make_unique<actein::ConnectionModel>(*settings);
             mConnectionModel->Start();
 
             mWorker = std::thread(&ActeinService::OnStart, this);
@@ -83,7 +98,7 @@ namespace as
             {
                 vr_events::VrGame game;
                 game.set_steam_game_id(mCommandLineHelper->GetTestGameId());
-                mTestGameRunner.Run(game);
+                mTestGameRunner->Run(game);
             }
 
             //std::wstring runDllLockScreen = L"rundll32.exe user32.dll,LockWorkStation";
@@ -105,9 +120,9 @@ namespace as
 
             mConnectionModel->Stop();
             
-            if (mCommandLineHelper->IsTestMode() && mTestGameRunner.IsGameRunning())
+            if (mCommandLineHelper->IsTestMode() && mTestGameRunner->IsGameRunning())
             {
-                mTestGameRunner.Stop();
+                mTestGameRunner->Stop();
             }
         }
         catch (const vr_events::VrEventsException & ex)

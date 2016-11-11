@@ -10,25 +10,26 @@
 #include <IVrEventsPublisher.h>
 #include "ConnectionModel.h"
 #include "ScheduleVrEventsHandler.h"
+#include "Settings.h"
 
 using CommonListener = mqtt_transport::CommonActionListener;
 using MqttAction = mqtt_transport::Action;
 
 namespace actein
 {
-    ConnectionModel::ConnectionModel(const std::string & brokerHost, int boothId)
+    ConnectionModel::ConnectionModel(Settings & settings)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
         mConnectListener = std::make_unique<CommonListener>(MqttAction::CONNECT, this);
         mDisconnectListener = std::make_unique<CommonListener>(MqttAction::DISCONNECT, this);
 
-        mConnection = mqtt_transport::Connection::CreateInstance(brokerHost);
+        mConnection = mqtt_transport::Connection::CreateInstance(settings.GetBrokerHost());
 
         auto vrBoothInfo = std::make_shared<vr_events::VrBoothInfo>();
-        vrBoothInfo->set_id(boothId);
+        vrBoothInfo->set_id(settings.GetBoothId());
 
         mVrEventsManager = std::make_unique<vr_events::MqttVrEventsManager>(*mConnection, vrBoothInfo);
-        mVrEventsHandler = std::make_unique<ScheduleVrEventsHandler>(this);
+        mVrEventsHandler = std::make_unique<ScheduleVrEventsHandler>(settings, *this);
     }
 
     ConnectionModel::~ConnectionModel()

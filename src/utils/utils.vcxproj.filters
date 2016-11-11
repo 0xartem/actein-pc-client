@@ -9,6 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\win">
+      <UniqueIdentifier>{bc59e57b-d3a5-4c37-80d9-376acd213747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win">
+      <UniqueIdentifier>{de517288-ed2d-42d3-af8e-e315e691badf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UUIDGenerator.h">
@@ -17,11 +23,20 @@
     <ClInclude Include="ThreadTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WinServiceUtils.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="WinRegistry.h">
+      <Filter>Header Files\win</Filter>
     </ClInclude>
     <ClInclude Include="Win32Exception.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="WinServiceUtils.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegKeyGuard.h">
+      <Filter>Header Files\win</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +47,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WinServiceUtils.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="WinRegistry.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

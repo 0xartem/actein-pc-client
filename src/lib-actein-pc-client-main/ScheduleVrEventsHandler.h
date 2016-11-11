@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <IVrEventsHandler.h>
-#include "GameRunner.h"
 
 namespace spdlog
 {
@@ -22,10 +21,16 @@ namespace vr_events
 
 namespace actein
 {
+    class Settings;
+    class GameRunner;
+
     class ScheduleVrEventsHandler : public vr_events::IVrEventsHandler
     {
     public:
-        explicit ScheduleVrEventsHandler(vr_events::IVrEventsManagerOwner * vrEventsManagerOwner);
+        explicit ScheduleVrEventsHandler(
+            Settings & settings,
+            vr_events::IVrEventsManagerOwner & vrEventsManagerOwner
+        );
         ~ScheduleVrEventsHandler();
 
         // vr_events::IVrEventsHandler
@@ -42,10 +47,11 @@ namespace actein
         );
 
     private:
-        GameRunner mGameRunner;
+        std::unique_ptr<GameRunner> mGameRunner;
         std::unique_ptr<utils::ThreadTimer> mGameStopTimer;
         std::shared_ptr<spdlog::logger> mLogger;
-        vr_events::IVrEventsManagerOwner * mVrEventsManagerOwner;
+
+        vr_events::IVrEventsManagerOwner & mVrEventsManagerOwner;
     };
 }
 

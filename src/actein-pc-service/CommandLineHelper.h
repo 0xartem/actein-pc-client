@@ -4,6 +4,7 @@
 #include <memory>
 #include <boost/program_options.hpp>
 #include <boost/application.hpp>
+#include <Settings.h>
 
 namespace boost_app = boost::application;
 namespace po = boost::program_options;
@@ -15,21 +16,16 @@ namespace spdlog
 
 namespace as
 {
-    class CommandLineHelper
+    class CommandLineHelper : public actein::Settings
     {
     public:
         explicit CommandLineHelper(const std::shared_ptr<boost_app::args> & args);
         
         po::options_description BuildServiceOptions();
 
-        int GetBoothId() const
+        bool IsNoRegistry() const
         {
-            return mBoothId;
-        }
-
-        std::string GetBrokerHost() const
-        {
-            return mBrokerHost;
+            return mNoRegistry;
         }
 
         bool IsTestMode() const
@@ -46,17 +42,16 @@ namespace as
         void ParseCommandLineArgs(const po::options_description & opts);
 
     private:
-        std::string mBrokerHost;
-        int mBoothId;
-        bool mTestMode;
-        __int64 mTestGameId;
-
         std::shared_ptr<boost_app::args> mArgs;
         std::shared_ptr<spdlog::logger> mLogger;
 
+        bool mNoRegistry;
+        bool mTestMode;
+        __int64 mTestGameId;
+
+        static const std::string DEFAULT_STEAM_ACCOUNT_NAME;
         static const std::string DEFAULT_BROKER_HOST;
         static const int DEFAULT_BOOTH_ID = 1;
-        static const bool DEFAULT_TEST_MODE = false;
         static const __int64 DEFAULT_TEST_GAME_ID = 392190; //Selfie tennis id
 
     };
