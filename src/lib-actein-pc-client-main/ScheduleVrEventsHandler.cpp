@@ -39,6 +39,8 @@ namespace actein
     {
         try
         {
+            std::unique_lock<std::mutex> locker(mSync);
+
             mLogger->info("VR game on event received. Game {}", event->game().game_name());
 
             mGameRunner->Run(event->game());
@@ -62,6 +64,8 @@ namespace actein
 
     void ScheduleVrEventsHandler::HandleVrGameOffEvent(const std::shared_ptr<vr_events::VrGameOffEvent> & event)
     {
+        std::unique_lock<std::mutex> locker(mSync);
+
         mLogger->info("VR game off event received.");
         if (mGameStopTimer->IsRunning())
         {
@@ -72,6 +76,7 @@ namespace actein
 
     void ScheduleVrEventsHandler::HandleVrGameStatusEvent(const std::shared_ptr<vr_events::VrGameStatusEvent> & event)
     {
+        std::unique_lock<std::mutex> locker(mSync);
         mLogger->info("VR game status event received");
     }
 

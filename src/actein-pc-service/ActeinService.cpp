@@ -97,8 +97,6 @@ namespace as
                 game.set_steam_game_id(mCommandLineHelper->GetTestGameId());
                 mTestGameRunner->Run(game);
             }
-
-            //std::wstring runDllLockScreen = L"rundll32.exe user32.dll,LockWorkStation";
         }
         catch (const std::exception & ex)
         {

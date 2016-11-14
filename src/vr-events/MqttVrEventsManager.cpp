@@ -21,6 +21,8 @@ namespace vr_events
         mqtt_transport::IConnectionObserver * connectionObserver,
         mqtt_transport::IActionStatusObserver * actionObserver)
     {
+        std::unique_lock<std::mutex> locker(mSync);
+
         mVrEventsPublisher = std::make_unique<MqttVrEventsPublisher>(
             mConnection.GetPublisher(),
             mVrBoothInfo,
@@ -40,6 +42,7 @@ namespace vr_events
 
     void MqttVrEventsManager::Stop()
     {
+        std::unique_lock<std::mutex> locker(mSync);
         mIsRunning = false;
         mVrEventsSubscriber.reset();
         mVrEventsPublisher.reset();
@@ -47,16 +50,19 @@ namespace vr_events
 
     bool MqttVrEventsManager::IsRunning() const
     {
+        std::unique_lock<std::mutex> locker(mSync);
         return mIsRunning;
     }
 
     IVrEventsPublisher * MqttVrEventsManager::GetPublisher() const
     {
+        std::unique_lock<std::mutex> locker(mSync);
         return mVrEventsPublisher.get();
     }
 
     IVrEventsSubscriber * MqttVrEventsManager::GetSubscriber() const
     {
+        std::unique_lock<std::mutex> locker(mSync);
         return mVrEventsSubscriber.get();
     }
 }

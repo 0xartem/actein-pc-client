@@ -2,6 +2,7 @@
 #define SCHEDULE_VR_EVENTS_HANDLER_H__
 
 #include <memory>
+#include <mutex>
 #include <IVrEventsHandler.h>
 
 namespace spdlog
@@ -47,6 +48,7 @@ namespace actein
         );
 
     private:
+        mutable std::mutex mSync;
         std::unique_ptr<GameRunner> mGameRunner;
         std::unique_ptr<utils::ThreadTimer> mGameStopTimer;
         std::shared_ptr<spdlog::logger> mLogger;
