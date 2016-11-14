@@ -2,6 +2,7 @@
 #define CONNECTION_MODEL_H__
 
 #include <memory>
+#include <mutex>
 #include "IActionStatusObserver.h"
 #include "IConnectionObserver.h"
 #include "IVrEventsManagerOwner.h"
@@ -53,6 +54,7 @@ namespace actein
         void OnConnectionLost() override;
 
     private:
+        mutable std::mutex mSync;
         std::unique_ptr<vr_events::IVrEventsHandler> mVrEventsHandler;
         std::unique_ptr<vr_events::IVrEventsManager> mVrEventsManager;
         std::unique_ptr<mqtt_transport::Connection> mConnection;

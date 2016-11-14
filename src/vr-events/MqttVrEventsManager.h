@@ -2,6 +2,7 @@
 #define MQTT_VR_EVENTS_MANAGER_H__
 
 #include <memory>
+#include <mutex>
 #include "IVrEventsManager.h"
 
 namespace mqtt_transport
@@ -33,6 +34,7 @@ namespace vr_events
         IVrEventsSubscriber * GetSubscriber() const override;
 
     private:
+        mutable std::mutex mSync;
         bool mIsRunning;
 
         std::unique_ptr<IVrEventsPublisher> mVrEventsPublisher;

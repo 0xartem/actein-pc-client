@@ -38,11 +38,13 @@ namespace actein
 
     void ConnectionModel::Start()
     {
+        std::unique_lock<std::mutex> locker(mSync);
         mConnection->Connect(*mConnectListener);
     }
 
     void ConnectionModel::Stop()
     {
+        std::unique_lock<std::mutex> locker(mSync);
         if (mVrEventsManager->IsRunning())
         {
             mVrEventsManager->GetSubscriber()->UnsubscribeFromGameOffEvent();
