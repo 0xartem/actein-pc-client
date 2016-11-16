@@ -27,6 +27,10 @@ namespace utils
         if (!m_isRunning)
         {
             m_isRunning = true;
+            if (m_worker.joinable())
+            {
+                m_worker.join();
+            }
             m_worker = std::thread(&ThreadTimer::TimerThread, this);
         }
     }
@@ -126,6 +130,9 @@ namespace utils
                 {
                     throw std::logic_error("Unknown timer usage type");
                 }
+
+                if (!m_isRunning)
+                    break;
 
                 locker.unlock();
                 if (m_handler)

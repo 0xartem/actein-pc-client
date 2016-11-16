@@ -40,6 +40,7 @@ namespace actein
         void HandleVrGameStatusEvent(const std::shared_ptr<vr_events::VrGameStatusEvent> & event) override;
 
     private:
+        bool ContinueStarting();
         void StopGameRoutine();
         void SendStatusEvent(const vr_events::VrGameStatus & status);
         void SendStatusEvent(

@@ -43,6 +43,9 @@ namespace actein
 
             mLogger->info("VR game on event received. Game {}", event->game().game_name());
 
+            if (!ContinueStarting())
+                return;
+
             mGameRunner->Run(event->game());
 
             mGameStopTimer->SetDuration(std::chrono::seconds(event->game().game_duration_seconds()));
@@ -99,6 +102,20 @@ namespace actein
             error->set_error_message(ex.what());
             SendStatusEvent(vr_events::VrGameStatus::GAME_OFF, std::move(error));
         }
+    }
+
+    bool ScheduleVrEventsHandler::ContinueStarting()
+    {
+        if (mGameRunner->IsGameRunning())
+        {
+            mLogger->info("VR game is already running");
+            return false;
+        }
+        if (mGameStopTimer->IsRunning())
+        {
+            mGameStopTimer->Stop();
+        }
+        return true;
     }
 
     void ScheduleVrEventsHandler::SendStatusEvent(const vr_events::VrGameStatus & status)
