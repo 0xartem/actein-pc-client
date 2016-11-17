@@ -14,9 +14,6 @@
     <ClCompile Include="ConnectionModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DlcInstallationHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -26,12 +23,12 @@
     <ClCompile Include="RegistrySettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SteamClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlcInstallationHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameRunner.h">
@@ -44,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SteamClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
