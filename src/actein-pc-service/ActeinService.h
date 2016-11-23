@@ -1,7 +1,7 @@
 #ifndef ACTEIN_SERVICE_H__
 #define ACTEIN_SERVICE_H__
 
-#include <thread>
+#include <memory>
 
 namespace boost_app = boost::application;
 
@@ -13,7 +13,6 @@ namespace spdlog
 namespace actein
 {
     class Settings;
-    class GameRunner;
     class RegistrySettings;
     class ConnectionModel;
 }
@@ -34,7 +33,6 @@ namespace as
         bool pause();
 
     private:
-        void OnStart();
         void ConfigureLog();
         actein::Settings * ChooseSettings();
 
@@ -44,12 +42,10 @@ namespace as
 
     private:
         boost_app::context & mContext;
-        std::thread mWorker;
 
         std::unique_ptr<as::CommandLineHelper> mCommandLineHelper;
         std::unique_ptr<actein::RegistrySettings> mRegistrySettings;
         std::unique_ptr<actein::ConnectionModel> mConnectionModel;
-        std::unique_ptr<actein::GameRunner> mTestGameRunner;
 
         std::shared_ptr<spdlog::logger> mLogger;
     };

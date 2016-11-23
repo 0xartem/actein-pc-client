@@ -28,16 +28,6 @@ namespace as
             return mNoRegistry;
         }
 
-        bool IsTestMode() const
-        {
-            return mTestMode;
-        }
-
-        __int64 GetTestGameId() const
-        {
-            return mTestGameId;
-        }
-
     private:
         void ParseCommandLineArgs(const po::options_description & opts);
 
@@ -46,14 +36,10 @@ namespace as
         std::shared_ptr<spdlog::logger> mLogger;
 
         bool mNoRegistry;
-        bool mTestMode;
-        __int64 mTestGameId;
 
         static const std::string DEFAULT_STEAM_ACCOUNT_NAME;
         static const std::string DEFAULT_BROKER_HOST;
         static const int DEFAULT_BOOTH_ID = 1;
-        static const __int64 DEFAULT_TEST_GAME_ID = 392190; //Selfie tennis id
-
     };
 }
 

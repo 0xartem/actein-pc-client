@@ -9,8 +9,6 @@ namespace as
     CommandLineHelper::CommandLineHelper(const std::shared_ptr<boost_app::args> & args)
         : mArgs(args)
         , mNoRegistry(false)
-        , mTestMode(false)
-        , mTestGameId(DEFAULT_TEST_GAME_ID)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
 
@@ -23,7 +21,6 @@ namespace as
         po::options_description serviceOptions("service options");
         serviceOptions.add_options()
             ("help", "produce a help message")
-            ("test", "test mode - start/stop game using service console")
             ("noreg", "use command line settings instead of registry settings")
             ("broker",
                 po::value<std::string>(&mBrokerHost)->default_value(DEFAULT_BROKER_HOST),
@@ -36,10 +33,7 @@ namespace as
                 "steam account name")
             ("steam_pwd",
                 po::value<std::string>(&mSteamAccountPassword),
-                "steam account password")
-            ("test_game_id",
-                po::value<__int64>(&mTestGameId)->default_value(DEFAULT_TEST_GAME_ID),
-                "test game id to start/stop - default is Selfie Tennis");
+                "steam account password");
 
         return serviceOptions;
     }
@@ -60,10 +54,6 @@ namespace as
         {
             mNoRegistry = true;
         }
-        if (vm.find("test") != vm.end())
-        {
-            mTestMode = true;
-        }
         auto it = vm.find("broker");
         if (it != vm.end())
         {
@@ -83,11 +73,6 @@ namespace as
         if (it != vm.end())
         {
             mSteamAccountPassword = it->second.as<std::string>();
-        }
-        it = vm.find("test_game_id");
-        if (it != vm.end())
-        {
-            mTestGameId = it->second.as<__int64>();
         }
     }
 }

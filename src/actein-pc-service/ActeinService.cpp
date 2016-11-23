@@ -3,13 +3,11 @@
 #include <mqtt/async_client.h>
 #include <mqtt/exception.h>
 #include <mqtt/iaction_listener.h>
-#include <gen/vr_game.pb.h>
 #include <Connection.h>
 #include <IVrEventsManager.h>
 #include <VrEventsException.h>
 #include <ConnectionModel.h>
 #include <WinServiceUtils.h>
-#include <GameRunner.h>
 #include <RegistrySettings.h>
 #include "CommandLineHelper.h"
 #include "ActeinService.h"
@@ -59,11 +57,8 @@ namespace as
             mLogger->info("Booth Id: {}", settings->GetBoothId());
             mLogger->info("Steam Account: {}", settings->GetSteamAccountName());
 
-            mTestGameRunner = std::make_unique<actein::GameRunner>(*settings);
             mConnectionModel = std::make_unique<actein::ConnectionModel>(*settings);
             mConnectionModel->Start();
-
-            mWorker = std::thread(&ActeinService::OnStart, this);
 
             mContext.find<boost_app::wait_for_termination_request>()->wait();
             return 0;
@@ -87,38 +82,11 @@ namespace as
         return 0;
     }
 
-    void ActeinService::OnStart()
-    {
-        try
-        {
-            if (mCommandLineHelper->IsTestMode())
-            {
-                vr_events::VrGame game;
-                game.set_steam_game_id(mCommandLineHelper->GetTestGameId());
-                mTestGameRunner->Run(game);
-            }
-        }
-        catch (const std::exception & ex)
-        {
-            mLogger->error(ex.what());
-        }
-    }
-
     bool ActeinService::stop()
     {
         try
         {
-            if (mWorker.joinable())
-            {
-                mWorker.join();
-            }
-
             mConnectionModel->Stop();
-            
-            if (mCommandLineHelper->IsTestMode() && mTestGameRunner->IsGameRunning())
-            {
-                mTestGameRunner->Stop();
-            }
         }
         catch (const vr_events::VrEventsException & ex)
         {
