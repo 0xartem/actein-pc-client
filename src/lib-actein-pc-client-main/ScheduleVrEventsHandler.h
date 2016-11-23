@@ -1,8 +1,9 @@
 #ifndef SCHEDULE_VR_EVENTS_HANDLER_H__
 #define SCHEDULE_VR_EVENTS_HANDLER_H__
 
-#include <memory>
+#include <vector>
 #include <mutex>
+#include <future>
 #include <IVrEventsHandler.h>
 #include "IGameStatusObserver.h"
 
@@ -59,6 +60,9 @@ namespace actein
     private:
         mutable std::mutex mStatusSync;
         vr_events::VrGameStatus mStatus;
+        mutable std::mutex mFuturesSync;
+        std::vector<std::future<void>> mFuturesVec;
+
         std::unique_ptr<VrTutorialRunner> mTutorialRunner;
         std::unique_ptr<GameRunner> mGameRunner;
         std::unique_ptr<utils::ThreadTimer> mGameStopTimer;

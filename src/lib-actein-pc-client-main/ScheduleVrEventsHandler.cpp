@@ -1,4 +1,3 @@
-#include <future>
 #include <spdlog/spdlog.h>
 #include <IVrEventsManagerOwner.h>
 #include <IVrEventsManager.h>
@@ -50,7 +49,12 @@ namespace actein
 
         if (ContinueStarting())
         {
-            std::thread(&ScheduleVrEventsHandler::StartGameRoutine, this, event).detach();
+            std::unique_lock<std::mutex> locker(mFuturesSync);
+            mFuturesVec.push_back(std::async(
+                std::launch::async,
+                &ScheduleVrEventsHandler::StartGameRoutine,
+                this, event
+            ));
         }
     }
 
@@ -61,7 +65,13 @@ namespace actein
         {
             mGameStopTimer->Stop();
         }
-        std::thread(&ScheduleVrEventsHandler::StopGameRoutine, this).detach();
+
+        std::unique_lock<std::mutex> locker(mFuturesSync);
+        mFuturesVec.push_back(std::async(
+            std::launch::async,
+            &ScheduleVrEventsHandler::StopGameRoutine,
+            this
+        ));
     }
 
     void ScheduleVrEventsHandler::HandleVrGameStatusEvent(const std::shared_ptr<vr_events::VrGameStatusEvent> & event)
