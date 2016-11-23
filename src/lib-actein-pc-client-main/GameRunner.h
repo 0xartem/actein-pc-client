@@ -24,17 +24,18 @@ namespace actein
         explicit GameRunner(Settings & settings);
         void Run(const vr_events::VrGame & game);
         void Stop();
-        bool IsGameRunning() const;
         const vr_events::VrGame * GetCurrentGame() const;
         
     private:
-        bool mGameRunning;
+        std::wstring mSteamLoginStartVrCmd;
+        std::wstring mSteamShutdownCmd;
+        mutable std::mutex mSync;
         Settings & mSettings;
         std::unique_ptr<vr_events::VrGame> mCurrentGame;
         
-        mutable std::mutex mSync;
-
         std::shared_ptr<spdlog::logger> mLogger;
+
+        static const int STEAM_VR_ID = 250820;
     };
 }
 

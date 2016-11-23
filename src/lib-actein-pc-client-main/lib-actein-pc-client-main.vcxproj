@@ -23,15 +23,19 @@
     <ClCompile Include="GameRunner.cpp" />
     <ClCompile Include="RegistrySettings.cpp" />
     <ClCompile Include="ScheduleVrEventsHandler.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SteamClient.cpp" />
+    <ClCompile Include="VrTutorialRunner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionModel.h" />
     <ClInclude Include="GameRunner.h" />
+    <ClInclude Include="IGameStatusObserver.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="RegistrySettings.h" />
     <ClInclude Include="ScheduleVrEventsHandler.h" />
     <ClInclude Include="SteamClient.h" />
+    <ClInclude Include="VrTutorialRunner.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{939BAA5E-C37F-4C54-B346-771D9771F8AF}</ProjectGuid>

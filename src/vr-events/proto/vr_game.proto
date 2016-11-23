@@ -11,4 +11,5 @@ message VrGame
   string game_name = 1;
   int64 steam_game_id = 2;
   int64 game_duration_seconds = 3;
+  bool run_tutorial = 4;
 }

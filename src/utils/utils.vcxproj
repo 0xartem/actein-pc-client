@@ -19,20 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HandleGuard.h" />
     <ClInclude Include="RegKeyGuard.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="WinProcessUtils.h" />
     <ClInclude Include="WinRegistry.h" />
     <ClInclude Include="ThreadTimer.h" />
     <ClInclude Include="UUIDGenerator.h" />
     <ClInclude Include="Win32Exception.h" />
     <ClInclude Include="WinServiceUtils.h" />
+    <ClInclude Include="WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="ThreadTimer.cpp" />
     <ClCompile Include="UUIDGenerator.cpp" />
+    <ClCompile Include="WinProcessUtils.cpp" />
     <ClCompile Include="WinRegistry.cpp" />
     <ClCompile Include="WinServiceUtils.cpp" />
+    <ClCompile Include="WinUtils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{33F541C0-8ABE-40A6-9519-AEC0CBA980E9}</ProjectGuid>

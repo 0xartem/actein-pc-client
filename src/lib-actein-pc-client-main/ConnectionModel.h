@@ -24,13 +24,13 @@ namespace mqtt_transport
 
 namespace vr_events
 {
-    class IVrEventsHandler;
     class IVrEventsManager;
 }
 
 namespace actein
 {
     class Settings;
+    class ScheduleVrEventsHandler;
 
     class ConnectionModel :
         public mqtt_transport::IActionStatusObserver,
@@ -55,7 +55,7 @@ namespace actein
 
     private:
         mutable std::mutex mSync;
-        std::unique_ptr<vr_events::IVrEventsHandler> mVrEventsHandler;
+        std::unique_ptr<ScheduleVrEventsHandler> mVrEventsHandler;
         std::unique_ptr<vr_events::IVrEventsManager> mVrEventsManager;
         std::unique_ptr<mqtt_transport::Connection> mConnection;
         std::unique_ptr<mqtt::iaction_listener> mConnectListener;

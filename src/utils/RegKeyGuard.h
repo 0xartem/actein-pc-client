@@ -13,12 +13,19 @@ namespace utils
         {
         }
 
-        HKEY Get()
+        HKEY get() const
         {
             return mKey;
         }
 
-        LONG Close()
+        HKEY release()
+        {
+            HKEY temp = mKey;
+            mKey = NULL;
+            return temp;
+        }
+
+        LONG close()
         {
             LONG status = ERROR_SUCCESS;
             if (mKey != NULL)
@@ -31,7 +38,7 @@ namespace utils
 
         ~RegKeyGuard()
         {
-            Close();
+            close();
         }
 
     private:

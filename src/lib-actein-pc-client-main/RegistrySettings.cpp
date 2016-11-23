@@ -18,19 +18,19 @@ namespace actein
     RegistrySettings::RegistrySettings()
     {
         utils::RegKeyGuard acteinKeyGd(WinReg::ReadKey(HKEY_LOCAL_MACHINE, REG_KEY_ACTEIN_CLIENT));
-        mSteamAccountName = WinReg::ReadStringValue(acteinKeyGd.Get(), REG_VALUE_STEAM_ACCOUNT_NAME);
-        mSteamAccountPassword = WinReg::ReadStringValue(acteinKeyGd.Get(), REG_VALUE_STEAM_ACCOUNT_PASSSWORD);
-        mBrokerHost = WinReg::ReadStringValue(acteinKeyGd.Get(), REG_VALUE_MQTT_BROKER_ADDRESS);
-        mBoothId = WinReg::ReadIntegerValue(acteinKeyGd.Get(), REG_VALUE_BOOTH_ID);
-        LONG status = acteinKeyGd.Close();
+        mSteamAccountName = WinReg::ReadStringValue(acteinKeyGd.get(), REG_VALUE_STEAM_ACCOUNT_NAME);
+        mSteamAccountPassword = WinReg::ReadStringValue(acteinKeyGd.get(), REG_VALUE_STEAM_ACCOUNT_PASSSWORD);
+        mBrokerHost = WinReg::ReadStringValue(acteinKeyGd.get(), REG_VALUE_MQTT_BROKER_ADDRESS);
+        mBoothId = WinReg::ReadIntegerValue(acteinKeyGd.get(), REG_VALUE_BOOTH_ID);
+        LONG status = acteinKeyGd.close();
         if (status != ERROR_SUCCESS)
         {
             throw utils::Win32Exception("Can not close registry key: " + REG_KEY_ACTEIN_CLIENT, status);
         }
 
         utils::RegKeyGuard steamKeyGd(WinReg::ReadKey(HKEY_LOCAL_MACHINE, REG_KEY_VALVE_STEAM));
-        mSteamPath = WinReg::ReadStringValue(steamKeyGd.Get(), REG_VALUE_STEAM_INSTALL_PATH);
-        status = steamKeyGd.Close();
+        mSteamPath = WinReg::ReadStringValue(steamKeyGd.get(), REG_VALUE_STEAM_INSTALL_PATH);
+        status = steamKeyGd.close();
         if (status != ERROR_SUCCESS)
         {
             throw utils::Win32Exception("Can not close registry key: " + REG_KEY_VALVE_STEAM, status);

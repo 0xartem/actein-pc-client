@@ -72,6 +72,7 @@ namespace actein
             mVrEventsManager->Start(mVrEventsHandler.get(), this, this);
             mVrEventsManager->GetSubscriber()->SubscribeToGameOnEvent();
             mVrEventsManager->GetSubscriber()->SubscribeToGameOffEvent();
+            mVrEventsHandler->OnStart();
         }
     }
 

@@ -6,19 +6,20 @@
 
 namespace utils
 {
-    // no exception guarantee
-    DWORD GetSessionIdOfUser(PCWSTR pszUserName, PCWSTR pszDomain);
-    // no exception guarantee
+    DWORD GetSessionIdOfUser(PCWSTR pszUserName, PCWSTR pszDomain) noexcept;
     BOOL CreateInteractiveProcess(
         DWORD dwSessionId,
         PWSTR pszCommandLine,
         BOOL fWait,
         DWORD dwTimeout,
         DWORD *pExitCode
-    );
+    ) noexcept;
 
-    // throws Win32Exception
-    void RunInteractiveProcess(const std::wstring & commandLineStr);
+    void RunInteractiveProcess(
+        const std::wstring & commandLineStr,
+        bool wait = false,
+        DWORD timeout = 0
+    ) noexcept(false);
 }
 
 #endif //WIN_SERVICE_UTILS_H__

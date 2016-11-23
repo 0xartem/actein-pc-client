@@ -8,7 +8,7 @@
 
 namespace utils
 {
-    DWORD GetSessionIdOfUser(PCWSTR pszUserName, PCWSTR pszDomain)
+    DWORD GetSessionIdOfUser(PCWSTR pszUserName, PCWSTR pszDomain) noexcept
     {
         DWORD dwSessionId = 0xFFFFFFFF;
 
@@ -86,7 +86,7 @@ namespace utils
         PWSTR pszCommandLine,
         BOOL fWait,
         DWORD dwTimeout,
-        DWORD *pExitCode)
+        DWORD *pExitCode) noexcept
     {
         DWORD dwError = ERROR_SUCCESS;
         HANDLE hToken = NULL;
@@ -196,7 +196,10 @@ namespace utils
         }
     }
 
-    void RunInteractiveProcess(const std::wstring & commandLineStr)
+    void RunInteractiveProcess(
+        const std::wstring & commandLineStr,
+        bool wait,
+        DWORD timeout) noexcept(false)
     {
         // Get the ID of the session attached to the physical console.
         DWORD dwSessionId = utils::GetSessionIdOfUser(nullptr, nullptr);
@@ -209,7 +212,8 @@ namespace utils
         if (!utils::CreateInteractiveProcess(
             dwSessionId,
             const_cast<wchar_t *>(commandLineStr.c_str()),
-            FALSE, 0,
+            wait ? TRUE : FALSE,
+            timeout,
             &dwExitCode))
         {
             throw Win32Exception("Can not start interactive process", ::GetLastError());

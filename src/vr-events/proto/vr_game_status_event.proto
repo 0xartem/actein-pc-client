@@ -11,8 +11,12 @@ option java_outer_classname = "VrGameStatusProtos";
 enum VrGameStatus
 {
   UNKNOWN = 0;
-  GAME_OFF = 1;
-  GAME_ON = 2;
+  STARTING_TUTORIAL = 1;
+  TUTORIAL_ON = 2;
+  STARTING_GAME = 3;
+  GAME_ON = 4;
+  STOPPING_GAME = 5;
+  GAME_OFF = 6;
 }
 
 message VrGameStatusEvent

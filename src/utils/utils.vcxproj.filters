@@ -38,6 +38,15 @@
     <ClInclude Include="RegKeyGuard.h">
       <Filter>Header Files\win</Filter>
     </ClInclude>
+    <ClInclude Include="WinUtils.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleGuard.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="WinProcessUtils.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UUIDGenerator.cpp">
@@ -54,6 +63,12 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinUtils.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="WinProcessUtils.cpp">
+      <Filter>Source Files\win</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

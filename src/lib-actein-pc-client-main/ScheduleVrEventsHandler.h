@@ -4,6 +4,7 @@
 #include <memory>
 #include <mutex>
 #include <IVrEventsHandler.h>
+#include "IGameStatusObserver.h"
 
 namespace spdlog
 {
@@ -24,8 +25,11 @@ namespace actein
 {
     class Settings;
     class GameRunner;
+    class VrTutorialRunner;
 
-    class ScheduleVrEventsHandler : public vr_events::IVrEventsHandler
+    class ScheduleVrEventsHandler :
+        public vr_events::IVrEventsHandler,
+        public IGameStatusObserver
     {
     public:
         explicit ScheduleVrEventsHandler(
@@ -34,22 +38,28 @@ namespace actein
         );
         ~ScheduleVrEventsHandler();
 
+        void OnStart();
+
         // vr_events::IVrEventsHandler
         void HandleVrGameOnEvent(const std::shared_ptr<vr_events::VrGameOnEvent> & event) override;
         void HandleVrGameOffEvent(const std::shared_ptr<vr_events::VrGameOffEvent> & event) override;
         void HandleVrGameStatusEvent(const std::shared_ptr<vr_events::VrGameStatusEvent> & event) override;
 
-    private:
-        bool ContinueStarting();
-        void StopGameRoutine();
-        void SendStatusEvent(const vr_events::VrGameStatus & status);
-        void SendStatusEvent(
-            const vr_events::VrGameStatus & status,
-            std::unique_ptr<vr_events::VrGameError> error
-        );
+        // IGameStatusObserver
+        vr_events::VrGameStatus GetGameStatus() const override;
+        void OnGameStatusChanged(const vr_events::VrGameStatus & status) override;
+        void OnGameStatusError(const std::string & error) override;
 
     private:
-        mutable std::mutex mSync;
+        bool IsGameRunning() const;
+        bool ContinueStarting();
+        void StartGameRoutine(std::shared_ptr<vr_events::VrGameOnEvent> event);
+        void StopGameRoutine();
+
+    private:
+        mutable std::mutex mStatusSync;
+        vr_events::VrGameStatus mStatus;
+        std::unique_ptr<VrTutorialRunner> mTutorialRunner;
         std::unique_ptr<GameRunner> mGameRunner;
         std::unique_ptr<utils::ThreadTimer> mGameStopTimer;
         std::shared_ptr<spdlog::logger> mLogger;
