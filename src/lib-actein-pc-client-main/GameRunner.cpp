@@ -46,7 +46,7 @@ namespace actein
             ::Sleep(1000);
         }
         while (!utils::IsProcessRunning(utils::string2wstring(mSettings.GetSteamVrExeName())));
-        ::Sleep(5000);
+        ::Sleep(6000);
 
         std::wostringstream steamRunGameCmdLine;
         steamRunGameCmdLine << utils::string2wstring(mSettings.GetSteamExePath())
