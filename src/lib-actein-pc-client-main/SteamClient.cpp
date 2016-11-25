@@ -1,6 +1,6 @@
 #include <thread>
 #include <stdexcept>
-#include <steam/steam_api.h>
+//#include <steam/steam_api.h>
 #include "SteamClient.h"
 
 namespace actein
