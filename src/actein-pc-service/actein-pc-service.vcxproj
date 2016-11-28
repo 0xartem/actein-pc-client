@@ -151,7 +151,8 @@
       <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I
+call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)ActeinCodeSign.pfx $(TargetPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -175,7 +176,8 @@
       <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I</Command>
+      <Command>xcopy $(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\paho-mqtt3a.dll $(SolutionDir)..\bin\$(Platform)\$(Configuration)\ /Y /I
+call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)ActeinCodeSign.pfx $(TargetPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
