@@ -1,6 +1,8 @@
 #include <sstream>
 #include <spdlog/spdlog.h>
 #include <gen/vr_game.pb.h>
+#include <gen/vr_game_error.pb.h>
+#include <VrEventsException.h>
 #include <StringUtils.h>
 #include <WinServiceUtils.h>
 #include <WinProcessUtils.h>
@@ -38,15 +40,7 @@ namespace actein
         utils::KillIfProcessRunning(utils::string2wstring(mSettings.GetSteamVrExeName()));
 
         utils::RunInteractiveProcess(mSteamLoginStartVrCmd);
-
-        // wait until SteamVR process is started,
-        // then wait a bit more for SteamVR to initialize
-        do
-        {
-            ::Sleep(1000);
-        }
-        while (!utils::IsProcessRunning(utils::string2wstring(mSettings.GetSteamVrExeName())));
-        ::Sleep(6000);
+        WaitForSteamVrToStart();
 
         std::wostringstream steamRunGameCmdLine;
         steamRunGameCmdLine << utils::string2wstring(mSettings.GetSteamExePath())
@@ -54,10 +48,6 @@ namespace actein
         
         utils::RunInteractiveProcess(steamRunGameCmdLine.str());
         
-        // TODO: this feature blocks headset's screen also, so now it's disabled
-        //std::wstring runDllLockScreen = L"rundll32.exe user32.dll,LockWorkStation";
-        //utils::RunInteractiveProcess(runDllLockScreen);
-
         mCurrentGame = std::make_unique<vr_events::VrGame>(game);
     }
 
@@ -75,5 +65,31 @@ namespace actein
         mCurrentGame.reset();
 
         utils::RunInteractiveProcess(mSteamShutdownCmd);
+    }
+
+    void GameRunner::WaitForSteamVrToStart()
+    {
+        // wait until SteamVR process is started,
+        // then wait a bit more for SteamVR to initialize
+        std::wstring steamVrExeWstr = utils::string2wstring(mSettings.GetSteamVrExeName());
+        int leftToWait = MAX_START_STEAM_VR_WAIT_TIME;
+        do
+        {
+            ::Sleep(WAIT_STEP);
+            leftToWait -= WAIT_STEP;
+        }
+        while (!utils::IsProcessRunning(steamVrExeWstr) && leftToWait > 0);
+
+        if (utils::IsProcessRunning(steamVrExeWstr))
+        {
+            ::Sleep(STEAM_VR_STARTUP_WAIT_TIME);
+        }
+        else
+        {
+            throw vr_events::VrEventsException(
+                vr_events::VrGameErrorCode::CANNOT_START_STEAM_VR,
+                "Can not start Steam VR."
+            );
+        }
     }
 }

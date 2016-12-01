@@ -65,7 +65,7 @@ namespace as
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error(ex.what());
+            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
         }
         catch (const mqtt::persistence_exception& ex)
         {
@@ -90,7 +90,7 @@ namespace as
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error(ex.what());
+            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
         }
         catch (const mqtt::persistence_exception& ex)
         {

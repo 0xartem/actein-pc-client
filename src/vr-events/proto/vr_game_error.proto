@@ -9,6 +9,9 @@ option java_outer_classname = "VrGameErrorProtos";
 enum VrGameErrorCode
 {
   FAIL = 0;
+  NETWORK_ERROR = 1;
+  CANNOT_START_STEAM_VR = 2;
+  CANNOT_START_STEAM_VR_TUTORIAL = 3;
 }
 
 message VrGameError

@@ -53,7 +53,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not subscribe to all vr events");
+            throw VrEventsException(NETWORK_ERROR, "Can not subscribe to all vr events");
         }
     }
 
@@ -66,7 +66,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not unsubscribe from all vr events");
+            throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from all vr events");
         }
     }
 
@@ -79,7 +79,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not subscribe to game on vr event");
+            throw VrEventsException(NETWORK_ERROR, "Can not subscribe to game on vr event");
         }
     }
 
@@ -92,7 +92,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not unsubscribe from game off vr event");
+            throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from game off vr event");
         }
     }
 
@@ -105,7 +105,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not subscribe to game off vr event");
+            throw VrEventsException(NETWORK_ERROR, "Can not subscribe to game off vr event");
         }
     }
 
@@ -118,7 +118,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not unsubscribe from game off vr event");
+            throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from game off vr event");
         }
     }
 

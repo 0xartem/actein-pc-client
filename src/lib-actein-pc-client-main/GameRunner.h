@@ -25,6 +25,9 @@ namespace actein
         void Run(const vr_events::VrGame & game);
         void Stop();
         const vr_events::VrGame * GetCurrentGame() const;
+
+    private:
+        void WaitForSteamVrToStart();
         
     private:
         std::wstring mSteamLoginStartVrCmd;
@@ -36,6 +39,9 @@ namespace actein
         std::shared_ptr<spdlog::logger> mLogger;
 
         static const int STEAM_VR_ID = 250820;
+        static const int MAX_START_STEAM_VR_WAIT_TIME = 12000;
+        static const int WAIT_STEP = 1000;
+        static const int STEAM_VR_STARTUP_WAIT_TIME = 6000;
     };
 }
 

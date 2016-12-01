@@ -9,7 +9,8 @@ namespace actein
     {
     public:
         virtual vr_events::VrGameStatus GetGameStatus() const = 0;
-        virtual void OnGameStatusChanged(const vr_events::VrGameStatus & status) = 0;
+        virtual void OnGameStatusChanged(vr_events::VrGameStatus status) = 0;
+        virtual void OnGameStatusError(vr_events::VrGameErrorCode errorCode, const std::string & error) = 0;
         virtual void OnGameStatusError(const std::string & error) = 0;
         virtual ~IGameStatusObserver() = default;
     };

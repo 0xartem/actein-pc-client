@@ -12,15 +12,18 @@ namespace actein
     {
     public:
         explicit VrTutorialRunner(Settings & settings);
-        std::future<void> RunAsync(bool wait);
-        void Run(bool wait);
+        std::future<void> RunAsync();
+        void Run();
         void Stop();
-        void WaitForTutorialStart();
+        void WaitForTutorialStart(int waitTimeout = MAX_START_WAIT_TIME);
 
     private:
         mutable std::mutex mSync;
         Settings & mSettings;
         std::wstring mTutorialRunCmd;
+        
+        static const int MAX_START_WAIT_TIME = 8000;
+        static const int WAIT_STEP = 1000;
     };
 }
 
