@@ -35,7 +35,7 @@
         <Property Id="ARPPRODUCTICON" Value="actein_icon_original.ico" />
         <Property Id="STEAMACCOUNTNAME" Value="actein" />
         <Property Id="STEAMACCOUNTPASSWORD" Hidden="yes" />
-        <Property Id="MQTTBROKERADDRESS" Value="iot.eclipse.org" />
+        <Property Id="MQTTBROKERADDRESS" Value="95.85.61.247" />
         <Property Id="BOOTHID" Value="1" />
         <Property Id="BoothIdMaskedEditTemplate" Value="&lt;##&gt;" />
 
