@@ -49,8 +49,13 @@ namespace actein
         // IGameStatusObserver
         vr_events::VrGameStatus GetGameStatus() const override;
         void OnGameStatusChanged(vr_events::VrGameStatus status) override;
-        void OnGameStatusError(vr_events::VrGameErrorCode errorCode, const std::string & error) override;
-        void OnGameStatusError(const std::string & error) override;
+        
+        void OnGameStatusError(
+            vr_events::VrGameStatus status,
+            vr_events::VrGameErrorCode errorCode,
+            const std::string & error) override;
+
+        void OnGameStatusError(vr_events::VrGameStatus status, const std::string & error) override;
 
     private:
         bool IsGameRunning() const;

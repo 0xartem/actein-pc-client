@@ -99,13 +99,14 @@ namespace actein
     }
 
     void ScheduleVrEventsHandler::OnGameStatusError(
+        vr_events::VrGameStatus status,
         vr_events::VrGameErrorCode errorCode,
         const std::string & error)
     {
         try
         {
             std::unique_lock<std::mutex> locker(mStatusSync);
-            vr_events::VrGameStatus curStatus = mStatus;
+            mStatus = status;
             locker.unlock();
             vr_events::IVrEventsManager * vrManager = mVrEventsManagerOwner.GetVrEventsManager();
             if (vrManager != nullptr)
@@ -113,7 +114,7 @@ namespace actein
                 std::unique_ptr<vr_events::VrGameError> vrError = std::make_unique<vr_events::VrGameError>();
                 vrError->set_error_code(errorCode);
                 vrError->set_error_message(error);
-                vrManager->GetPublisher()->PublishVrGameStatusEvent(curStatus, std::move(vrError));
+                vrManager->GetPublisher()->PublishVrGameStatusEvent(status, std::move(vrError));
             }
         }
         catch (const vr_events::VrEventsException & ex)
@@ -126,9 +127,11 @@ namespace actein
         }
     }
 
-    void ScheduleVrEventsHandler::OnGameStatusError(const std::string & error)
+    void ScheduleVrEventsHandler::OnGameStatusError(
+        vr_events::VrGameStatus status,
+        const std::string & error)
     {
-        OnGameStatusError(vr_events::VrGameErrorCode::FAIL, error);
+        OnGameStatusError(status, vr_events::VrGameErrorCode::FAIL, error);
     }
 
     bool ScheduleVrEventsHandler::IsGameRunning() const
@@ -167,12 +170,12 @@ namespace actein
         catch (const vr_events::VrEventsException & ex)
         {
             mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
-            OnGameStatusError(ex.GetErrorCode(), ex.what());
+            OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.GetErrorCode(), ex.what());
         }
         catch (const std::exception & ex)
         {
             mLogger->error(ex.what());
-            OnGameStatusError(ex.what());
+            OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.what());
         }
     }
 
@@ -200,12 +203,12 @@ namespace actein
         catch (const vr_events::VrEventsException & ex)
         {
             mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
-            OnGameStatusError(ex.GetErrorCode(), ex.what());
+            OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.GetErrorCode(), ex.what());
         }
         catch (const std::exception & ex)
         {
             mLogger->error(ex.what());
-            OnGameStatusError(ex.what());
+            OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.what());
         }
     }
 
