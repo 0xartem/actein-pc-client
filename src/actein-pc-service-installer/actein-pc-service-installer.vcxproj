@@ -138,7 +138,7 @@
       <AdditionalLibraryDirectories>c:\Code\third-parties\boost_1_62_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)ActeinCodeSign.pfx $(TargetPath)</Command>
+      <Command>call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)OS201611283152.pfx $(TargetPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +159,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)ActeinCodeSign.pfx $(TargetPath)</Command>
+      <Command>call $(SolutionDir)sign.cmd $(SolutionDir)sign-password.cmd $(SolutionDir)OS201611283152.pfx $(TargetPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
