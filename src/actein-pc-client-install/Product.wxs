@@ -98,7 +98,7 @@
                     <RegistryValue Type="string" Name="$(var.RegValueSteamAccountName)" Value="[STEAMACCOUNTNAME]" />
                     <RegistryValue Type="string" Name="$(var.RegValueSteamAccountPassword)" Value="[STEAMACCOUNTPASSWORD]" />
                     <RegistryValue Type="string" Name="$(var.RegValueMqttBrokerAddress)" Value="[MQTTBROKERADDRESS]" KeyPath="yes" />
-                    <RegistryValue Type="integer" Name="$(var.RegValueBoothId)" Value="[BOOTHID]" />
+                    <RegistryValue Type="string" Name="$(var.RegValueBoothId)" Value="[BOOTHID]" />
                 </RegistryKey>
             </Component>
 		
