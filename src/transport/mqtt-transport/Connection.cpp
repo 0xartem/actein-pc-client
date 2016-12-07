@@ -7,12 +7,15 @@
 
 namespace mqtt_transport
 {
-    std::unique_ptr<Connection> Connection::CreateInstance(const std::string & brokerHost)
+    std::unique_ptr<Connection> Connection::CreateInstance(
+        const std::string & brokerHost,
+        std::unique_ptr<IConnectionPolicy> connectionPolicy
+    )
     {
         return std::unique_ptr<Connection>(new Connection(
             std::make_unique<MqttBrokerEndPoint>(brokerHost),
             std::make_unique<MqttClientEndPoint>(),
-            std::make_unique<PreciseDeliveryConnectionPolicy>()
+            std::move(connectionPolicy)
             ));
     }
 

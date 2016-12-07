@@ -25,6 +25,10 @@ namespace mqtt_transport
                 mActionStatusObserver->OnActionSuccess(mAction, resultMessage);
             }
         }
+        catch (const mqtt::exception & ex)
+        {
+            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+        }
         catch (const std::exception & ex)
         {
             mLogger->error(ex.what());

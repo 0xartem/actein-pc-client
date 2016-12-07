@@ -24,9 +24,12 @@
     <ClInclude Include="Connection.h" />
     <ClInclude Include="ConnectOptionsBuilder.h" />
     <ClInclude Include="DefaultConnectionPolicy.h" />
+    <ClInclude Include="gen\online_status_event.pb.h" />
+    <ClInclude Include="LastWillManager.h" />
     <ClInclude Include="IActionStatusObserver.h" />
     <ClInclude Include="IConnectionObserver.h" />
     <ClInclude Include="IConnectionPolicy.h" />
+    <ClInclude Include="IEmbDeviceOnlineStatusHandler.h" />
     <ClInclude Include="IMessageHandler.h" />
     <ClInclude Include="IPublisher.h" />
     <ClInclude Include="ISubscriber.h" />
@@ -38,17 +41,23 @@
     <ClInclude Include="OneTimeConnectionPolicy.h" />
     <ClInclude Include="PreciseDeliveryConnectionPolicy.h" />
     <ClInclude Include="QualityOfService.h" />
+    <ClInclude Include="TopicBuilder.h" />
     <ClInclude Include="Topics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonActionListener.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="ConnectOptionsBuilder.cpp" />
+    <ClCompile Include="gen\online_status_event.pb.cc" />
+    <ClCompile Include="LastWillManager.cpp" />
     <ClCompile Include="MqttBrokerEndPoint.cpp" />
     <ClCompile Include="MqttPublisher.cpp" />
     <ClCompile Include="MqttSubscriber.cpp" />
     <ClCompile Include="MqttSubscriberCallback.cpp" />
     <ClCompile Include="Topics.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="proto\online_status_event.proto" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F53FE4F8-D750-44B5-9D80-700EAF1790F4}</ProjectGuid>
@@ -132,6 +141,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\online_status_event.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -147,6 +159,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\online_status_event.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -166,6 +181,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\online_status_event.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -185,6 +203,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)third-parties\protobuf\platforms\windows\win32\release\bin\protoc.exe --proto_path=$(ProjectDir)proto --cpp_out=$(ProjectDir)gen $(ProjectDir)proto\online_status_event.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

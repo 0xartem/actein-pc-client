@@ -5,6 +5,7 @@ namespace mqtt_transport
 {
     class IConnectionObserver;
     class IActionStatusObserver;
+    class IMessageHandler;
 }
 
 namespace vr_events
@@ -17,17 +18,14 @@ namespace vr_events
     {
     public:
         // throws VrEventsException
-        virtual void Start(
-            IVrEventsHandler * vrEventsHandler,
-            mqtt_transport::IConnectionObserver * connectionObserver,
-            mqtt_transport::IActionStatusObserver * actionObserver) = 0;
-
+        virtual void Start() = 0;
         // throws VrEventsException
         virtual void Stop() = 0;
         virtual bool IsRunning() const = 0;
 
         virtual IVrEventsPublisher * GetPublisher() const = 0;
         virtual IVrEventsSubscriber * GetSubscriber() const = 0;
+        virtual mqtt_transport::IMessageHandler * GetMessageHandler() const = 0;
 
         virtual ~IVrEventsManager() = default;
     };

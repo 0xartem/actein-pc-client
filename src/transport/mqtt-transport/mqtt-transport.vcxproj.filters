@@ -21,6 +21,27 @@
     <Filter Include="Source Files\action">
       <UniqueIdentifier>{ec95f1ec-9b37-430b-b8d7-216091e552f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{14cfe786-97f1-47e1-bf10-371d86091ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\topics">
+      <UniqueIdentifier>{ab9181c7-33da-42f3-bd92-3c79bdea250f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\last-will">
+      <UniqueIdentifier>{07cc3e7b-ea9c-4b4f-b27e-4e8475c2fd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\last-will">
+      <UniqueIdentifier>{e8f7a1dc-ad63-4ae7-bea5-123efcec7fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\topics">
+      <UniqueIdentifier>{09ff41bc-e7ad-4e40-9742-f532405d9027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gen">
+      <UniqueIdentifier>{029c86be-cecb-4e67-93b4-3f7caede0d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gen">
+      <UniqueIdentifier>{eb8cf6e3-b2e8-4438-8247-fa2c806cd2ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connection.h">
@@ -30,9 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MqttClientEndPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Topics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IConnectionPolicy.h">
@@ -83,12 +101,24 @@
     <ClInclude Include="ConnectOptionsBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Topics.h">
+      <Filter>Header Files\topics</Filter>
+    </ClInclude>
+    <ClInclude Include="TopicBuilder.h">
+      <Filter>Header Files\topics</Filter>
+    </ClInclude>
+    <ClInclude Include="LastWillManager.h">
+      <Filter>Header Files\last-will</Filter>
+    </ClInclude>
+    <ClInclude Include="IEmbDeviceOnlineStatusHandler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="gen\online_status_event.pb.h">
+      <Filter>Header Files\gen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MqttBrokerEndPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Topics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Connection.cpp">
@@ -109,5 +139,19 @@
     <ClCompile Include="ConnectOptionsBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Topics.cpp">
+      <Filter>Source Files\topics</Filter>
+    </ClCompile>
+    <ClCompile Include="LastWillManager.cpp">
+      <Filter>Source Files\last-will</Filter>
+    </ClCompile>
+    <ClCompile Include="gen\online_status_event.pb.cc">
+      <Filter>Source Files\gen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="proto\online_status_event.proto">
+      <Filter>proto</Filter>
+    </None>
   </ItemGroup>
 </Project>
