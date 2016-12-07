@@ -72,7 +72,10 @@ public:
 	 */
     connect_options()
         : opts_(MQTTAsync_connectOptions_initializer)
-        , willOpts_(MQTTAsync_willOptions_initializer) {}
+        , willOpts_(MQTTAsync_willOptions_initializer)
+    {
+        opts_.will = &willOpts_;
+    }
 	/**
 	 * Returns the connection timeout value. 
 	 * @return int 
