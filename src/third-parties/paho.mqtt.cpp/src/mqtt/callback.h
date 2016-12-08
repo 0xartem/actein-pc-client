@@ -19,6 +19,7 @@
  *
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
+ *    Artem Brazhnikov - automatic reconnect
  *******************************************************************************/
 
 #ifndef __mqtt_callback_h
@@ -62,6 +63,11 @@ public:
 	 * @param token 
 	 */
 	virtual void delivery_complete(idelivery_token_ptr tok) =0;
+    /**
+    * Called when the connection to the server is completed successfully.
+    * @param cause The reason for the disconnection.
+    */
+    virtual void connect_complete(const std::string& cause) =0;
 };
 
 typedef callback::ptr_t callback_ptr;
