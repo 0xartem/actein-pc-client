@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <Product Id="*"
-             Name="Actein PC Client" Language="1033" Version="1.0.1" Manufacturer="Actein"
+             Name="Actein PC Client" Language="1033" Version="1.0.2" Manufacturer="Actein"
              UpgradeCode="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
 
         <Package Id="*" Manufacturer="Actein"
@@ -11,7 +11,7 @@
                  InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         
         <Upgrade Id="8B779266-F18C-4ACC-88AB-B1FBCF71EC63">
-            <UpgradeVersion OnlyDetect="no" Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.0.1" IncludeMaximum="no"
+            <UpgradeVersion OnlyDetect="no" Minimum="1.0.0" IncludeMinimum="yes" Maximum="1.0.2" IncludeMaximum="no"
                             Property="PREVIOUSFOUND" />
         </Upgrade>
 
