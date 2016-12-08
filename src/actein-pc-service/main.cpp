@@ -14,7 +14,7 @@ int main(int argc, char ** argv)
         boost_app::auto_handler<as::ActeinService> app(appContext);
 
         // To run service in console mode replace 'server' -> 'common'
-        return boost_app::launch<boost_app::common>(app, appContext);
+        return boost_app::launch<boost_app::server>(app, appContext);
     }
     catch (const boost::system::system_error & se)
     {
