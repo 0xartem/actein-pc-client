@@ -20,6 +20,7 @@ namespace mqtt_transport
         void connection_lost(const std::string& cause) override;
         void message_arrived(const std::string& topic, mqtt::message_ptr msg) override;
         void delivery_complete(mqtt::idelivery_token_ptr tok) override;
+        void connect_complete(const std::string& cause) override;
 
     private:
         IMessageHandler * mMessageHandler;

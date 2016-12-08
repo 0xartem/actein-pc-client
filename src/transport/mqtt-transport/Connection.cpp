@@ -60,6 +60,12 @@ namespace mqtt_transport
         token->set_action_callback(listener);
     }
 
+    void Connection::Reconnect(mqtt::iaction_listener & listener)
+    {
+        mqtt::itoken_ptr token = mClient->reconnect();
+        token->set_action_callback(listener);
+    }
+
     void Connection::Disconnect(mqtt::iaction_listener & listener)
     {
         mqtt::itoken_ptr token = mClient->disconnect();

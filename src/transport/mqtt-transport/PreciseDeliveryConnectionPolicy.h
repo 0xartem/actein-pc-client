@@ -32,6 +32,33 @@ namespace mqtt_transport
             return false;
         }
 
+        virtual bool isAutomaticReconnect() const override
+        {
+            // Disable automatic reconnect until
+            // https://github.com/eclipse/paho.mqtt.c/issues/196 is fixed
+            return false;
+        }
+
+        virtual int getConnectionTimeout() const override
+        {
+            return 15;
+        }
+
+        virtual int getKeepAliveInterval() const override
+        {
+            return 30;
+        }
+
+        virtual int getMinReconnectInterval() const override
+        {
+            return 1;
+        }
+
+        virtual int getMaxReconnectInterval() const override
+        {
+            return 16;
+        }
+
         virtual bool shouldUseLastWill() const override
         {
             return true;

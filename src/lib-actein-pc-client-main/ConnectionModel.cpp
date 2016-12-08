@@ -25,6 +25,8 @@ namespace actein
 {
     ConnectionModel::ConnectionModel(Settings & settings)
         : mSettings(settings)
+        , mReconnecting(false)
+        , mRunning(false)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
         mConnectListener = std::make_unique<CommonListener>(MqttAction::CONNECT, this);
@@ -65,6 +67,7 @@ namespace actein
     void ConnectionModel::Start()
     {
         std::unique_lock<std::mutex> locker(mSync);
+        mRunning = true;
         std::unique_ptr<MqttCallback> callback = std::make_unique<MqttCallback>(this, this);
         mConnection->GetSubcriber().SetupCallback(std::move(callback));
         mConnection->Connect(*mConnectListener);
@@ -84,6 +87,7 @@ namespace actein
         {
             mConnection->Disconnect(*mDisconnectListener);
         }
+        mRunning = false;
     }
 
     vr_events::IVrEventsManager * ConnectionModel::GetVrEventsManager() const
@@ -96,20 +100,51 @@ namespace actein
         //Already logged message in the CommonActionListener
         if (action == MqttAction::CONNECT)
         {
+            std::unique_lock<std::mutex> locker(mSync);
             mLastWillManager->Start();
             mVrEventsManager->Start();
-            mVrEventsHandler->OnStart();
+            if (!mReconnecting)
+            {
+                mVrEventsHandler->OnStartUp();
+            }
+            else
+            {
+                mReconnecting = false;
+            }
         }
     }
 
     void ConnectionModel::OnActionFailure(MqttAction action, const std::string & message)
     {
         //Already logged message in the CommonActionListener
+        if (action == MqttAction::CONNECT)
+        {
+            std::unique_lock<std::mutex> locker(mSync);
+            mConnection->Connect(*mConnectListener);
+        }
     }
 
     void ConnectionModel::OnConnectionLost()
     {
         mLogger->warn("MQTT connection is lost");
+        std::unique_lock<std::mutex> locker(mSync);
+        if (mRunning)
+        {
+            mReconnecting = true;
+            mConnection->Connect(*mConnectListener);
+        }
+    }
+
+    void ConnectionModel::OnConnected()
+    {
+        // Disable processing on connected until
+        // https://github.com/eclipse/paho.mqtt.c/issues/196 is fixed
+    }
+
+    void ConnectionModel::OnReconnected()
+    {
+        // Disable automatic reconnect until
+        // https://github.com/eclipse/paho.mqtt.c/issues/196 is fixed
     }
 
     void ConnectionModel::HandleMessage(const std::string & topic, mqtt::message_ptr message)

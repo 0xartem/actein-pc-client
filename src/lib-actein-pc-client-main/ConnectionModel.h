@@ -61,6 +61,8 @@ namespace actein
 
         // mqtt_transport::IConnectionObserver
         void OnConnectionLost() override;
+        void OnConnected() override;
+        void OnReconnected() override;
 
         // mqtt_transport::IMessageHandler
         void HandleMessage(const std::string & topic, mqtt::message_ptr message) override;
@@ -69,8 +71,10 @@ namespace actein
         void OnEmbDeviceOnlineStatusChanged(mqtt_transport::OnlineStatus status) override;
 
     private:
-        Settings & mSettings;
+        bool mRunning;
+        bool mReconnecting;
         mutable std::mutex mSync;
+        Settings & mSettings;
         std::map<std::string, mqtt_transport::IMessageHandler *> mMessageHandlers;
 
         std::unique_ptr<ScheduleVrEventsHandler> mVrEventsHandler;

@@ -7,6 +7,8 @@ namespace mqtt_transport
     {
     public:
         virtual void OnConnectionLost() = 0;
+        virtual void OnConnected() = 0;
+        virtual void OnReconnected() = 0;
         virtual ~IConnectionObserver() = default;
     };
 }

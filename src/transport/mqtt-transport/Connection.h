@@ -31,6 +31,7 @@ namespace mqtt_transport
         );
 
         void Connect(mqtt::iaction_listener & listener); // throws mqtt::exception
+        void Reconnect(mqtt::iaction_listener & listener); // throws mqtt::exception
         void Disconnect(mqtt::iaction_listener & listener); // throws mqtt::exception
         void WaitPendingTokens(); // throws mqtt::exception
 
