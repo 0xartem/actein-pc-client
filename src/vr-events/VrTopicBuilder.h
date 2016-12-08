@@ -3,8 +3,8 @@
 
 #include <string>
 #include <algorithm>
+#include <Topics.h>
 #include "VrTopics.h"
-#include "Topics.h"
 
 using TrTopics = mqtt_transport::Topics;
 

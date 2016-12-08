@@ -12,18 +12,14 @@
 #include "VrTopicBuilder.h"
 #include "IVrEventsHandler.h"
 
-using MqttCallback = mqtt_transport::MqttSubscriberCallback;
-
 namespace vr_events
 {
     MqttVrEventsSubscriber::MqttVrEventsSubscriber(
         mqtt_transport::ISubscriber & subscriber,
         const std::shared_ptr<VrBoothInfo> & vrBoothInfo,
         IVrEventsHandler * vrEventsHandler,
-        mqtt_transport::IConnectionObserver * connectionObserver,
         mqtt_transport::IActionStatusObserver * actionObserver)
         : mSubscriber(subscriber)
-        , mVrBoothInfo(vrBoothInfo)
         , mVrEventsHandler(vrEventsHandler)
         , mSubscribeListener(new mqtt_transport::CommonActionListener(
             mqtt_transport::Action::SUBSCRIBE, actionObserver
@@ -32,16 +28,13 @@ namespace vr_events
             mqtt_transport::Action::UNSUBSCRIBE, actionObserver
         ))
     {
-        std::unique_ptr<MqttCallback> callback = std::make_unique<MqttCallback>(
-            this, connectionObserver
-            );
-        mSubscriber.SetupCallback(std::move(callback));
+        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
 
         VrTopicBuilder topicBuilder;
-        mAllVrEventsTopic = topicBuilder.SetToAll().SetBoothId(mVrBoothInfo->id()).Build();
-        mGameStatusVrTopic = topicBuilder.SetToGameStatus().SetBoothId(mVrBoothInfo->id()).Build();
-        mGameOnVrTopic = topicBuilder.SetToGameOn().SetBoothId(mVrBoothInfo->id()).Build();
-        mGameOffVrTopic = topicBuilder.SetToGameOff().SetBoothId(mVrBoothInfo->id()).Build();
+        mAllVrEventsTopic = topicBuilder.SetToAll().SetBoothId(vrBoothInfo->id()).Build();
+        mGameStatusVrTopic = topicBuilder.SetToGameStatus().SetBoothId(vrBoothInfo->id()).Build();
+        mGameOnVrTopic = topicBuilder.SetToGameOn().SetBoothId(vrBoothInfo->id()).Build();
+        mGameOffVrTopic = topicBuilder.SetToGameOff().SetBoothId(vrBoothInfo->id()).Build();
     }
 
     void MqttVrEventsSubscriber::SubscribeToAll()
@@ -136,10 +129,6 @@ namespace vr_events
         {
             ProcessVrStatusEvent(message);
         }
-        else
-        {
-            throw std::logic_error("Unknown vr event message type");
-        }
     }
 
     void MqttVrEventsSubscriber::ProcessGameOnEvent(mqtt::message_ptr message)
@@ -148,6 +137,7 @@ namespace vr_events
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game on event");
+            return;
         }
         if (mVrEventsHandler != nullptr)
         {
@@ -161,6 +151,7 @@ namespace vr_events
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game off event");
+            return;
         }
         if (mVrEventsHandler != nullptr)
         {
@@ -174,6 +165,7 @@ namespace vr_events
         if (!event->ParseFromString(message->get_payload()))
         {
             mLogger->error("Can not parse vr game status event");
+            return;
         }
         if (mVrEventsHandler != nullptr)
         {

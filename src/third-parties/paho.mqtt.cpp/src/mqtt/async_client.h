@@ -21,6 +21,7 @@
  *    Frank Pagliughi - initial implementation and documentation
  *    Artem Brazhnikov - disable warning 4290
  *    Artem Brazhnikov - add 'get_pending_tokens', 'get_pending_token' methods
+ *    Artem Brazhnikov - automatic reconnect
  *******************************************************************************/
 
 #ifndef __mqtt_async_client_h
@@ -121,6 +122,24 @@ public:
 	 */
 	virtual itoken_ptr connect(void* userContext, iaction_listener& cb)
 							throw(exception, security_exception) =0;
+    /**
+    * Reconnects to an MQTT server.
+    * @return itoken_ptr
+    * @throw exception
+    * @throw security_exception
+    */
+    virtual itoken_ptr reconnect() throw(exception, security_exception) = 0;
+    /**
+    * Reconnects to an MQTT server.
+    * @param userContext
+    * @param callback
+    *
+    * @return itoken_ptr
+    * @throw exception
+    * @throw security_exception
+    */
+    virtual itoken_ptr reconnect(void* userContext, iaction_listener& cb)
+        throw(exception, security_exception) = 0;
 	/**
 	 * Disconnects from the server. 
 	 * @return itoken_ptr
@@ -361,6 +380,7 @@ private:
 	static int on_message_arrived(void* context, char* topicName, int topicLen, 
 								  MQTTAsync_message* msg);
 	static void on_delivery_complete(void* context, MQTTAsync_token tok);
+    static void on_connect_complete(void* context, char* cause);
 
 	/** Manage internal list of active tokens */
 	friend class token;
@@ -439,15 +459,15 @@ public:
 	 * @throw security_exception
 	 */
 	virtual itoken_ptr connect(connect_options options) throw(exception, security_exception);
-	/**
-	 * Connects to an MQTT server using the specified options.
-	 * 
-	 * @param options 
-	 * 
-	 * @return bool 
-	 * @throw exception 
-	 * @throw security_exception
-	 */
+    /**
+    * Connects to an MQTT server using the specified options.
+    *
+    * @param options
+    *
+    * @return bool
+    * @throw exception
+    * @throw security_exception
+    */
 	virtual itoken_ptr connect(connect_options options, void* userContext, 
 							   iaction_listener& cb) throw(exception, security_exception);
 	/**
@@ -461,6 +481,24 @@ public:
 	 */
 	virtual itoken_ptr connect(void* userContext, iaction_listener& cb)
 							throw(exception, security_exception);
+    /**
+    * Reconnects to an MQTT server.
+    * @return itoken_ptr
+    * @throw exception
+    * @throw security_exception
+    */
+    virtual itoken_ptr reconnect() throw(exception, security_exception);
+    /**
+    * Reconnects to an MQTT server.
+    * @param userContext
+    * @param callback
+    *
+    * @return itoken_ptr
+    * @throw exception
+    * @throw security_exception
+    */
+    virtual itoken_ptr reconnect(void* userContext, iaction_listener& cb)
+        throw(exception, security_exception);
 	/**
 	 * Disconnects from the server. 
 	 * @return itoken_ptr

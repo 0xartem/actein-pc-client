@@ -20,6 +20,7 @@
  * Contributors:
  *    Frank Pagliughi - initial implementation and documentation
  *    Artem Brazhnikov - add support of MQTT will options
+ *    Artem Brazhnikov - automatic reconnect
  *******************************************************************************/
 
 #ifndef __mqtt_connect_options_h
@@ -72,7 +73,10 @@ public:
 	 */
     connect_options()
         : opts_(MQTTAsync_connectOptions_initializer)
-        , willOpts_(MQTTAsync_willOptions_initializer) {}
+        , willOpts_(MQTTAsync_willOptions_initializer)
+    {
+        opts_.will = &willOpts_;
+    }
 	/**
 	 * Returns the connection timeout value. 
 	 * @return int 
@@ -155,6 +159,57 @@ public:
 	void set_keep_alive_interval(int keepAliveInterval) {
 		opts_.keepAliveInterval = keepAliveInterval;
 	}
+
+    /**
+    * Sets whether the client will automatically attempt to reconnect to the
+    * server if the connection is lost.
+    * @param automaticReconnect
+    */
+    void set_automatic_reconnect(bool automaticReconnect) {
+        opts_.automaticReconnect = (automaticReconnect) ? (!0) : 0;
+    }
+
+    /**
+    * Returns whether the client will automatically attempt to reconnect to the
+    * server if the connection is lost
+    * @return the automatic reconnection flag.
+    */
+    bool is_automatic_reconnect() const {
+        return opts_.automaticReconnect != 0;
+    }
+
+    /**
+    * Sets minimum time interval for reconnection retry
+    * @param minRetryInterval
+    */
+    void set_min_reconnect_interval(int minRetryInterval) {
+        opts_.minRetryInterval = minRetryInterval;
+    }
+
+    /**
+    * Returns minimum time interval for reconnection retry
+    * @return minimum retry interval
+    */
+    int get_min_reconnect_interval() const {
+        return opts_.minRetryInterval;
+    }
+
+    /**
+    * Sets minimum time interval for reconnection retry
+    * @param minRetryInterval
+    */
+    void set_max_reconnect_interval(int maxRetryInterval) {
+        opts_.maxRetryInterval = maxRetryInterval;
+    }
+
+    /**
+    * Returns maximum time interval for reconnection retry
+    * @return maximum retry interval
+    */
+    int get_max_reconnect_interval() const {
+        return opts_.maxRetryInterval;
+    }
+
 	/**
 	 * Sets the password to use for the connection.
 	 */

@@ -13,35 +13,33 @@ namespace mqtt_transport
 namespace vr_events
 {
     class VrBoothInfo;
+    class MqttVrEventsPublisher;
+    class MqttVrEventsSubscriber;
 
     class MqttVrEventsManager : public IVrEventsManager
     {
     public:
         MqttVrEventsManager(
             mqtt_transport::Connection & connection,
+            IVrEventsHandler * vrEventsHandler,
+            mqtt_transport::IActionStatusObserver * actionObserver,
             const std::shared_ptr<VrBoothInfo> & vrBoothInfo
         );
 
-        void Start(
-            IVrEventsHandler * vrEventsHandler,
-            mqtt_transport::IConnectionObserver * connectionObserver,
-            mqtt_transport::IActionStatusObserver * actionObserver) override;
-
+        void Start() override;
         void Stop() override;
         bool IsRunning() const override;
 
         IVrEventsPublisher * GetPublisher() const override;
         IVrEventsSubscriber * GetSubscriber() const override;
+        mqtt_transport::IMessageHandler * GetMessageHandler() const override;
 
     private:
-        mutable std::mutex mSync;
         bool mIsRunning;
+        mutable std::mutex mSync;
 
-        std::unique_ptr<IVrEventsPublisher> mVrEventsPublisher;
-        std::unique_ptr<IVrEventsSubscriber> mVrEventsSubscriber;
-
-        mqtt_transport::Connection & mConnection;
-        std::shared_ptr<VrBoothInfo> mVrBoothInfo;
+        std::unique_ptr<MqttVrEventsPublisher> mVrEventsPublisher;
+        std::unique_ptr<MqttVrEventsSubscriber> mVrEventsSubscriber;
     };
 }
 

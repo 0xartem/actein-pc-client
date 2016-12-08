@@ -22,6 +22,13 @@ namespace mqtt_transport
         connectOptions->set_keep_alive_interval(connectionPolicy.getKeepAliveInterval());
         connectOptions->set_connection_timeout(connectionPolicy.getConnectionTimeout());
 
+        connectOptions->set_automatic_reconnect(connectionPolicy.isAutomaticReconnect());
+        if (connectionPolicy.isAutomaticReconnect())
+        {
+            connectOptions->set_min_reconnect_interval(connectionPolicy.getMinReconnectInterval());
+            connectOptions->set_max_reconnect_interval(connectionPolicy.getMaxReconnectInterval());
+        }
+
         return connectOptions;
     }
 }

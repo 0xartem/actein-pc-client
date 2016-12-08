@@ -39,7 +39,7 @@ namespace actein
         );
         ~ScheduleVrEventsHandler();
 
-        void OnStart();
+        void OnStartUp();
 
         // vr_events::IVrEventsHandler
         void HandleVrGameOnEvent(const std::shared_ptr<vr_events::VrGameOnEvent> & event) override;

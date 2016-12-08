@@ -16,6 +16,7 @@
  *    Frank Pagliughi - initial implementation and documentation
  *    Artem Brazhnikov - disable warning 4290
  *    Artem Brazhnikov - add 'get_pending_tokens', 'get_pending_token' methods
+ *    Artem Brazhnikov - automatic reconnect
  *******************************************************************************/
 
 #include "mqtt/async_client.h"
@@ -102,6 +103,16 @@ void async_client::on_connection_lost(void *context, char *cause)
 		if (cb)
 			cb->connection_lost(cause ? std::string(cause) : std::string());
 	}
+}
+
+void async_client::on_connect_complete(void* context, char* cause)
+{
+    if (context != nullptr) {
+        async_client* m = static_cast<async_client*>(context);
+        callback* cb = m->get_callback();
+        if (cb != nullptr)
+            cb->connect_complete(cause != nullptr ? std::string(cause) : std::string());
+    }
 }
 
 int async_client::on_message_arrived(void* context, char* topicName, int topicLen, 
@@ -279,6 +290,41 @@ itoken_ptr async_client::connect(void* userContext, iaction_listener& cb)
 	opts.opts_.keepAliveInterval = 30;
 	opts.opts_.cleansession = 1;
 	return connect(opts, userContext, cb);
+}
+
+itoken_ptr async_client::reconnect() throw(exception, security_exception)
+{
+    token* ctok = new token(*this);
+    itoken_ptr tok = itoken_ptr(ctok);
+    add_token(tok);
+
+    int rc = MQTTAsync_reconnect(cli_);
+
+    if (rc != MQTTASYNC_SUCCESS) {
+        remove_token(tok);
+        throw exception(rc);
+    }
+
+    return tok;
+}
+
+itoken_ptr async_client::reconnect(void* userContext, iaction_listener& cb) throw(exception, security_exception)
+{
+    token* ctok = new token(*this);
+    itoken_ptr tok = itoken_ptr(ctok);
+    add_token(tok);
+
+    tok->set_user_context(userContext);
+    tok->set_action_callback(cb);
+
+    int rc = MQTTAsync_reconnect(cli_);
+
+    if (rc != MQTTASYNC_SUCCESS) {
+        remove_token(tok);
+        throw exception(rc);
+    }
+
+    return tok;
 }
 
 itoken_ptr async_client::disconnect(long timeout) throw(exception)
@@ -463,6 +509,10 @@ void async_client::set_callback(callback& cb) throw(exception)
 
 	if (rc != MQTTASYNC_SUCCESS)
 		throw exception(rc);
+
+    rc = MQTTAsync_setConnected(cli_, this, &async_client::on_connect_complete);
+    if (rc != MQTTASYNC_SUCCESS)
+        throw exception(rc);
 }
 
 itoken_ptr async_client::subscribe(const topic_filter_collection& topicFilters, 

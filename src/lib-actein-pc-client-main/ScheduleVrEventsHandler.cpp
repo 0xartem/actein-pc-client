@@ -34,7 +34,7 @@ namespace actein
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
     }
 
-    void ScheduleVrEventsHandler::OnStart()
+    void ScheduleVrEventsHandler::OnStartUp()
     {
         OnGameStatusChanged(vr_events::VrGameStatus::GAME_OFF);
     }

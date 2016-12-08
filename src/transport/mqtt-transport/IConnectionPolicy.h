@@ -13,6 +13,10 @@ namespace mqtt_transport
 
         virtual bool shouldRetainMessages() const = 0;
         virtual bool isPersistentSession() const = 0;
+        
+        virtual bool isAutomaticReconnect() const = 0;
+        virtual int getMinReconnectInterval() const = 0;
+        virtual int getMaxReconnectInterval() const = 0;
 
         virtual bool shouldUseLastWill() const = 0;
         virtual std::string getLastWillTopic() const = 0;

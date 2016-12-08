@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package mqtt_transport;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.actein.transport.mqtt";
+option java_outer_classname = "OnlineStatusProtos";
+
+enum OnlineStatus
+{
+  UNKNOWN = 0;
+  OFFLINE = 1;
+  ONLINE = 2;
+}
+
+message OnlineStatusEvent
+{
+  OnlineStatus status = 1;
+}

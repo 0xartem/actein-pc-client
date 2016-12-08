@@ -31,7 +31,6 @@ namespace vr_events
             mqtt_transport::ISubscriber & subscriber,
             const std::shared_ptr<VrBoothInfo> & vrBoothInfo,
             IVrEventsHandler * vrEventsHandler,
-            mqtt_transport::IConnectionObserver * connectionObserver,
             mqtt_transport::IActionStatusObserver * actionObserver
         );
 
@@ -61,7 +60,6 @@ namespace vr_events
 
         IVrEventsHandler * mVrEventsHandler;
         mqtt_transport::ISubscriber & mSubscriber;
-        std::shared_ptr<VrBoothInfo> mVrBoothInfo;
 
         std::unique_ptr<mqtt_transport::CommonActionListener> mSubscribeListener;
         std::unique_ptr<mqtt_transport::CommonActionListener> mUnsubscribeListener;

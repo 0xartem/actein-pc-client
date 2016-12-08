@@ -20,13 +20,18 @@ namespace mqtt_transport
     class Connection
     {
     public:
-        static std::unique_ptr<Connection> CreateInstance(const std::string & brokerHost);
+        static std::unique_ptr<Connection> CreateInstance(
+            const std::string & brokerHost,
+            std::unique_ptr<IConnectionPolicy> connectionPolicy
+        );
         static std::unique_ptr<Connection> CreateInstance(
             std::unique_ptr<MqttBrokerEndPoint> brokerEndPoint,
             std::unique_ptr<MqttClientEndPoint> clientEndPoint,
-            std::unique_ptr<IConnectionPolicy> connectionPolicy);
+            std::unique_ptr<IConnectionPolicy> connectionPolicy
+        );
 
         void Connect(mqtt::iaction_listener & listener); // throws mqtt::exception
+        void Reconnect(mqtt::iaction_listener & listener); // throws mqtt::exception
         void Disconnect(mqtt::iaction_listener & listener); // throws mqtt::exception
         void WaitPendingTokens(); // throws mqtt::exception
 

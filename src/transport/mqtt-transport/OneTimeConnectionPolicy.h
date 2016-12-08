@@ -24,6 +24,11 @@ namespace mqtt_transport
             return false;
         }
 
+        virtual bool isAutomaticReconnect() const override
+        {
+            return false;
+        }
+
         virtual bool shouldUseLastWill() const override
         {
             return false;

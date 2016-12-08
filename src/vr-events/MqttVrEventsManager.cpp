@@ -9,43 +9,39 @@ namespace vr_events
 {
     MqttVrEventsManager::MqttVrEventsManager(
         mqtt_transport::Connection & connection,
-        const std::shared_ptr<VrBoothInfo> & vrBoothInfo)
-        : mConnection(connection)
-        , mVrBoothInfo(vrBoothInfo)
-        , mIsRunning(false)
-    {
-    }
-
-    void MqttVrEventsManager::Start(
         IVrEventsHandler * vrEventsHandler,
-        mqtt_transport::IConnectionObserver * connectionObserver,
-        mqtt_transport::IActionStatusObserver * actionObserver)
+        mqtt_transport::IActionStatusObserver * actionObserver,
+        const std::shared_ptr<VrBoothInfo> & vrBoothInfo
+        ) : mIsRunning(false)
     {
-        std::unique_lock<std::mutex> locker(mSync);
-
         mVrEventsPublisher = std::make_unique<MqttVrEventsPublisher>(
-            mConnection.GetPublisher(),
-            mVrBoothInfo,
+            connection.GetPublisher(),
+            vrBoothInfo,
             actionObserver
             );
 
         mVrEventsSubscriber = std::make_unique<MqttVrEventsSubscriber>(
-            mConnection.GetSubcriber(),
-            mVrBoothInfo,
+            connection.GetSubcriber(),
+            vrBoothInfo,
             vrEventsHandler,
-            connectionObserver,
             actionObserver
             );
+    }
 
+    void MqttVrEventsManager::Start()
+    {
+        std::unique_lock<std::mutex> locker(mSync);
         mIsRunning = true;
+        mVrEventsSubscriber->SubscribeToGameOnEvent();
+        mVrEventsSubscriber->SubscribeToGameOffEvent();
     }
 
     void MqttVrEventsManager::Stop()
     {
         std::unique_lock<std::mutex> locker(mSync);
+        mVrEventsSubscriber->UnsubscribeFromGameOffEvent();
+        mVrEventsSubscriber->UnsubscribeFromGameOnEvent();
         mIsRunning = false;
-        mVrEventsSubscriber.reset();
-        mVrEventsPublisher.reset();
     }
 
     bool MqttVrEventsManager::IsRunning() const
@@ -56,13 +52,16 @@ namespace vr_events
 
     IVrEventsPublisher * MqttVrEventsManager::GetPublisher() const
     {
-        std::unique_lock<std::mutex> locker(mSync);
         return mVrEventsPublisher.get();
     }
 
     IVrEventsSubscriber * MqttVrEventsManager::GetSubscriber() const
     {
-        std::unique_lock<std::mutex> locker(mSync);
+        return mVrEventsSubscriber.get();
+    }
+
+    mqtt_transport::IMessageHandler * MqttVrEventsManager::GetMessageHandler() const
+    {
         return mVrEventsSubscriber.get();
     }
 }
