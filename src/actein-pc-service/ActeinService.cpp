@@ -86,7 +86,10 @@ namespace as
     {
         try
         {
-            mConnectionModel->Stop();
+            if (mConnectionModel->IsRunning())
+            {
+                mConnectionModel->Stop();
+            }
         }
         catch (const vr_events::VrEventsException & ex)
         {

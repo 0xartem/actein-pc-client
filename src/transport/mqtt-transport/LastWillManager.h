@@ -22,6 +22,7 @@ namespace mqtt_transport
 
         void Start();
         void Stop();
+        bool IsRunning() const;
 
         // throws mqtt::exception
         void PublishPcOnlineStatus(bool online);
@@ -35,6 +36,9 @@ namespace mqtt_transport
         void ProcessOnlineStatusEvent(mqtt::message_ptr message);
 
     private:
+        bool mIsRunning;
+        mutable std::mutex mSync;
+
         std::string mPcLastWillTopic;
         std::string mEmbDeviceLastWillTopic;
 

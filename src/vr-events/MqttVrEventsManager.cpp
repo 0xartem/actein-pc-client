@@ -31,9 +31,9 @@ namespace vr_events
     void MqttVrEventsManager::Start()
     {
         std::unique_lock<std::mutex> locker(mSync);
+        mIsRunning = true;
         mVrEventsSubscriber->SubscribeToGameOnEvent();
         mVrEventsSubscriber->SubscribeToGameOffEvent();
-        mIsRunning = true;
     }
 
     void MqttVrEventsManager::Stop()

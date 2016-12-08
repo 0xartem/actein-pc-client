@@ -51,6 +51,7 @@ namespace actein
         ~ConnectionModel();
         void Start();
         void Stop();
+        bool IsRunning() const;
 
         // vr_events::IVrEventsManagerOwner
         vr_events::IVrEventsManager * GetVrEventsManager() const override;
@@ -71,7 +72,7 @@ namespace actein
         void OnEmbDeviceOnlineStatusChanged(mqtt_transport::OnlineStatus status) override;
 
     private:
-        bool mRunning;
+        bool mIsRunning;
         bool mReconnecting;
         mutable std::mutex mSync;
         Settings & mSettings;

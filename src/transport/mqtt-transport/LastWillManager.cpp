@@ -35,14 +35,24 @@ namespace mqtt_transport
 
     void LastWillManager::Start()
     {
+        std::unique_lock<std::mutex> locker(mSync);
+        mIsRunning = true;
         this->SubscribeToEmbDeviceLastWill();
         this->PublishPcOnlineStatus(true);
     }
 
     void LastWillManager::Stop()
     {
+        std::unique_lock<std::mutex> locker(mSync);
         this->UnsubscribeFromEmbDeviceLastWill();
         this->PublishPcOnlineStatus(false);
+        mIsRunning = false;
+    }
+
+    bool LastWillManager::IsRunning() const
+    {
+        std::unique_lock<std::mutex> locker(mSync);
+        return mIsRunning;
     }
 
     void LastWillManager::PublishPcOnlineStatus(bool online)

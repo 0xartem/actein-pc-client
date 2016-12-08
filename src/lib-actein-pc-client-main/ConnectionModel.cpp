@@ -26,7 +26,7 @@ namespace actein
     ConnectionModel::ConnectionModel(Settings & settings)
         : mSettings(settings)
         , mReconnecting(false)
-        , mRunning(false)
+        , mIsRunning(false)
     {
         mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
         mConnectListener = std::make_unique<CommonListener>(MqttAction::CONNECT, this);
@@ -67,7 +67,7 @@ namespace actein
     void ConnectionModel::Start()
     {
         std::unique_lock<std::mutex> locker(mSync);
-        mRunning = true;
+        mIsRunning = true;
         std::unique_ptr<MqttCallback> callback = std::make_unique<MqttCallback>(this, this);
         mConnection->GetSubcriber().SetupCallback(std::move(callback));
         mConnection->Connect(*mConnectListener);
@@ -76,18 +76,27 @@ namespace actein
     void ConnectionModel::Stop()
     {
         std::unique_lock<std::mutex> locker(mSync);
-        mLastWillManager->Stop();
+        if (mLastWillManager->IsRunning())
+        {
+            mLastWillManager->Stop();
+        }
         if (mVrEventsManager->IsRunning())
         {
             mVrEventsManager->Stop();
-            mConnection->WaitPendingTokens();
         }
 
         if (mConnection->GetClient().is_connected())
         {
+            mConnection->WaitPendingTokens();
             mConnection->Disconnect(*mDisconnectListener);
         }
-        mRunning = false;
+        mIsRunning = false;
+    }
+
+    bool ConnectionModel::IsRunning() const
+    {
+        std::unique_lock<std::mutex> locker(mSync);
+        return mIsRunning;
     }
 
     vr_events::IVrEventsManager * ConnectionModel::GetVrEventsManager() const
@@ -128,7 +137,7 @@ namespace actein
     {
         mLogger->warn("MQTT connection is lost");
         std::unique_lock<std::mutex> locker(mSync);
-        if (mRunning)
+        if (mIsRunning)
         {
             mReconnecting = true;
             mConnection->Connect(*mConnectListener);
