@@ -36,6 +36,9 @@ namespace actein
     {
         std::unique_lock<std::mutex> locker(mSync);
 
+        // Shutdown steam if it's running
+        utils::KillIfProcessRunning(utils::string2wstring(mSettings.GetSteamExeName()));
+
         // Kill process to restart without the dashboard
         utils::KillIfProcessRunning(utils::string2wstring(mSettings.GetSteamVrExeName()));
 
@@ -65,6 +68,8 @@ namespace actein
         mCurrentGame.reset();
 
         utils::RunInteractiveProcess(mSteamShutdownCmd);
+        WaitForSteamToExit();
+        utils::KillIfProcessRunning(utils::string2wstring(mSettings.GetSteamExeName()));
     }
 
     void GameRunner::WaitForSteamVrToStart()
@@ -91,5 +96,17 @@ namespace actein
                 "Can not start Steam VR."
             );
         }
+    }
+
+    void GameRunner::WaitForSteamToExit()
+    {
+        std::wstring steamExeWstr = utils::string2wstring(mSettings.GetSteamExeName());
+        int leftToWait = MAX_EXIT_STEAM_WAIT_TIME;
+        do
+        {
+            ::Sleep(WAIT_STEP);
+            leftToWait -= WAIT_STEP;
+        }
+        while (utils::IsProcessRunning(steamExeWstr) && leftToWait > 0);
     }
 }

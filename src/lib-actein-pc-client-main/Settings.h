@@ -43,6 +43,11 @@ namespace actein
             return mSteamAccountPassword;
         }
 
+        virtual const std::string & GetSteamExeName() const
+        {
+            return STEAM_EXE_NAME;
+        }
+
         virtual const std::string & GetSteamVrExeName() const
         {
             return STEAM_VR_EXE_NAME;
