@@ -148,7 +148,6 @@ namespace actein
         try
         {
             mGameStopTimer->SetDuration(std::chrono::seconds(event->game().game_duration_seconds()));
-            mGameStopTimer->Start();
             mGameStopTimer->RethrowExceptionIfAny();
 
             if (event->game().run_tutorial())
@@ -157,6 +156,7 @@ namespace actein
                 auto fut = mTutorialRunner->RunAsync();
                 mTutorialRunner->WaitForTutorialStart();
                 OnGameStatusChanged(vr_events::VrGameStatus::TUTORIAL_ON);
+                mGameStopTimer->Start();
                 fut.get();
 
                 if (!IsGameRunning())
@@ -166,6 +166,11 @@ namespace actein
             OnGameStatusChanged(vr_events::VrGameStatus::STARTING_GAME);
             mGameRunner->Run(event->game());
             OnGameStatusChanged(vr_events::VrGameStatus::GAME_ON);
+
+            if (!mGameStopTimer->IsRunning())
+            {
+                mGameStopTimer->Start();
+            }
         }
         catch (const vr_events::VrEventsException & ex)
         {
