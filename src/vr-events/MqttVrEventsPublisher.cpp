@@ -42,7 +42,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not publish vr game turn on event.");
+            throw VrEventsException(NETWORK_ERROR, "Can not publish vr game turn on event.");
         }
     }
 
@@ -61,7 +61,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not publish vr game turn off event.");
+            throw VrEventsException(NETWORK_ERROR, "Can not publish vr game turn off event.");
         }
     }
 
@@ -93,7 +93,7 @@ namespace vr_events
         catch (const mqtt::exception & ex)
         {
             mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
-            throw VrEventsException("Can not publish vr game status event.");
+            throw VrEventsException(NETWORK_ERROR, "Can not publish vr game status event.");
         }
     }
 }
