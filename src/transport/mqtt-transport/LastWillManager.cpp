@@ -37,14 +37,16 @@ namespace mqtt_transport
     {
         std::unique_lock<std::mutex> locker(mSync);
         mIsRunning = true;
-        this->SubscribeToEmbDeviceLastWill();
+        //Subscription to embedded device status is not needed now
+        //this->SubscribeToEmbDeviceLastWill();
         this->PublishPcOnlineStatus(true);
     }
 
     void LastWillManager::Stop()
     {
         std::unique_lock<std::mutex> locker(mSync);
-        this->UnsubscribeFromEmbDeviceLastWill();
+        //Subscription to embedded device status is not needed now
+        //this->UnsubscribeFromEmbDeviceLastWill();
         this->PublishPcOnlineStatus(false);
         mIsRunning = false;
     }
