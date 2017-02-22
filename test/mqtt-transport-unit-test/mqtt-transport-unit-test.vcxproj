@@ -97,12 +97,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\protobuf\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>
@@ -115,12 +117,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\protobuf\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libprotobuf-lited.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>
@@ -135,7 +139,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\protobuf\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -143,6 +147,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\;$(SolutionDir)third-parties\paho.mqtt.c\platforms\windows\$(Platform)\release\lib\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>
@@ -157,7 +163,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third-parties\googletest\include;$(SolutionDir)third-parties\googlemock\include;$(SolutionDir)transport\mqtt-transport;$(SolutionDir)..\test\test-utils;$(SolutionDir)third-parties\paho.mqtt.cpp\src;$(SolutionDir)third-parties\paho.mqtt.c\include;$(SolutionDir)third-parties\protobuf\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -165,6 +171,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libprotobuf-lite.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)third-parties\protobuf\platforms\windows\$(Platform)\$(Configuration)\lib\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>

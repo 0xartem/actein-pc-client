@@ -6,17 +6,19 @@ namespace mqtt_transport_test
 {
     TEST(PreciseDeliveryConnectionPolicyTest, DefaultValues)
     {
-        mqtt_transport::PreciseDeliveryConnectionPolicy policy;
+        mqtt_transport::PreciseDeliveryConnectionPolicy policy(1);
 
         ASSERT_FALSE(policy.isPersistentSession());
-        ASSERT_EQ(policy.getKeepAliveInterval(), 60);
-        ASSERT_EQ(policy.getConnectionTimeout(), 30);
+        ASSERT_EQ(policy.getKeepAliveInterval(), 30);
+        ASSERT_EQ(policy.getConnectionTimeout(), 15);
 
         ASSERT_EQ(policy.getQualityOfService(), 2);
         ASSERT_TRUE(policy.shouldRetainMessages());
 
         ASSERT_TRUE(policy.shouldUseLastWill());
-        ASSERT_STREQ(policy.getLastWillTopic().c_str(), mqtt_transport::Topics::PC_ONLINE_STATUS.c_str());
-        ASSERT_TRUE(test_utils::ArraysMatch<std::string>("offline", policy.getLastWillPayload()));
+        ASSERT_STREQ(policy.getLastWillTopic().c_str(), u8"factory/booths/1/pc/status");
+        mqtt_transport::OnlineStatusEvent event;
+        event.set_status(mqtt_transport::OnlineStatus::OFFLINE);
+        ASSERT_TRUE(test_utils::ArraysMatch<std::string>(event.SerializeAsString(), policy.getLastWillPayload()));
     }
 }
