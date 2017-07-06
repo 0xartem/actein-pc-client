@@ -12,7 +12,7 @@ namespace actein
         : mSettings(settings)
     {
         mTutorialRunCmd = utils::string2wstring(mSettings.GetVrTutorialExePath())
-            + L" -popupwindow -tutorial";
+            + L" -popupwindow";
     }
 
     std::future<void> VrTutorialRunner::RunAsync()
