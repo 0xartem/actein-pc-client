@@ -1,5 +1,5 @@
 #include <mqtt/exception.h>
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include "MqttVrEventsSubscriber.h"
 #include "MqttSubscriberCallback.h"
 #include "ISubscriber.h"
@@ -28,7 +28,7 @@ namespace vr_events
             mqtt_transport::Action::UNSUBSCRIBE, actionObserver
         ))
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
 
         VrTopicBuilder topicBuilder;
         mAllVrEventsTopic = topicBuilder.SetToAll().SetBoothId(vrBoothInfo->id()).Build();
@@ -45,7 +45,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not subscribe to all vr events");
         }
     }
@@ -58,7 +58,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from all vr events");
         }
     }
@@ -71,7 +71,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not subscribe to game on vr event");
         }
     }
@@ -84,7 +84,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from game off vr event");
         }
     }
@@ -97,7 +97,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not subscribe to game off vr event");
         }
     }
@@ -110,7 +110,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not unsubscribe from game off vr event");
         }
     }

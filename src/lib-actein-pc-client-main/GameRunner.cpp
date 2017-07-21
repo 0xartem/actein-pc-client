@@ -1,5 +1,5 @@
 #include <sstream>
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include <gen/vr_game.pb.h>
 #include <gen/vr_game_error.pb.h>
 #include <VrEventsException.h>
@@ -14,7 +14,7 @@ namespace actein
     GameRunner::GameRunner(Settings & settings)
         : mSettings(settings)
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
 
         std::wostringstream steamLoginStartVrStrm;
         steamLoginStartVrStrm << utils::string2wstring(mSettings.GetSteamExePath())

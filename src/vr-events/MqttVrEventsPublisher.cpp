@@ -1,5 +1,5 @@
 #include <mqtt/exception.h>
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include "gen/vr_booth_info.pb.h"
 #include "gen/vr_game_on_event.pb.h"
 #include "gen/vr_game_off_event.pb.h"
@@ -21,7 +21,7 @@ namespace vr_events
             mqtt_transport::Action::PUBLISH, actionObserver
         ))
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
     }
 
     void MqttVrEventsPublisher::PublishVrGameOnEvent(std::unique_ptr<VrGame> vrGame)
@@ -41,7 +41,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not publish vr game turn on event.");
         }
     }
@@ -60,7 +60,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not publish vr game turn off event.");
         }
     }
@@ -92,7 +92,7 @@ namespace vr_events
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
             throw VrEventsException(NETWORK_ERROR, "Can not publish vr game status event.");
         }
     }

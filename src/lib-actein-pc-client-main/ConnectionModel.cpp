@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include <mqtt/async_client.h>
 #include <Connection.h>
 #include <ISubscriber.h>
@@ -28,7 +28,7 @@ namespace actein
         , mReconnecting(false)
         , mIsRunning(false)
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
         mConnectListener = std::make_unique<CommonListener>(MqttAction::CONNECT, this);
         mDisconnectListener = std::make_unique<CommonListener>(MqttAction::DISCONNECT, this);
 
@@ -137,10 +137,14 @@ namespace actein
     {
         mLogger->warn("MQTT connection is lost");
         std::unique_lock<std::mutex> locker(mSync);
+        mLogger->warn("MQTT connection is lost; in lock");
         if (mIsRunning)
         {
+            mLogger->warn("MQTT connection is lost; in lock; model is running");
             mReconnecting = true;
+            mLogger->warn("MQTT connection is lost; in lock; reconnecting = true");
             mConnection->Connect(*mConnectListener);
+            mLogger->warn("MQTT connection is lost; in lock; connect started");
         }
     }
 

@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include <boost/application.hpp>
 #include <mqtt/async_client.h>
 #include <mqtt/exception.h>
@@ -37,7 +37,7 @@ namespace as
         // Need to write information to the log here and re-throw the exception
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
             throw;
         }
     }
@@ -65,19 +65,15 @@ namespace as
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
-        }
-        catch (const mqtt::persistence_exception& ex)
-        {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "VR game error code", ex.GetErrorCode());
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
         return 0;
     }
@@ -93,19 +89,19 @@ namespace as
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "VR game error code", ex.GetErrorCode());
         }
         catch (const mqtt::persistence_exception& ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
         return true;
     }
@@ -137,7 +133,7 @@ namespace as
         sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("CommonLog", "log", 1048576 * 5, 3));
 
         mLogger = std::make_shared<spdlog::logger>(
-            spdlog::COMMON_LOGGER_NAME, sinks.begin(), sinks.end()
+            COMMON_LOGGER_NAME, sinks.begin(), sinks.end()
             );
 
         spdlog::register_logger(mLogger);

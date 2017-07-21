@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include <IVrEventsManagerOwner.h>
 #include <IVrEventsManager.h>
 #include <IVrEventsPublisher.h>
@@ -31,7 +31,7 @@ namespace actein
             std::bind(&ScheduleVrEventsHandler::StopGameRoutine, this)
             );
 
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
     }
 
     void ScheduleVrEventsHandler::OnStartUp()
@@ -119,11 +119,11 @@ namespace actein
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "VR game error code", ex.GetErrorCode());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 
@@ -174,12 +174,12 @@ namespace actein
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "VR game error code", ex.GetErrorCode());
             OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.GetErrorCode(), ex.what());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
             OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.what());
         }
     }
@@ -207,12 +207,12 @@ namespace actein
         }
         catch (const vr_events::VrEventsException & ex)
         {
-            mLogger->error("{}; VR game error code: {}", ex.what(), ex.GetErrorCode());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "VR game error code", ex.GetErrorCode());
             OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.GetErrorCode(), ex.what());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
             OnGameStatusError(vr_events::VrGameStatus::GAME_OFF, ex.what());
         }
     }

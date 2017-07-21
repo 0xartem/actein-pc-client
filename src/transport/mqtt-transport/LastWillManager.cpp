@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include "gen/online_status_event.pb.h"
 #include "Connection.h"
 #include "CommonActionListener.h"
@@ -28,7 +28,7 @@ namespace mqtt_transport
             Action::UNSUBSCRIBE, actionObserver
         ))
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
         mPcLastWillTopic = TopicBuilder::BuildPcLastWill(boothId);
         mEmbDeviceLastWillTopic = TopicBuilder::BuildEmbDeviceLastWill(boothId);
     }

@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include "CommandLineHelper.h"
 
 namespace as
@@ -10,7 +10,7 @@ namespace as
         : mArgs(args)
         , mNoRegistry(false)
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
 
         po::options_description opts = BuildServiceOptions();
         ParseCommandLineArgs(opts);

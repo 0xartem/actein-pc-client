@@ -1,5 +1,5 @@
+#include <SpdLocalLog.h>
 #include "MqttSubscriberCallback.h"
-#include <spdlog/spdlog.h>
 
 namespace mqtt_transport
 {
@@ -9,7 +9,7 @@ namespace mqtt_transport
         : mMessageHandler(messageHandler)
         , mConnectionObserver(connectionObserver)
     {
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
     }
 
     void MqttSubscriberCallback::connection_lost(const std::string& cause)
@@ -31,7 +31,7 @@ namespace mqtt_transport
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 
@@ -58,11 +58,11 @@ namespace mqtt_transport
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 
@@ -78,7 +78,7 @@ namespace mqtt_transport
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 

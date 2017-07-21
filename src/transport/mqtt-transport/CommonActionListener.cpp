@@ -1,6 +1,6 @@
 #include <sstream>
 #include <mqtt/token.h>
-#include <spdlog/spdlog.h>
+#include <SpdLocalLog.h>
 #include "IActionStatusObserver.h"
 #include "CommonActionListener.h"
 
@@ -10,7 +10,7 @@ namespace mqtt_transport
     {
         mAction = action;
         mActionStatusObserver = actionStatusObserver;
-        mLogger = spdlog::get(spdlog::COMMON_LOGGER_NAME);
+        mLogger = spdlog::get(COMMON_LOGGER_NAME);
     }
 
     void CommonActionListener::on_success(const mqtt::itoken& asyncActionToken)
@@ -27,11 +27,11 @@ namespace mqtt_transport
         }
         catch (const mqtt::exception & ex)
         {
-            mLogger->error("{}; Mqtt Paho error code: {}", ex.what(), ex.get_reason_code());
+            LOG_ERROR_WITH_ERROR_CODE(mLogger, ex.what(), "Mqtt Paho error code", ex.get_reason_code());
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 
@@ -55,7 +55,7 @@ namespace mqtt_transport
         }
         catch (const std::exception & ex)
         {
-            mLogger->error(ex.what());
+            LOG_ERROR(mLogger, ex.what());
         }
     }
 
